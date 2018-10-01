@@ -1,0 +1,25 @@
+<!--Pages/detail/detail.wxml-->
+<view class='poem_detail_content'>
+  <text class='poem_author'>{{poem.poem_dynasty}} : {{poem.poem_author}}</text>
+  <text class='poem_content'>{{poem.poem_content}}</text>
+  <view class='poem_tools'>
+    <image class='poem_collection' src='../../Sources/images/btn_fav_un.png' bindtap='poemCollection'></image>
+    <image class='poem_copy' src='../../Sources/images/btn_copy.png' bindtap='poemCopy'></image>
+    <image class='poem_share' src='../../Sources/images/btn_share.png' bindtap='poemShare'></image>
+    <image class='poem_modify' src='../../Sources/images/write.png' bindtap='poemModify'></image>
+    <image class='poem_good' src='../../Sources/images/btn_good.png' bindtap='poemGood'></image>
+  </view>
+</view>
+
+<view class='poem_detail_extension'>
+  <view wx:for="{{poem.poem_extension}}" wx:key="{{index}}">
+    <text class='poem_extension_title'>{{item.extension_title}}\n</text>
+    <text class='poem_extension_content'>{{item.extension_content}}</text>
+    <view class='poem_extension_tools'>
+      <text class='good'>{{item.extension_good}}</text>
+      <image class='poem_extension_good' src='../../Sources/images/btn_good.png' bindtap='poemGood'></image>
+      <text class='bad'>{{item.extension_bad}}</text>
+      <image class='poem_extension_bad' src='../../Sources/images/btn_bad.png' bindtap='poemModify'></image>
+    </view>
+  </view>
+</view>

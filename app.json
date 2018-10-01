@@ -1,0 +1,40 @@
+{
+  "pages": [
+    "Pages/home/home",
+    "Pages/poem/poem",
+    "Pages/me/me",
+    "Pages/detail/detail"
+  ],
+  "tabBar": {
+    "color": "#CFCFCF",
+    "selectedColor": "#000000",
+    "list": [
+      {
+        "pagePath": "Pages/home/home",
+        "text": "推荐",
+        "iconPath": "Sources/images/recommand.png",
+        "selectedIconPath": "Sources/images/recommand_selected.png"
+      },
+      {
+        "pagePath": "Pages/poem/poem",
+        "text": "诗文",
+        "iconPath": "Sources/images/poem.png",
+        "selectedIconPath": "Sources/images/poem_selected.png"
+      },
+      {
+        "pagePath": "Pages/me/me",
+        "text": "我",
+        "iconPath": "Sources/images/me.png",
+        "selectedIconPath": "Sources/images/me_selected.png"
+      }
+    ]
+  },
+  "window": {
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "古诗文",
+    "backgroundColor": "#eeeeee",
+    "backgroundTextStyle": "light",
+    "enablePullDownRefresh": false
+  }
+}

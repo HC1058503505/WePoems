@@ -1,0 +1,41 @@
+/* Pages/detail/detail.wxss */
+
+.poem_detail_content {
+   display: flex;
+   flex-direction: column;
+}
+
+.poem_author {
+   text-align: center;
+   color: #CFCFCF;
+   font-size: medium;
+}
+
+.poem_content {
+  text-align: center;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+}
+
+.poem_collection, .poem_copy, .poem_share , .poem_modify, .poem_good, .poem_extension_good, .poem_extension_bad{
+  width: 40rpx;
+  height: 40rpx;
+  margin-top: 20rpx;
+  margin-left: 20rpx;
+}
+
+.poem_good {
+  float: right;
+  margin-right: 20rpx;
+}
+
+
+.poem_extension_content {
+  font-size: medium;
+  text-align: center;
+  padding: 20rpx;
+}
+
+.bad {
+  margin-left: 30rpx;
+}
