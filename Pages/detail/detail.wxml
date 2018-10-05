@@ -12,7 +12,7 @@
 </view>
 
 <view class='poem_detail_extension'>
-  <view wx:for="{{poem.poem_extension}}" wx:key="{{index}}">
+  <view class='poem_extension' wx:for="{{poem.poem_extension}}" wx:key="{{index}}">
     <text class='poem_extension_title'>{{item.extension_title}}\n</text>
     <text class='poem_extension_content'>{{item.extension_content}}</text>
     <view class='poem_extension_tools'>

@@ -13,8 +13,7 @@
 
 .poem_content {
   text-align: center;
-  padding-left: 10rpx;
-  padding-right: 10rpx;
+  padding: 20rpx;
 }
 
 .poem_collection, .poem_copy, .poem_share , .poem_modify, .poem_good, .poem_extension_good, .poem_extension_bad{
@@ -30,12 +29,24 @@
 }
 
 
-.poem_extension_content {
+.poem_detail_extension {
   font-size: medium;
-  text-align: center;
   padding: 20rpx;
+}
+
+.poem_extension {
+  padding-bottom: 20rpx;
 }
 
 .bad {
   margin-left: 30rpx;
+}
+
+text {
+  font-size: medium;
+}
+
+.poem_extension_title {
+  font-size: large;
+  font-weight: bold;
 }

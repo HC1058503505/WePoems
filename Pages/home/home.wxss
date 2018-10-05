@@ -1,4 +1,8 @@
 /* Pages/home/home.wxss */
+@font-face {
+  font-family: "iconfont";
+  src:url('../../Sources/font/ziti.ttf') format('truetype'); /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+}
 
 .poemlist{
   display: flex;
@@ -23,7 +27,6 @@
 .poem_author {
   text-align: center;
   color: #CFCFCF;
-  font-size: medium;
 }
 
 .poem_content {
@@ -34,5 +37,13 @@
   margin-top: 10rpx;
   color: #CFCFCF;
   font-size: small;
-  
 }
+
+/* text {
+   font-family: "iconfont";
+   font-size: medium; 
+} */
+
+
+
+

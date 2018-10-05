@@ -13,8 +13,10 @@ Page({
   },
   onItemSelected : function(e) {
     var index = e.currentTarget.dataset.index
+    // wx.setStorageSync("poem", JSON.stringify(this.data.poemlist[index]))  
+    wx.setStorageSync("poem", this.data.poemlist[index])
     wx.navigateTo({
-      url: '../../Pages/detail/detail?poem_detail=' + JSON.stringify(this.data.poemlist[index]),
+      url: '../../Pages/detail/detail',
     })
   },
   /**
@@ -31,7 +33,7 @@ Page({
     wx.showNavigationBarLoading()
     var that = this;
     wx.request({
-      url: 'http://180.76.181.15:3000/poems/0',
+      url: 'https://houcong.win:18081/poems/0',
       method: 'get',
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -91,7 +93,9 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+    // complete
+    wx.hideNavigationBarLoading() //完成停止加载
+    wx.stopPullDownRefresh() //停止下拉刷新
   },
 
   /**
@@ -103,7 +107,7 @@ Page({
     var currentpage = that.data.page + 1;
     var dataList = that.data.poemlist
     wx.request({
-      url: 'http://180.76.181.15:3000/poems/' + currentpage,
+      url: 'https://houcong.win:18081/poems/' + currentpage,
       method: 'get',
       header: {
         'content-type': 'application/x-www-form-urlencoded'

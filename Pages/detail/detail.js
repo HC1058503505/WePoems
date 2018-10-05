@@ -5,19 +5,22 @@ Page({
    * 页面的初始数据
    */
   data: {
-      poem : []
+      poem : {}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
     this.setData({
-      poem: JSON.parse(options.poem_detail)
+      poem: wx.getStorageSync("poem")
     })
     wx.setNavigationBarTitle({
        title:this.data.poem.poem_title
     })
+
+    wx.removeStorageSync("poem")   
   },
 
   /**
