@@ -13,7 +13,7 @@
 
 .poem_content {
   text-align: center;
-  padding: 20rpx;
+  padding: 60rpx;
 }
 
 .poem_collection, .poem_copy, .poem_share , .poem_modify, .poem_good, .poem_extension_good, .poem_extension_bad{

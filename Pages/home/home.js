@@ -33,7 +33,7 @@ Page({
     wx.showNavigationBarLoading()
     var that = this;
     wx.request({
-      url: 'https://houcong.win:18081/poems/0',
+      url: 'https://houcong.win:18081/poems/page/0/limit/6',
       method: 'get',
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -107,7 +107,7 @@ Page({
     var currentpage = that.data.page + 1;
     var dataList = that.data.poemlist
     wx.request({
-      url: 'https://houcong.win:18081/poems/' + currentpage,
+      url: 'https://houcong.win:18081/poems/page/' + currentpage +'/limit/10',
       method: 'get',
       header: {
         'content-type': 'application/x-www-form-urlencoded'
