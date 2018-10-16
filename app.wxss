@@ -1,0 +1,5 @@
+@import './Sources/font/stylesheet.wxss';
+
+text {
+   font-family: 'QXyingbikai'; 
+}

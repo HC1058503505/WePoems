@@ -1,25 +1,26 @@
 <!--Pages/detail/detail.wxml-->
-<view class='poem_detail_content'>
-  <text class='poem_author'>{{poem.poem_dynasty}} : {{poem.poem_author}}</text>
-  <text class='poem_content'>{{poem.poem_content}}</text>
-  <view class='poem_tools'>
-    <image class='poem_collection' src='../../Sources/images/btn_fav_un.png' bindtap='poemCollection'></image>
-    <image class='poem_copy' src='../../Sources/images/btn_copy.png' bindtap='poemCopy'></image>
-    <image class='poem_share' src='../../Sources/images/btn_share.png' bindtap='poemShare'></image>
-    <image class='poem_modify' src='../../Sources/images/write.png' bindtap='poemModify'></image>
-    <image class='poem_good' src='../../Sources/images/btn_good.png' bindtap='poemGood'></image>
-  </view>
-</view>
+<view class='poem'>
+  <cover-view class='poem_detail_tools'> 
+    <cover-image src="../../Sources/images/share.png" bindtap='shareAction'></cover-image>
+    <cover-image src="../../Sources/images/no_collection.png" bindtap='collectionAction'></cover-image>
+    <cover-image src="../../Sources/images/setting.png" bindtap='settingAction'></cover-image>
+  </cover-view>
 
-<view class='poem_detail_extension'>
-  <view class='poem_extension' wx:for="{{poem.poem_extension}}" wx:key="{{index}}">
-    <text class='poem_extension_title'>{{item.extension_title}}\n</text>
-    <text class='poem_extension_content'>{{item.extension_content}}</text>
-    <view class='poem_extension_tools'>
-      <text class='good'>{{item.extension_good}}</text>
-      <image class='poem_extension_good' src='../../Sources/images/btn_good.png' bindtap='poemGood'></image>
-      <text class='bad'>{{item.extension_bad}}</text>
-      <image class='poem_extension_bad' src='../../Sources/images/btn_bad.png' bindtap='poemModify'></image>
-    </view>
+  <view class='poem_detail_content'>
+    <text class='poem_author'>{{poem.poem_dynasty}} / {{poem.poem_author}}</text>
+    <text class='poem_content'>{{poem.poem_content}}</text>
+  </view>
+
+  <view class='poem_tags'>
+    <view class='tag' wx:for="{{poem.poem_tags}}" data-index="{{index}}" wx:key="{{item.poem_id}}" bindtap="onItemSelected">
+        <text class='poem_tag' bindtap='poemTagTapAction'>{{item}}</text>
+    </view> 
+  </view>
+
+  <view class='poem_detail_tab'>
+    <button id='zhengwen' bindtap='poemDetailTabAction'>正文</button>
+    <button id='yizhu' bindtap='poemDetailTabAction'>译注</button>
+    <button id='shangxi' bindtap='poemDetailTabAction'>赏析</button>
+    <button id='author' bindtap='poemDetailTabAction'>作者</button>
   </view>
 </view>

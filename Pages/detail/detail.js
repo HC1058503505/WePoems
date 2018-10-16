@@ -70,5 +70,8 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+  poemDetailTabAction: function(event) {
+    console.log(event)
   }
 })

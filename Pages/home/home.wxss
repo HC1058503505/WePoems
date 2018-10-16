@@ -1,9 +1,4 @@
 /* Pages/home/home.wxss */
-@font-face {
-  font-family: "iconfont";
-  src:url('../../Sources/font/ziti.ttf') format('truetype'); /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
-}
-
 .poemlist{
   display: flex;
   flex-direction: column;
@@ -14,10 +9,8 @@
   flex-direction: column;
   margin: 15rpx;
   background-color: #fff;
-  border-radius: 10rpx;
   /*align-items: center;*/
   padding: 15rpx;
-  border-style: inset;
 }
 
 .poem_title {
@@ -30,7 +23,7 @@
 }
 
 .poem_content {
-  text-align: center;
+  text-align: left;
 }
 
 .poem_tags {
@@ -39,11 +32,7 @@
   font-size: small;
 }
 
-/* text {
-   font-family: "iconfont";
-   font-size: medium; 
-} */
-
-
-
+.bg-gray{
+  background-color: #f7f7f7;
+}
 

@@ -2,6 +2,7 @@
 const ajax = require('../../utils/ajax.js');
 const utils = require('../../utils/util.js');
 
+
 Page({
 
   /**
@@ -23,7 +24,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+  
   },
 
   /**
@@ -44,6 +45,7 @@ Page({
           var poem = res.data[item]
           var poem_abstract = poem.poem_content.split("\n")[0]
           poem["poem_abstract"] = poem_abstract
+          poem["poem_tags"] = poem.poem_tags.split('|')
           dataList.push(poem)
         }
         
@@ -117,6 +119,7 @@ Page({
           var poem = res.data[i]
           var poem_abstract = poem.poem_content.split("\n")[0]
           poem["poem_abstract"] = poem_abstract
+          poem["poem_tags"] = poem.poem_tags.split('|')
           dataList.push(poem)
         }        
         that.setData({

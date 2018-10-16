@@ -1,11 +1,12 @@
 <!--Pages/home/home.wxml-->
-<view class='poemlist'>
-  <view wx:for="{{poemlist}}" data-index="{{index}}" wx:key="{{item.poem_id}}" bindtap="onItemSelected">
-      <view class='poem'>
-        <text class='poem_title'>{{item.poem_title}}</text>
-        <text class='poem_author'>{{item.poem_dynasty}} : {{item.poem_author}}</text>
-        <text class='poem_content'>{{item.poem_abstract}}</text>
-        <text class='poem_tags'>{{item.poem_tags}}</text>
+<scroll-view class='bg-gray overflow' style='height:calc(100vh - {{navH}}px)' scroll-y >
+    <view class='poemlist'>
+      <view wx:for="{{poemlist}}" data-index="{{index}}" wx:key="{{item.poem_id}}" bindtap="onItemSelected">
+          <view class='poem'>
+            <text class='poem_title'>{{item.poem_title}}</text>
+            <text class='poem_author'>{{item.poem_dynasty}} / {{item.poem_author}}</text>
+            <text class='poem_content'>{{item.poem_abstract}}</text>
+          </view>
       </view>
-  </view>
-</view>
+    </view>
+</scroll-view>

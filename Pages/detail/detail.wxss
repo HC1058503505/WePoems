@@ -1,52 +1,88 @@
 /* Pages/detail/detail.wxss */
-
+.poem {
+  width: 100%;
+  height: 100%;
+}
 .poem_detail_content {
    display: flex;
    flex-direction: column;
+   background-color: hsl(0, 0%, 95%);
+   margin: 60rpx;
 }
 
 .poem_author {
+   padding-top: 40rpx;
+   padding-bottom: 20rpx;
    text-align: center;
-   color: #CFCFCF;
-   font-size: medium;
 }
 
 .poem_content {
-  text-align: center;
-  padding: 60rpx;
+   text-align: center;
+   padding: 10rpx;
+   padding-bottom: 40rpx;
 }
 
-.poem_collection, .poem_copy, .poem_share , .poem_modify, .poem_good, .poem_extension_good, .poem_extension_bad{
-  width: 40rpx;
-  height: 40rpx;
-  margin-top: 20rpx;
-  margin-left: 20rpx;
+.poem_detail_tools {
+  margin-top: 60rpx;
+  margin-right: 40rpx;
 }
-
-.poem_good {
+cover-image {
   float: right;
-  margin-right: 20rpx;
-}
-
-
-.poem_detail_extension {
-  font-size: medium;
-  padding: 20rpx;
-}
-
-.poem_extension {
-  padding-bottom: 20rpx;
-}
-
-.bad {
-  margin-left: 30rpx;
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 30rpx;
 }
 
 text {
-  font-size: medium;
+  font-size: large;
 }
 
-.poem_extension_title {
-  font-size: large;
-  font-weight: bold;
+.poem_tags {
+    padding-left: 60rpx;
+    padding-right: 60rpx;
+    /*设置弹性布局的方向*/
+    flex-direction: row;
+    /*是否换行*/
+    flex-wrap: wrap;
+    /*设置子元素排列*/
+    justify-content: space-between;
+    /*设置按照弹性布局展示*/
+    display: flex;
+    /*设置子元素交叉轴排列*/
+    /*align-items: stretch;*/
+    align-items: center;
+}
+.tag {
+  border: 1rpx solid hsl(0, 0%, 95%);
+}
+
+.tag>text{
+  font-size: small;
+}
+
+.poem_detail_tab {
+    /*设置弹性布局的方向*/
+    flex-direction: row;
+    /*是否换行*/
+    flex-wrap: wrap;
+    /*设置子元素排列*/
+    justify-content: space-around;
+    /*设置按照弹性布局展示*/
+    display: flex;
+    /*设置子元素交叉轴排列*/
+    /*align-items: stretch;*/
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    margin-bottom: 20rpx;
+}
+
+
+button {
+  background: none !important;
+}
+
+button::after {
+  border: none;
 }
