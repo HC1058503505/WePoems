@@ -107,7 +107,7 @@ Page({
     wx.showNavigationBarLoading()
     var that = this;
     page = page + 1;
-    console.log(page);
+
     var dataList = that.data.poemlist
     wx.request({
       url: 'https://houcong.win:18081/poems/page/' + page +'/limit/10',
