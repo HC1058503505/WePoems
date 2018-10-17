@@ -13,8 +13,8 @@
         </view>
 
         <view class='poem_tags'>
-          <view class='tag' wx:for="{{poem.poem_tags}}" data-index="{{index}}" wx:key="{{item.poem_id}}" bindtap="onItemSelected">
-              <text class='poem_tag' bindtap='poemTagTapAction'>{{item}}</text>
+          <view class='tag' wx:for="{{poem.poem_tags}}" data-index="{{index}}" wx:key="{{item.poem_id}}">
+              <text id='{{item}}' class='poem_tag' bindtap='poemTagTapAction'>{{item}}</text>
           </view> 
         </view>
       </view>

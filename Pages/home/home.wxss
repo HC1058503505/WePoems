@@ -7,10 +7,10 @@
 .poem {
   display: flex;
   flex-direction: column;
-  margin: 15rpx;
+  margin-top: 15rpx;
   background-color: #fff;
   /*align-items: center;*/
-  padding: 15rpx;
+  padding: 20rpx;
 }
 
 .poem_title {

@@ -4,7 +4,8 @@
     "Pages/poem/poem",
     "Pages/me/me",
     "Pages/detail/detail",
-    "Pages/author/author"
+    "Pages/author/author",
+    "Pages/tag/tag"
   ],
   "tabBar": {
     "color": "#CFCFCF",

@@ -98,7 +98,11 @@ Page({
       isYizhu: targetid == 'yizhu',
       isShangxi: targetid == 'shangxi'
     })
-
-
+  },
+  poemTagTapAction: function(e) {
+    wx.setStorageSync("tag", e.currentTarget.id)
+    wx.navigateTo({
+      url: '../../Pages/tag/tag',
+    })
   }
 })

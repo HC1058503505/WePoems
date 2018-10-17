@@ -1,0 +1,13 @@
+<!--Pages/tag/tag.wxml-->
+
+<view wx:for="{{poems_tag}}" data-index="{{index}}" wx:key="{{item.poem_id}}" bindtap='onItemSelected'>
+  <view class='poem_cell'>
+    <view class='poem_top'>
+      <text class='poem_title'>{{item.poem_title}}</text>
+      <text class='poem_dynasy_author'>{{item.poem_dynasty}}/{{item.poem_author}}</text>
+    </view>
+    <view class='poem_bottom'>
+      <text class='poem_abstract'>{{item.poem_abstract}}</text>
+    </view>
+  </view>
+</view>
