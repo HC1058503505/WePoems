@@ -1,0 +1,15 @@
+.poem_detail_tools {
+  background-color: white;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100rpx;
+  padding-top: 35rpx;
+}
+cover-image {
+  float: right;
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 50rpx;
+
+}

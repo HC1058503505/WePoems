@@ -15,15 +15,18 @@
 
 .poem_title {
   text-align: center;
+  font-size: medium;
 }
 
 .poem_author {
   text-align: center;
   color: #CFCFCF;
+  font-size: small;
 }
 
 .poem_content {
   text-align: left;
+  font-size: medium;
 }
 
 .poem_tags {

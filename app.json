@@ -3,7 +3,8 @@
     "Pages/home/home",
     "Pages/poem/poem",
     "Pages/me/me",
-    "Pages/detail/detail"
+    "Pages/detail/detail",
+    "Pages/author/author"
   ],
   "tabBar": {
     "color": "#CFCFCF",

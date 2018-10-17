@@ -1,0 +1,36 @@
+.poem_detail_tab {
+    /*设置弹性布局的方向*/
+    flex-direction: row;
+    /*是否换行*/
+    flex-wrap: wrap;
+    /*设置子元素排列*/
+    justify-content: space-around;
+    /*设置按照弹性布局展示*/
+    display: flex;
+    /*设置子元素交叉轴排列*/
+    /*align-items: stretch;*/
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    padding-bottom: 10rpx;
+}
+
+button {
+  background: none !important;
+}
+
+button::after {
+  border: none;
+}
+
+.normal {
+  color: black;
+}
+
+.didSelected {
+  border-bottom-color: palevioletred;
+  border-bottom-style: solid;
+  color: palevioletred;
+}

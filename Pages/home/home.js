@@ -1,7 +1,7 @@
 // Pages/home/home.js
 const ajax = require('../../utils/ajax.js');
 const utils = require('../../utils/util.js');
-
+var page = 0;
 
 Page({
 
@@ -9,8 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    poemlist:[],
-    page: 0
+    poemlist:[]
   },
   onItemSelected : function(e) {
     var index = e.currentTarget.dataset.index
@@ -34,7 +33,7 @@ Page({
     wx.showNavigationBarLoading()
     var that = this;
     wx.request({
-      url: 'https://houcong.win:18081/poems/page/0/limit/6',
+      url: 'https://houcong.win:18081/poems/page/0/limit/10',
       method: 'get',
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -43,7 +42,8 @@ Page({
         var dataList = []
         for (var item in res.data) {
           var poem = res.data[item]
-          var poem_abstract = poem.poem_content.split("\n")[0]
+          var poem_content_list = poem.poem_content.split("\n")
+          var poem_abstract = poem_content_list[0]
           poem["poem_abstract"] = poem_abstract
           poem["poem_tags"] = poem.poem_tags.split('|')
           dataList.push(poem)
@@ -106,10 +106,11 @@ Page({
   onReachBottom: function () {
     wx.showNavigationBarLoading()
     var that = this;
-    var currentpage = that.data.page + 1;
+    page = page + 1;
+    console.log(page);
     var dataList = that.data.poemlist
     wx.request({
-      url: 'https://houcong.win:18081/poems/page/' + currentpage +'/limit/10',
+      url: 'https://houcong.win:18081/poems/page/' + page +'/limit/10',
       method: 'get',
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -117,14 +118,14 @@ Page({
       success: function (res) {
         for(var i=0; i < res.data.length; i++) {
           var poem = res.data[i]
-          var poem_abstract = poem.poem_content.split("\n")[0]
+          var poem_content_list = poem.poem_content.split("\n")
+          var poem_abstract = poem_content_list[0]
           poem["poem_abstract"] = poem_abstract
           poem["poem_tags"] = poem.poem_tags.split('|')
           dataList.push(poem)
         }        
         that.setData({
-          poemlist: dataList,
-          page: currentpage
+          poemlist: dataList
         })
 
         // complete

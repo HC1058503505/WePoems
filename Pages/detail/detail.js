@@ -1,11 +1,19 @@
 // Pages/detail/detail.js
+var app = getApp()
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-      poem : {}
+      poem : {},
+      scrollHeight: wx.getSystemInfoSync().windowHeight - 50 - app.globalData.navHeight,
+      scrollTop: -1,
+      isZhengwen: true,
+      isYizhu: false,
+      isShangxi: false,
+      isAuthor: false
   },
 
   /**
@@ -72,6 +80,25 @@ Page({
   
   },
   poemDetailTabAction: function(event) {
-    console.log(event)
+    let targetid = event.currentTarget.id
+
+    if (targetid == 'author') {
+      var author = this.data.poem.poem_author
+      // wx.setStorageSync("poem", JSON.stringify(this.data.poemlist[index]))  
+      wx.setStorageSync("author", author)
+      wx.navigateTo({
+        url: '../../Pages/author/author',
+      })
+      return
+    }
+    
+    this.setData({
+      scrollTop: 0,
+      isZhengwen: targetid == 'zhengwen',
+      isYizhu: targetid == 'yizhu',
+      isShangxi: targetid == 'shangxi'
+    })
+
+
   }
 })

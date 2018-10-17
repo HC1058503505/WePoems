@@ -1,0 +1,37 @@
+/* Pages/author/author.wxss */
+
+@import '../detail/poem_detail_yizhu.wxss'
+
+/* 头像 */
+.poet_portrait_block {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-top: 30rpx;
+}
+
+.poet_portrait {
+  width: 300rpx;
+  height: 300rpx;
+  border-radius: 150rpx;
+}
+
+/* 简介 */
+.poet_abstract_block {
+  display: flex;
+  flex-direction: column;
+  padding: 40rpx;
+}
+
+.poet_abstract_title {
+  font-weight: 600;
+  font-size: x-large;
+  border-bottom: 2rpx dashed rgb(228, 227, 227);
+  padding-bottom: 20rpx;
+}
+.poet_abstract_content {
+  padding-top: 10rpx;
+}
+
+
+/* 扩展 */
