@@ -47,3 +47,23 @@
     <button class="{{isShangxi ? 'didSelected' : 'normal'}}" id='shangxi' bindtap='poemDetailTabAction'>赏析</button>
     <button class="{{isAuthor ? 'didSelected' : 'normal'}}" id='author' bindtap='poemDetailTabAction'>作者</button>
 </view>
+
+
+<!--默认action-sheet为隐藏，由button触发-->
+<!-- <action-sheet hidden="{{actionSheetHidden}}" bindchange="listenerActionSheet" >
+    <action-sheet-item bindtap="copyPoems" >复制诗词</action-sheet-item>
+    <action-sheet-item bindtap="generatePic">生成图片</action-sheet-item>
+    <action-sheet-cancel>取消</action-sheet-cancel>
+</action-sheet> -->
+
+<!-- 画布大小按需定制 这里我按照背景图的尺寸定的  -->
+<!-- <canvas canvas-id="shareImg"></canvas>
+
+<block wx:if="{{previewhidden}}">
+  
+  <view class='preview'>
+    <image src="{{imageTempPath}}"></image>
+  </view>
+</block> -->
+
+

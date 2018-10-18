@@ -13,7 +13,10 @@ Page({
       isZhengwen: true,
       isYizhu: false,
       isShangxi: false,
-      isAuthor: false
+      isAuthor: false,
+      previewhidden: false,
+      systemInfo: {},
+      imageTempPath: ''
   },
 
   /**
@@ -35,7 +38,15 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+    // 获取系统信息
+    var that = this;
+    wx.getSystemInfo({
+      success: res => {
+        that.setData({
+          systemInfo: res
+        })
+      }
+    });
   },
 
   /**
@@ -104,5 +115,100 @@ Page({
     wx.navigateTo({
       url: '../../Pages/tag/tag',
     })
+  },
+
+  copyAction: function(e) {
+
+    var that = this;
+    wx.showActionSheet({
+      itemList: ["复制诗词", "生成图片"],
+      itemColor: '#000000',
+      success: function (res) {
+        if (res.tapIndex == 0) {
+          that.copyPoems()
+        } else if (res.tapIndex == 1) {
+          that.generatePic()
+        }
+      },
+      fail: function (res) {
+
+      },
+      complete: function (res) {
+
+      },
+    })
+  },
+
+  copyPoems: function() {
+    var that = this;
+    let copy_content = this.data.poem.poem_title + '\n\n'
+      + this.data.poem.poem_dynasty + '/' + this.data.poem.poem_author + '\n\n'
+      + this.data.poem.poem_content;
+    wx.setClipboardData({
+      data: copy_content,
+      success: function(res){
+        wx.getClipboardData({
+          success: function(res) {
+            wx.showToast({
+              title: '复制成功'
+            })
+
+            that.setData({
+              actionSheetHidden: true
+            })
+          }
+        })
+      }
+    })
+  },
+
+  generatePic: function() {
+
+    this.poemPicture()
+
+    var that = this
+    wx.canvasToTempFilePath({
+      x: 0,
+      y: 0,
+      width: 500,
+      height: 700,
+      destHeight: 500,
+      destWidth: 700,
+      canvasId: 'shareImg',
+      success: function (res) {
+        console.log(res.tempFilePath)
+        that.setData({
+          previewhidden: true,
+          imageTempPath: res.tempFilePath
+        })
+
+        wx.setNavigationBarTitle({
+          title: ''
+        })
+      }
+    }, this)   
+    
+  },
+  poemPicture: function () {
+    const ctx = wx.createCanvasContext('shareImg', this)
+    ctx.setFontSize(30)
+    ctx.setFillStyle('black')
+
+    ctx.setTextAlign('center')
+    ctx.fillText(this.data.poem.poem_title,100,50)
+    ctx.fillText(this.data.poem.poem_dynasty + '/' + this.data.poem.poem_author, 100, 100)
+    ctx.fillText(this.data.poem.poem_content, 100, 150)
+    // ctx.setFillStyle('#484a3d')
+    // ctx.fillRect(50,20,100,300)
+    ctx.draw()
+  },
+ 
+  phoneType:  function () {
+    console.log(this.data.systemInfo.platform)
+    if (this.data.systemInfo.platform == 'ios') {
+      return 2
+    } 
+    return 2
   }
+
 })
