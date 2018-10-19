@@ -1,4 +1,5 @@
 // Pages/author/author.js
+const util = require('../../utils/util.js')
 var author_name = ''
 
 Page({
@@ -27,36 +28,14 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    wx.showNavigationBarLoading()
     var that = this;
-    wx.request({
-      url: 'https://houcong.win:18081/poets/name/' + author_name + '/page/0/limit/1',
-      method: 'get',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      success: function (res) {
-        let poet_message = res.data[0]
+    util.requestMe('/poets/name/' + author_name + '/page/0/limit/1','get','author')
+      .then(res => {
         that.setData({
-          poet_info: poet_message,
-          poet_portrait: 'https://houcong.win:18081/pictures/poets/' + poet_message.poet_portrait + '.jpg'
+          poet_info: res.poet_info,
+          poet_portrait: res.poet_portrait
         })
-
-        // complete
-        wx.hideNavigationBarLoading() //完成停止加载
-        wx.stopPullDownRefresh() //停止下拉刷新
-      },
-      fail: function (error) {
-        wx.showToast({
-          title: '请求失败',
-          duration: 1500
-        })
-
-        // complete
-        wx.hideNavigationBarLoading() //完成停止加载
-        wx.stopPullDownRefresh() //停止下拉刷新
-      }
-    })
+      })
   },
 
   /**

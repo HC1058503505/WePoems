@@ -37,6 +37,7 @@
     "navigationBarTitleText": "古诗文",
     "backgroundColor": "#eeeeee",
     "backgroundTextStyle": "light",
-    "enablePullDownRefresh": false
+    "enablePullDownRefresh": false,
+    "onReachBottomDistance": 150
   }
 }

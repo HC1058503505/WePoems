@@ -22,7 +22,7 @@
 
 .poem_dynasy_author {
   font-size: small;
-  color: lightgrey;
+  color: gray;
 }
 
 .poem_abstract {

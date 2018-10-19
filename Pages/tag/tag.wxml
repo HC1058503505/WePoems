@@ -1,6 +1,6 @@
 <!--Pages/tag/tag.wxml-->
 
-<view wx:for="{{poems_tag}}" data-index="{{index}}" wx:key="{{item.poem_id}}" bindtap='onItemSelected'>
+<view wx:for="{{poemlist}}" data-index="{{index}}" wx:key="{{item.poem_id}}" bindtap='onItemSelected'>
   <view class='poem_cell'>
     <view class='poem_top'>
       <text class='poem_title'>{{item.poem_title}}</text>

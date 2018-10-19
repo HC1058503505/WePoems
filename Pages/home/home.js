@@ -1,5 +1,4 @@
 // Pages/home/home.js
-const ajax = require('../../utils/ajax.js');
 const utils = require('../../utils/util.js');
 var page = 0;
 
@@ -15,6 +14,7 @@ Page({
     var index = e.currentTarget.dataset.index
     // wx.setStorageSync("poem", JSON.stringify(this.data.poemlist[index]))  
     wx.setStorageSync("poem", this.data.poemlist[index])
+    wx.hideNavigationBarLoading()
     wx.navigateTo({
       url: '../../Pages/detail/detail',
     })
@@ -31,43 +31,7 @@ Page({
    */
   onReady: function () {
     wx.showNavigationBarLoading()
-    var that = this;
-    wx.request({
-      url: 'https://houcong.win:18081/poems/page/0/limit/10',
-      method: 'get',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      success: function(res) {
-        var dataList = []
-        for (var item in res.data) {
-          let poem = res.data[item]
-          let poem_content_list = poem.poem_content.split("\n")
-          let poem_abstract = poem_content_list[0]
-          poem["poem_abstract"] = poem_abstract
-          poem["poem_tags"] = poem.poem_tags.split('|')
-          dataList.push(poem)
-        }
-        
-        that.setData({
-          poemlist:dataList
-        })
-
-        // complete
-        wx.hideNavigationBarLoading() //完成停止加载
-        wx.stopPullDownRefresh() //停止下拉刷新
-      },
-      fail: function(error) {
-        wx.showToast({
-          title: '请求失败',
-          duration: 1500
-        })
-
-        // complete
-        wx.hideNavigationBarLoading() //完成停止加载
-        wx.stopPullDownRefresh() //停止下拉刷新
-      }
-    })
+    this.onReachBottom()
   },
 
   /**
@@ -104,45 +68,16 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    wx.showNavigationBarLoading()
-    var that = this;
-    page = page + 1;
-
+    var that = this
     var dataList = that.data.poemlist
-    wx.request({
-      url: 'https://houcong.win:18081/poems/page/' + page +'/limit/10',
-      method: 'get',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      success: function (res) {
-        for(var i=0; i < res.data.length; i++) {
-          var poem = res.data[i]
-          var poem_content_list = poem.poem_content.split("\n")
-          var poem_abstract = poem_content_list[0]
-          poem["poem_abstract"] = poem_abstract
-          poem["poem_tags"] = poem.poem_tags.split('|')
-          dataList.push(poem)
-        }        
-        that.setData({
-          poemlist: dataList
-        })
+    utils.requestMe('/poems/page/' + page +'/limit/10','get','poems')
+          .then(res => {
+            that.setData({
+              poemlist: dataList.concat(res.results)
+            })
 
-        // complete
-        wx.hideNavigationBarLoading() //完成停止加载
-        wx.stopPullDownRefresh() //停止下拉刷新
-      },
-      fail: function (error) {
-        wx.showToast({
-          title: '请求失败',
-          duration: 1500
-        })
-
-        // complete
-        wx.hideNavigationBarLoading() //完成停止加载
-        wx.stopPullDownRefresh() //停止下拉刷新
-      }
-    })
+            page = page + 1
+          })
   },
 
   /**

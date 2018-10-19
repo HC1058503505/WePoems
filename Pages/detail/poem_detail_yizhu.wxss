@@ -36,7 +36,7 @@ text {
 }
 
 scroll-view{
-  height: calc(100vh - 46px);
+  height: calc(100vh - 100rpx);
 }
 
 ::-webkit-scrollbar {

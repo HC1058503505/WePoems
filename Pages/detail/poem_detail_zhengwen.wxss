@@ -46,9 +46,11 @@ text {
     padding-bottom: 20rpx;
 }
 .tag {
-  border: 1rpx solid hsl(0, 0%, 95%);
+  border: 2rpx solid gainsboro;
   margin-right: 40rpx;
   margin-bottom: 30rpx;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
 }
 
 

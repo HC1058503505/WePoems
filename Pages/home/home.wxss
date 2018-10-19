@@ -20,7 +20,7 @@
 
 .poem_author {
   text-align: center;
-  color: #CFCFCF;
+  color: grey;
   font-size: small;
 }
 
@@ -29,13 +29,11 @@
   font-size: medium;
 }
 
-.poem_tags {
-  margin-top: 10rpx;
-  color: #CFCFCF;
-  font-size: small;
-}
-
 .bg-gray{
   background-color: #f7f7f7;
+}
+
+text {
+  margin-bottom: 10rpx;
 }
 
