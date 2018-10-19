@@ -57,13 +57,12 @@
 </action-sheet> -->
 
 <!-- 画布大小按需定制 这里我按照背景图的尺寸定的  -->
-<!-- <canvas canvas-id="shareImg"></canvas>
-
 <block wx:if="{{previewhidden}}">
-  
-  <view class='preview'>
-    <image src="{{imageTempPath}}"></image>
-  </view>
-</block> -->
+  <canvas canvas-id="shareImg" style="height:{{canvasH}}"></canvas>
+</block>
+
+
+
+
 
 

@@ -62,7 +62,7 @@ function poemsType(dataResult){
 function authorType(dataResult){
   let results = dataResult['result']
   let poet_message = results[0]
-  let poet_protrait_src = '../../Sources/images/placeholder.jpg'
+  let poet_portrait_src = '../../Sources/images/placeholder.jpg'
   if (poet_message.poet_portrait.length > 0) {
     poet_portrait_src = baseUrl + '/pictures/poets/' + poet_message.poet_portrait + '.jpg'
   }
