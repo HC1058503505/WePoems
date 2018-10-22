@@ -17,6 +17,8 @@ function requestMe(path, method, pageType){
           wx.vibrateShort()
         } else if (pageType == 'author') {
           result = authorType(res.data['data'])
+        } else if (pageType == 'sharePoem') {
+          result = sharePoem(res.data['data'])
         }
 
         resolve(result)
@@ -70,6 +72,12 @@ function authorType(dataResult){
     'poet_info': poet_message,
     'poet_portrait': poet_portrait_src
   }
+}
+
+function sharePoem(dataResult){
+  let results = dataResult['result']
+  console.log(results)
+  return results
 }
 module.exports.requestMe = requestMe
 //备注: 开发者key需要到“实战开发助手”小程序获取，直接配置就可以使用，如果每日次数用完可以申请增加次数

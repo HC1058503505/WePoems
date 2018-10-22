@@ -32,5 +32,6 @@ button::after {
 .didSelected {
   border-bottom-color: palevioletred;
   border-bottom-style: solid;
+  border-radius: 0;
   color: palevioletred;
 }

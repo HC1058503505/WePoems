@@ -34,11 +34,30 @@
     </block>
 </scroll-view>
 
-<cover-view class='poem_detail_tools'> 
-      <cover-image src="../../Sources/images/share.png" bindtap='shareAction'></cover-image>
-      <cover-image src="../../Sources/images/no_collection.png" bindtap='collectionAction'></cover-image>
-      <cover-image src="../../Sources/images/setting.png" bindtap='settingAction'></cover-image>
-</cover-view>
+<view class='poem_detail_tools'> 
+        <!-- <image src="../../Sources/images/share.png" bindtap='shareAction'></image>
+        <image src="{{isCollection ? '../../Sources/images/yes_collection.png' : '../../Sources/images/no_collection.png'}}" bindtap='collectionAction'></image>
+        <image src="../../Sources/images/setting.png" bindtap='settingAction'></image> -->
+        
+        <button class='share' open-type='share'>
+          <image src="../../Sources/images/share.png" bindtap='shareAction'></image>
+        </button>
+
+        <button class='collection' bindtap='collectionAction'>
+          <image src="{{isCollection ? '../../Sources/images/yes_collection.png' : '../../Sources/images/no_collection.png'}}"></image>
+        </button>
+
+        <button class='setting'>
+          <image src="../../Sources/images/setting.png" bindtap='settingAction'></image>
+        </button>
+        
+        <block wx:if="{{isFromShare}}">
+          <button class='home' bindtap='homeAction'>
+            <image src='../../Sources/images/home.png'></image>
+          </button>
+        </block>
+        
+</view>
 
 <!-- 切换选项 -->
 <view class='poem_detail_tab'>
@@ -57,9 +76,7 @@
 </action-sheet> -->
 
 <!-- 画布大小按需定制 这里我按照背景图的尺寸定的  -->
-<block wx:if="{{previewhidden}}">
-  <canvas canvas-id="shareImg" style="height:{{canvasH}}"></canvas>
-</block>
+<canvas canvas-id="shareImg" hidden='true'></canvas>
 
 
 

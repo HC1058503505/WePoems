@@ -23,7 +23,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    if(options.pageid == 10071) {
+      wx.navigateTo({
+        url: '../../Pages/detail/detail?pageid=10071&poem_id=' + options.poem_id,
+      })
+    }
   },
 
   /**

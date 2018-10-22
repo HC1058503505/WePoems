@@ -1,6 +1,6 @@
 /* Pages/author/author.wxss */
 
-@import '../detail/poem_detail_yizhu.wxss'
+@import '../detail/poem_detail_yizhu.wxss';
 
 /* 头像 */
 .poet_portrait_block {
@@ -11,9 +11,10 @@
 }
 
 .poet_portrait {
-  width: 300rpx;
+  width: 210rpx;
   height: 300rpx;
-  border-radius: 150rpx;
+  border-radius: 105rpx;
+
 }
 
 /* 简介 */

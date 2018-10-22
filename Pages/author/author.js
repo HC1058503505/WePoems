@@ -78,5 +78,16 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  protraitTap: function(){
+    wx.previewImage({
+      urls: [this.data.poet_portrait],
+      success: function(){
+
+      },
+      fail: function(){
+        
+      }
+    })
   }
 })

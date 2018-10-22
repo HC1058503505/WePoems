@@ -1,7 +1,7 @@
 <!--Pages/author/author.wxml-->
 <view>
       <view class='poet_portrait_block'>
-          <image class='poet_portrait' src="{{poet_portrait}}"></image>
+          <image class='poet_portrait' src="{{poet_portrait}}" bindtap='protraitTap'></image>
       </view>
 
       <view class='poet_abstract_block'>
