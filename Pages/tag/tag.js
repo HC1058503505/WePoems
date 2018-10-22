@@ -75,7 +75,7 @@ Page({
   onReachBottom: function () {
     var that = this
     var dataList = that.data.poemlist
-    utils.requestMe('/poems/page/' + page + '/limit/10', 'get', 'poems')
+    utils.requestMe('/poems/tag/' + tag + '/page/' + page + '/limit/10', 'get', 'poems')
       .then(res => {
         that.setData({
           poemlist: dataList.concat(res.results)
