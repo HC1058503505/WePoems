@@ -19,8 +19,7 @@ Page({
       systemInfo: {},
       canvasH:0,
       canvasW:0,
-      isCollection:false,
-      isFromShare:false
+      isCollection:false
   },
 
   /**
@@ -31,31 +30,34 @@ Page({
     if(options.pageid == 10071) {
       console.log('分享',options.poem_id)
       // 根据poem_id请求数据
-      utils.requestMe('/poem/id/' + options.poem_id, 'get', 'sharePoem')
+      utils.requestMe('/poems/id/' + options.poem_id, 'get', 'sharePoem')
         .then(res => {
           console.log(res)
-          // that.setData({
-          //   poem: res,
-          //   isFromShare: true
-          // })
+          that.setData({
+            poem: res,
+            isFromShare: true
+          })
+
+          wx.setNavigationBarTitle({
+            title: res.poem_title
+          })
         })
     } else {
       this.setData({
-        poem: wx.getStorageSync("poem"),
-        isFromShare: app.globalData.scene == 1007
+        poem: wx.getStorageSync("poem")
       })
+
+      var titleStr = ''
+      if (this.data.poem.poem_title != undefined) {
+        titleStr = this.data.poem.poem_title
+      }
+      wx.setNavigationBarTitle({
+        title: titleStr
+      })
+
+      wx.removeStorageSync("poem")  
     }
     
-    var titleStr = ''
-    if (this.data.poem.poem_title != undefined) {
-      titleStr = this.data.poem.poem_title
-    }
-    wx.setNavigationBarTitle({
-      title: titleStr
-    })
-
-    wx.removeStorageSync("poem")   
-
   },
 
   /**

@@ -51,12 +51,6 @@
           <image src="../../Sources/images/setting.png" bindtap='settingAction'></image>
         </button>
         
-        <block wx:if="{{isFromShare}}">
-          <button class='home' bindtap='homeAction'>
-            <image src='../../Sources/images/home.png'></image>
-          </button>
-        </block>
-        
 </view>
 
 <!-- 切换选项 -->

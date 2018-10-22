@@ -24,6 +24,7 @@ Page({
    */
   onLoad: function (options) {
     if(options.pageid == 10071) {
+      console.log(page)
       wx.navigateTo({
         url: '../../Pages/detail/detail?pageid=10071&poem_id=' + options.poem_id,
       })
@@ -34,6 +35,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+    console.log('onReady')
     wx.showNavigationBarLoading()
     this.onReachBottom()
   },
@@ -72,6 +74,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
+    console.log('onReachBottom')
     var that = this
     var dataList = that.data.poemlist
     utils.requestMe('/poems/page/' + page +'/limit/10','get','poems')

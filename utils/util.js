@@ -75,9 +75,9 @@ function authorType(dataResult){
 }
 
 function sharePoem(dataResult){
-  let results = dataResult['result']
-  console.log(results)
-  return results
+  let poem = dataResult['result'][0]
+  poem["poem_tags"] = poem.poem_tags.split('|')
+  return poem
 }
 module.exports.requestMe = requestMe
 //备注: 开发者key需要到“实战开发助手”小程序获取，直接配置就可以使用，如果每日次数用完可以申请增加次数

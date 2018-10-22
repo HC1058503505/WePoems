@@ -13,7 +13,6 @@ App({
         //导航高度
         this.globalData.navHeight = res.statusBarHeight + 46;
         this.globalData.scene = options.scene;
-        console.log(this.globalData.scene)
       }, fail(err) {
         console.log(err);
       }
