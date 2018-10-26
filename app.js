@@ -3,7 +3,8 @@
 App({
   globalData : {
     navHeight : 0,
-    scene:0
+    scene:0,
+    userID: ''
   },
   onLaunch: function (options) {
     // 小程序启动之后 触发

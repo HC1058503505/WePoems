@@ -5,7 +5,8 @@
     "Pages/me/me",
     "Pages/detail/detail",
     "Pages/author/author",
-    "Pages/tag/tag"
+    "Pages/tag/tag",
+    "Pages/showresult/showresult"
   ],
   "tabBar": {
     "color": "#CFCFCF",

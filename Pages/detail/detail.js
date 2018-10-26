@@ -19,7 +19,7 @@ Page({
       systemInfo: {},
       canvasH:0,
       canvasW:0,
-      isCollection:false
+      isCollection: false
   },
 
   /**
@@ -43,19 +43,29 @@ Page({
           })
         })
     } else {
-      this.setData({
-        poem: wx.getStorageSync("poem")
-      })
+      var that = this
+      let poem = wx.getStorageSync("poem")
+      let key = 'poem_id'
+      let keyid = poem.poem_id
+      let typestr = 'poems'
+      utils.requestMe('/poems/isCollection/key/' + key + '/keyid/' + keyid + '/type/' + typestr,'get','isCollection')
+        .then(res => {
+          that.setData({
+            poem: poem,
+            isCollection: res['isCollection']
+          })
 
-      var titleStr = ''
-      if (this.data.poem.poem_title != undefined) {
-        titleStr = this.data.poem.poem_title
-      }
-      wx.setNavigationBarTitle({
-        title: titleStr
-      })
+          var titleStr = ''
+          if (this.data.poem.poem_title != undefined) {
+            titleStr = this.data.poem.poem_title
+          }
+          wx.setNavigationBarTitle({
+            title: titleStr
+          })
 
-      wx.removeStorageSync("poem")  
+          wx.removeStorageSync("poem")
+        })
+        
     }
     
   },
@@ -114,7 +124,7 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    console.log('shareAction')
+
     let poem_title = this.data.poem.poem_title
     let poem_dynasty = this.data.poem.poem_dynasty
     let poem_author = this.data.poem.poem_author
@@ -135,19 +145,52 @@ Page({
       }
     }
   },
-  homeAction:function(){
-    console.log('homeAction')
-    wx.redirectTo({
-      url: '../../Pages/home/home',
-    })
-  },
   shareAction:function(){
     this.onShareAppMessage()
   },
   collectionAction:function(){
-    this.setData({
-      isCollection: !this.data.isCollection
-    })
+    if (app.userID.length == 0) {
+      // 未获取到用户id，需登录
+    } else {
+      // 以获取到用户id，无需登录
+
+      let key = 'poem_id'
+      let keyid = that.data.poem.poem_id
+      let typestr = 'poems'
+      let isCollection = !that.data.isCollection
+
+      utils.requestMe('/poems/key/' + key + '/keyid/' + keyid + '/type/' + typestr + '/isCollection/' + isCollection, 'get' + '/userID/' + app.userID, 'isCollection')
+        .then(res => {
+          that.setData({
+            isCollection: isCollection
+          })
+        })
+    }
+    // var that = this
+    // wx.login({
+    //   success: function (res) {
+    //     if (res.code) {
+    //       console.log("登录请求" + res.code)
+    //     } else {
+    //       console.log("登录失败")
+    //     }
+    //   }
+    // })
+
+
+    // let key = 'poem_id'
+    // let keyid = that.data.poem.poem_id
+    // let typestr = 'poems'
+    // let isCollection = !that.data.isCollection
+
+    // utils.requestMe('/poems/key/' + key + '/keyid/' + keyid + '/type/' + typestr + '/isCollection/' + isCollection, 'get', 'isCollection')
+    //   .then(res => {
+    //     that.setData({
+    //       isCollection: isCollection
+    //     })
+    //   })
+
+    
   },
   poemDetailTabAction: function(event) {
     let targetid = event.currentTarget.id
@@ -364,6 +407,37 @@ Page({
       }
 
       return initY + lineHeight
+  },
+  bindgetuserinfo: function(e){
+    console.log(e)
+    var that = this;
+    if (e.detail.userInfo) {
+      // 发送 res.code 到后台换取 openId, sessionKey, unionId
+      wx.login({
+        success: res => {
+          // console.log(res.code, e.detail.iv, e.detail.encryptedData)
+          wx.request({
+            //后台接口地址
+            url: 'http://localhost:18080/users/wx/onlogin/code/' + res.code + '/nickname/' + e.detail.userInfo.nickName,
+            method: 'GET',
+            header: {
+              'content-type': 'application/json'
+            },
+            success: function (res) {
+              console.log('请求成功', res)
+            }
+          })
+        }
+      })
+    } else {
+      console.log(333, '执行到这里，说明拒绝了授权')
+      wx.showToast({
+        title: "为了您更好的体验,请先同意授权",
+        icon: 'none',
+        duration: 2000
+      });
+    }
+
   }
 
 })

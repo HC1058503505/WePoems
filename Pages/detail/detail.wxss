@@ -1,7 +1,7 @@
 /* Pages/detail/detail.wxss */
 @import 'poem_detail_zhengwen.wxss';
 @import 'poem_detail_tab.wxss';
-@import 'poem_detail_tools.wxss';
+/* @import 'poem_detail_tools.wxss'; */
 @import 'poem_detail_yizhu.wxss';
 
 canvas {

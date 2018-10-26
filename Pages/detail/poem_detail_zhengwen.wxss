@@ -7,7 +7,6 @@
    flex-direction: column;
    background-color: rgb(242, 242, 242);
    margin: 50rpx;
-   margin-top: 100rpx;
 }
 
 .poem_author {

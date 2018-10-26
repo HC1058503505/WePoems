@@ -19,6 +19,12 @@ function requestMe(path, method, pageType){
           result = authorType(res.data['data'])
         } else if (pageType == 'sharePoem') {
           result = sharePoem(res.data['data'])
+        } else if (pageType == 'isCollection') {
+          let tempResult = res.data
+          if (tempResult.isCollection == undefined) {
+            tempResult["isCollection"] = false
+          }
+          result = tempResult
         }
 
         resolve(result)
@@ -52,6 +58,9 @@ function poemsType(dataResult){
     let poem_abstract = poem_content_list[0]
     poem["poem_abstract"] = poem_abstract
     poem["poem_tags"] = poem.poem_tags.split('|')
+    if (poem["isCollection"] == undefined) {
+      poem["isCollection"] = false
+    }
     dataList.push(poem)
   }
 
@@ -77,7 +86,11 @@ function authorType(dataResult){
 function sharePoem(dataResult){
   let poem = dataResult['result'][0]
   poem["poem_tags"] = poem.poem_tags.split('|')
+  if (poem["isCollection"] == undefined) {
+    poem["isCollection"] = false
+  }
   return poem
 }
+
 module.exports.requestMe = requestMe
 //备注: 开发者key需要到“实战开发助手”小程序获取，直接配置就可以使用，如果每日次数用完可以申请增加次数

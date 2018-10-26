@@ -34,16 +34,12 @@
     </block>
 </scroll-view>
 
-<view class='poem_detail_tools'> 
-        <!-- <image src="../../Sources/images/share.png" bindtap='shareAction'></image>
-        <image src="{{isCollection ? '../../Sources/images/yes_collection.png' : '../../Sources/images/no_collection.png'}}" bindtap='collectionAction'></image>
-        <image src="../../Sources/images/setting.png" bindtap='settingAction'></image> -->
-        
+<!-- <view class='poem_detail_tools'> 
         <button class='share' open-type='share'>
           <image src="../../Sources/images/share.png" bindtap='shareAction'></image>
         </button>
 
-        <button class='collection' bindtap='collectionAction'>
+        <button class='collection' bindtap='collectionAction' bindgetuserinfo="bindgetuserinfo" open-type='getUserInfo'>
           <image src="{{isCollection ? '../../Sources/images/yes_collection.png' : '../../Sources/images/no_collection.png'}}"></image>
         </button>
 
@@ -51,7 +47,7 @@
           <image src="../../Sources/images/setting.png" bindtap='settingAction'></image>
         </button>
         
-</view>
+</view> -->
 
 <!-- 切换选项 -->
 <view class='poem_detail_tab'>
