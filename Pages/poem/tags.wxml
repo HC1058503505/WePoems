@@ -6,10 +6,10 @@
     </view>
     
     <view class='tags'>
-      <text class='tag_poet'>诗人</text>
-      <text class='tag_dynasty'>朝代</text>
-      <text class='tag'>标签</text>
-      <text class='tag_poems'>诗集</text>
+      <text id='tag_poet' class='tag_poet' bindtap='tagTap'>诗人</text>
+      <text id='tag_dynasty' class='tag_dynasty' bindtap='tagTap'>朝代</text>
+      <text id='tag' class='tag' bindtap='tagTap'>标签</text>
+      <text id='tag_poems' class='tag_poems' bindtap='tagTap'>诗集</text>
     </view>
   
   </view>

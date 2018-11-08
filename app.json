@@ -1,19 +1,24 @@
 {
   "pages": [
+    "Pages/recommend/recommend",
     "Pages/home/home",
     "Pages/poem/poem",
     "Pages/me/me",
     "Pages/detail/detail",
     "Pages/author/author",
     "Pages/tag/tag",
-    "Pages/showresult/showresult"
+    "Pages/showresult/showresult",
+    "Pages/poet/poet",
+    "Pages/poetry/poetry",
+    "Pages/categorysearch/categorysearch",
+    "Pages/categorydetail/categorydetail"
   ],
   "tabBar": {
     "color": "#CFCFCF",
     "selectedColor": "#000000",
     "list": [
       {
-        "pagePath": "Pages/home/home",
+        "pagePath": "Pages/recommend/recommend",
         "text": "推荐",
         "iconPath": "Sources/images/recommand.png",
         "selectedIconPath": "Sources/images/recommand_selected.png"

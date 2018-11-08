@@ -1,0 +1,12 @@
+<!--Pages/recommend/recommend.wxml-->
+<scroll-view class='bg-gray overflow' style='height:calc(100vh - {{navH}}px)' scroll-y >
+    <view class='poemlist'>
+      <view wx:for="{{gushiwens}}" data-index="poetry_{{item.id}}.json" wx:key="{{item.poem_id}}" bindtap="onItemSelected">
+          <view class='poem'>
+            <text class='poem_title'>{{item.nameStr}}</text>
+            <text class='poem_author'>{{item.chaodai}} / {{item.author}}</text>
+            <text class='poem_content'>{{item.cont}}</text>
+          </view>
+      </view>
+    </view>
+</scroll-view>

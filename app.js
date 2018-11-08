@@ -19,7 +19,12 @@ App({
       }
     })
     
-
+    wx.cloud.init({
+      env: {
+        database:"wepoems-2f5265"
+      },
+      traceUser: true
+    })
   }
 
 })

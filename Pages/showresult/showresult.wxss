@@ -1,1 +1,4 @@
 /* Pages/showresult/showresult.wxss */
+
+@import './searchview.wxss';
+

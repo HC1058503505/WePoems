@@ -1,2 +1,5 @@
 <!--Pages/showresult/showresult.wxml-->
-<text>Pages/showresult/showresult.wxml</text>
+<import src='./searchview.wxml' />
+<template is="search" data="" />
+<template is="section_poet" data="{{searchResult}}" />
+<template is="section_poem" data="{{searchResult}}" />

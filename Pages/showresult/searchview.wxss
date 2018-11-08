@@ -1,0 +1,46 @@
+.df {
+  height: 80rpx;
+  background-color: white;
+  margin: 40rpx;
+  display: flex;
+  flex-direction: row;
+  border: 2rpx solid lightgrey;
+  border-radius: 10rpx;
+  align-items: center;
+}
+
+.searchcion {
+  margin-left: 20rpx;
+}
+
+.inputtext {
+  margin-left: 20rpx;
+}
+
+/* section_title */
+.sectionTitle {
+  padding-left: 20rpx;
+  background-color: lightgrey;
+  margin-top: -22rpx;
+}
+
+/* section_cell */
+.section_cell {
+  margin: 20rpx;
+  border-bottom: solid 1rpx lightgrey;
+  padding-bottom: 10rpx;
+}
+
+.poem_title {
+
+}
+
+.poem_author_info {
+  margin-left: 20rpx;
+  color: lightgrey;
+  font-size: medium;
+}
+
+.poem_first_row {
+  font-size: medium;
+}

@@ -1,0 +1,38 @@
+/* Pages/poet/poet.wxss */
+
+/* 头像 */
+.poet_portrait_block {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-top: 30rpx;
+}
+
+.poet_portrait {
+  width: 210rpx;
+  height: 300rpx;
+  border-radius: 105rpx;
+
+}
+
+/* 简介 */
+.poet_abstract_block {
+  display: flex;
+  flex-direction: column;
+  padding: 40rpx;
+}
+
+.poet_abstract_title {
+  font-weight: 600;
+  font-size: x-large;
+  border-bottom: 2rpx dashed rgb(228, 227, 227);
+  padding-bottom: 20rpx;
+}
+.poet_abstract_content {
+  padding-top: 10rpx;
+}
+
+.poet_extension {
+  padding-left: 40rpx;
+  padding-right: 40rpx;
+}

@@ -1,0 +1,84 @@
+/* Pages/categorysearch/categorysearch.wxss */
+.header_tab {
+  height: 100rpx;
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+  align-items: center;
+}
+
+.normal {
+  color: grey;
+}
+
+.author_didSelected {
+  color: red;
+  border-bottom-color: red;
+  border-bottom-style: solid;
+}
+.dynasty_didSelected {
+  color: blueviolet;
+  border-bottom-color: blueviolet;
+  border-bottom-style: solid;
+}
+.tag_didSelected {
+  color: orange;
+  border-bottom-color: orange;
+  border-bottom-style: solid;
+}
+.poetry_didSelected{
+  color: cyan;
+  border-bottom-color: cyan;
+  border-bottom-style: solid;
+}
+
+scroll-view {
+  height: calc(100vh - 100rpx);
+  width: 100vw;
+}
+
+.flex_box {
+  position: fixed;
+}
+
+.flex_left{
+  position: fixed;
+}
+
+.flex-right{
+  position: fixed;
+  width: 40rpx;
+  right: 0;
+  bottom: 0;
+  margin-bottom: 40rpx;
+  background-color: transparent;
+  text-align: center;
+  margin-right: 30rpx;
+}
+
+
+.section_title {
+  padding-left: 40rpx;
+  height: 60rpx;
+  background-color: rgb(242, 242, 242);
+}
+
+.item_info {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+  height: 100rpx;
+    border-bottom: solid 2rpx rgb(242, 242, 242);
+}
+
+.author_name {
+  font-size: medium;
+  padding-left: 40rpx;
+}
+
+.poetyr_count{
+  font-size: medium;
+  padding-right: 100rpx;
+  color: grey;
+}

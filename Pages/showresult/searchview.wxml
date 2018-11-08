@@ -1,0 +1,36 @@
+
+<template name="search">
+  <view class='page_row'>  
+      <view class="search">  
+        <view class="df search_arr">  
+          <icon class="searchcion" size='20' type='search'></icon>  
+          <input class="inputtext" bindinput="" placeholder="请输入关键字" confirm-type='search' bindconfirm='bindKeyInput'/>  
+        </view>  
+      </view>  
+  </view>
+</template>
+
+
+<template name="section_poet">
+<block wx:if="{{searchResult.poet_list.length > 0}}">
+  <view class='sectionTitle'>诗人：</view>
+  <view class='section_cell' wx:for="{{searchResult.poet_list}}" wx:key="{{item.id}}" data-index="poet_{{item.id}}.json" bindtap="onItemSelected">
+    <text>{{item.name}}</text>
+  </view>
+</block>
+</template>
+
+<template name="section_poem">
+<block wx:if="{{searchResult.poem_list.length > 0}}">
+  <view class='sectionTitle'>诗词：</view>
+  <view class='section_cell' wx:for="{{searchResult.poem_list}}" wx:key="{{item.id}}" data-index="poetry_{{item.id}}.json" bindtap="onItemSelected">
+    <view>
+      <text class="poem_title">{{item.name}}</text>
+      <text class="poem_author_info">{{item.author_info}}</text>
+    </view>
+    <view>
+      <text class="poem_first_row">{{item.first_row}}</text>
+    </view>
+  </view>
+</block>
+</template>

@@ -1,0 +1,32 @@
+/* Pages/poetry/poetry.wxss */
+@import '../detail/poem_detail_tab.wxss';
+@import '../detail/poem_detail_zhengwen.wxss';
+
+.poetry_extension {
+  padding: 20rpx;
+  padding-bottom: 100rpx;
+}
+
+scroll-view{
+  height: calc(100vh - 100rpx);
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+.poem_detail_content {
+  padding-left: 20rpx;
+  padding-bottom: 50rpx;
+  padding-right: 20rpx;
+}
+
+canvas {
+  position: fixed;
+  background-color: green;
+  top: 0;
+  width: 100% ;
+  height: 10000px;
+}

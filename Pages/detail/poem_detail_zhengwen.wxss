@@ -16,7 +16,7 @@
 }
 
 .poem_content {
-   text-align: center;
+   text-align:center;
    padding: 10rpx;
    padding-bottom: 40rpx;
    line-height: 60rpx;

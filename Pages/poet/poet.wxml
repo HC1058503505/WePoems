@@ -1,0 +1,24 @@
+<!--Pages/poet/poet.wxml-->
+<!--Pages/author/author.wxml-->
+<import src="../../wxParse/wxParse.wxml"/>
+<view>
+      <view class='poet_portrait_block'>
+          <image class='poet_portrait' src="{{poetinfo.image}}" bindtap='protraitTap'></image>
+      </view>
+
+      <view class='poet_abstract_block'>
+        <block wx:if="{{poetinfo.desc.length > 0}}">
+          <text class='poet_abstract_title'>简介</text>
+          <text class='poet_abstract_content'>{{poetinfo.desc}}</text>
+        </block>
+      </view>
+
+      <!-- <view class='extension'>
+        <web-view>{{poetinfo.content}}</web-view>
+      </view> -->
+
+</view>
+<view class='poet_extension'>
+  <template is="wxParse" data="{{wxParseData:dkcontent.nodes}}"/>
+</view>
+
