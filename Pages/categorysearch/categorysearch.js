@@ -1,4 +1,5 @@
 // Pages/categorysearch/categorysearch.js
+var zimu = ""
 Page({
 
   /**
@@ -40,7 +41,6 @@ Page({
           isTag: tagType == "tag",
           isPoetry: tagType == "tag_poems"
         })
-        wx.removeStorageSync("categorysearch")
       })
   },
 
@@ -63,6 +63,19 @@ Page({
    */
   onUnload: function () {
 
+    wx.removeStorage({
+      key: 'categorysearch',
+      success: function(res) {},
+    })
+    wx.removeStorage({
+      key: 'AuthorName',
+      success: function(res) {},
+    })
+
+    wx.removeStorage({
+      key: 'CategorySearchKey',
+      success: function(res) {},
+    })
   },
 
   /**
@@ -86,16 +99,23 @@ Page({
 
   },
   onItemSelected: function(e) {
-    let authorId = e.currentTarget.dataset.id
-    // https://weapp.madliar.com/poem/poet/665?page=0
+    let dataS = e.currentTarget.dataset
+    let authorId = dataS.id
+    if (dataS.hasOwnProperty("name")) {
+      let authorName = dataS.name
+      wx.setStorageSync("AuthorName", authorName)
+    }
     
-    wx.setStorageSync("CategorySearchAuthorID", authorId)
+    // https://weapp.madliar.com/poem/poet/665?page=0
+
+    wx.setStorageSync("CategorySearchKey", authorId)
     wx.navigateTo({
       url: '../../Pages/categorydetail/categorydetail',
     })
   },
   tagTap: function(e) {
     let tagType = e.target.id
+    wx.setStorageSync("categorysearch", tagType)
     this.setData({
       isAuthor: tagType == "tag_poet",
       isDynasty: tagType == "tag_dynasty",
@@ -107,6 +127,19 @@ Page({
 
     this.setData({
       sectionId: e.currentTarget.dataset.id
+    })
+
+    wx.showToast({
+      title: e.currentTarget.dataset.id,
+      icon: "none",
+      duration: 1000
+    })
+    // 短暂震动
+    wx.vibrateShort()
+  },
+  seachAction: function(){
+    wx.navigateTo({
+      url: '../../Pages/showresult/showresult',
     })
   },
   requestMe: function() {

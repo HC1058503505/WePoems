@@ -47,13 +47,18 @@ scroll-view {
 
 .flex-right{
   position: fixed;
-  width: 40rpx;
+  height: calc(100vh - 100rpx);
+  width: 80rpx;
   right: 0;
   bottom: 0;
-  margin-bottom: 40rpx;
-  background-color: transparent;
+  display: flex;
+  justify-content:center;
+  align-items:Center;
+}
+
+.zimulist {
+  width: 80rpx;
   text-align: center;
-  margin-right: 30rpx;
 }
 
 
@@ -77,8 +82,46 @@ scroll-view {
   padding-left: 40rpx;
 }
 
-.poetyr_count{
+.poetry_count{
   font-size: medium;
   padding-right: 100rpx;
   color: grey;
+}
+
+.dynasty_poetry_count {
+  font-size: medium;
+  padding-right: 40rpx;
+  color: grey;
+
+}
+
+.section_tag {
+  border-left: solid 8rpx red;
+  padding-left: 20rpx;
+  margin-top: 40rpx;
+  margin-left: 40rpx;
+}
+
+.tag_items_container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-content: center;
+  align-items: center;
+}
+.tag_item {
+  font-size: small;
+  text-align: center;
+  width: 120rpx;
+  border: solid 2rpx rgb(228, 227, 227);
+  height: 40rpx;
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
+}
+
+.tag_container {
+  padding-top: 20rpx;
+}
+.section_tag_container {
+  padding-bottom: 40rpx;
 }

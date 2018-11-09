@@ -7,14 +7,23 @@ Page({
    * 页面的初始数据
    */
   data: {
-    searchResult:[]
+    searchResult:[],
+    isSearch: false,
+    hotsearch:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that = this
+    this.requestMe()
+      .then(res => {
+        console.log(res.hotsearch)
+        that.setData({
+          hotsearch: res.hotsearch
+        })
+      })
   },
 
   /**
@@ -23,23 +32,6 @@ Page({
   onReady: function () {
     wx.setNavigationBarTitle({
       title: '搜索',
-    })
-    // 1. 获取数据库引用
-    const db = wx.cloud.database()
-    // 2. 构造查询语句
-    // collection 方法获取一个集合的引用
-    // where 方法传入一个对象，数据库返回集合中字段等于指定值的 JSON 文档。API 也支持高级的查询条件（比如大于、小于、in 等），具体见文档查看支持列表
-    // get 方法会触发网络请求，往数据库取数据
-    db.collection('poets').where({
-
-    }).get({
-      success: function (res) {
-        // 输出 [{ "title": "The Catcher in the Rye", ... }]
-        console.log(res)
-      },
-      fail: function(error) {
-        console.log(error)
-      }
     })
   },
 
@@ -61,7 +53,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    searchContent = ""
   },
 
   /**
@@ -109,6 +101,23 @@ Page({
         searchResult: res
       })
     })
+  },
+  currentInput:function(e) {
+    let cursor = e.detail.cursor
+    let value = e.detail.value
+    if (cursor == 0) {
+      // 搜索关键字为空 
+      this.setData({
+        isSearch: false
+      })
+    } else {
+      // 搜索关键字不为空 
+      this.setData({
+        isSearch: true
+      })
+    }
+
+    
   },
   search: function(searchContent){
     wx.showNavigationBarLoading()
@@ -159,5 +168,30 @@ Page({
         url: '../../Pages/poetry/poetry',
       })
     }
+  },
+  requestMe: function () {
+    return new Promise((reslove, reject) => {
+      var that = this
+      // 1. 获取数据库引用
+      const db = wx.cloud.database()
+      // 2. 构造查询语句
+      // collection 方法获取一个集合的引用
+      // where 方法传入一个对象，数据库返回集合中字段等于指定值的 JSON 文档。API 也支持高级的查询条件（比如大于、小于、in 等），具体见文档查看支持列表
+      // get 方法会触发网络请求，往数据库取数据
+      db.collection('hostsearch').where({
+
+      }).get({
+        success: function (res) {
+          // 输出 [{ "title": "The Catcher in the Rye", ... }]
+          console.log(res)
+          reslove(res.data[0])
+        },
+        fail: function (error) {
+          reject(error)
+        },
+        complete: function () {
+        }
+      })
+    })
   }
 })

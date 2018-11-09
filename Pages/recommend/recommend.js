@@ -104,6 +104,8 @@ Page({
         },
         complete: function (res) {
           wx.hideNavigationBarLoading()
+          // 短暂震动
+          wx.vibrateShort()
         },
       })
     })

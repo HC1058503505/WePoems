@@ -21,6 +21,7 @@ scroll-view{
   padding-left: 20rpx;
   padding-bottom: 50rpx;
   padding-right: 20rpx;
+  font-size: medium;
 }
 
 canvas {

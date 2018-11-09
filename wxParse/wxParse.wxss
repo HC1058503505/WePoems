@@ -25,7 +25,8 @@ view{
     margin: 0;
     padding: 0;
     font-family:'Times New Roman', Times, serif; 
-    letter-spacing: 3rpx;
+    letter-spacing: 4rpx;
+    text-align: center;
 }
 /*//标题 */
 .wxParse-div{margin: 0;padding: 0;}
@@ -224,4 +225,11 @@ view{
   border-bottom: 2rpx dashed rgb(228, 227, 227);
   padding-bottom: 20rpx;
 
+}
+
+.wrong {
+  margin-top: 100rpx;
+  text-align:center;
+  color:grey;
+  font-size:small;
 }

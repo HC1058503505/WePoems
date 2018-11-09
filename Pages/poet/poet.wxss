@@ -35,4 +35,5 @@
 .poet_extension {
   padding-left: 40rpx;
   padding-right: 40rpx;
+  padding-bottom: 40rpx;
 }

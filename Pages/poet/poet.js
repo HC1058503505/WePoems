@@ -25,7 +25,6 @@ Page({
     this.requestMe()
       .then(res => {
         wxparse.wxParse('dkcontent', 'html', res.content, that, 5);
-        console.log(res)
         that.setData({
           poetinfo: res
         })
