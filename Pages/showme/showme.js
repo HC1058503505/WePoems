@@ -1,26 +1,39 @@
-// Pages/author/author.js
-const util = require('../../utils/util.js')
-var author_name = ''
-
+// Pages/showme/showme.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    poet_info : {},
-    poet_portrait: '../../Sources/images/placeholder.jpg'
+    isAbout: false,
+    isAbstract: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    author_name = wx.getStorageSync("author")
-    wx.removeStorageSync("author") 
+    var that = this
+    wx.getStorage({
+      key: 'MeSelectedIndex',
+      success: function(res) {
+        let index = res.data
+        let title = ""
+        if (index == "0") {
+          title = "关于"
+        } else if (index == "1") {
+          title = "功能介绍"
+        }
 
-    wx.setNavigationBarTitle({
-      title: author_name
+        wx.setNavigationBarTitle({
+          title: title,
+        })
+
+        that.setData({
+          isAbout: index == "0",
+          isAbstract: index == "1"
+        })
+      },
     })
   },
 
@@ -28,21 +41,14 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    var that = this;
-    util.requestMe('/poets/name/' + author_name + '/page/0/limit/1','get','author')
-      .then(res => {
-        that.setData({
-          poet_info: res.poet_info,
-          poet_portrait: res.poet_portrait
-        })
-      })
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    
   },
 
   /**
@@ -56,7 +62,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    author_name = ''
+
   },
 
   /**
@@ -78,16 +84,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-  protraitTap: function(){
-    wx.previewImage({
-      urls: [this.data.poet_portrait],
-      success: function(){
-
-      },
-      fail: function(){
-        
-      }
-    })
   }
 })

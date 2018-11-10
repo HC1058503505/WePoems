@@ -1,5 +1,5 @@
 // Pages/recommend/recommend.js
-var page = 1
+var page = 0
 Page({
 
   /**
@@ -48,14 +48,23 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    page = 0
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    page = 0
+    var that = this
+    this.requestMe()
+      .then(res => {
+        let temp = that.parseHtml(res)
+        that.setData({
+          gushiwens: temp
+        })
+        wx.stopPullDownRefresh()
+      })
   },
 
   /**

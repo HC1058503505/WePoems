@@ -1,1 +1,28 @@
 /* Pages/me/me.wxss */
+
+.icon {
+  text-align: center;
+}
+
+.basicprofile {
+  height: 200rpx;
+  width: 200rpx;
+  background-color: red;
+}
+
+.guanyu_img {
+  height: 45rpx;
+  width: 45rpx;
+
+  margin-right: 10rpx;
+}
+.guanyu {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  border-bottom: solid 2rpx rgb(242, 242, 242);
+  padding-bottom: 10rpx;
+  margin-left: 40rpx;
+  margin-right: 40rpx;
+  margin-bottom: 40rpx;
+}

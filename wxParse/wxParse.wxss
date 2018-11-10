@@ -233,3 +233,10 @@ view{
   color:grey;
   font-size:small;
 }
+
+.wxParse-p {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+}

@@ -338,6 +338,8 @@ Page({
           wx.hideNavigationBarLoading()
         },
         complete: function () {
+          // 短暂震动
+          wx.vibrateShort()
           wx.removeStorageSync("poetryjson")
         }
       })

@@ -25,9 +25,6 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    wx.setNavigationBarTitle({
-      title: '查找',
-    })
 
     var that = this
 
@@ -62,7 +59,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    zimu = ''
     wx.removeStorage({
       key: 'categorysearch',
       success: function(res) {},

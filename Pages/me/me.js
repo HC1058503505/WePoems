@@ -40,7 +40,10 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+    wx.removeStorage({
+      key: 'MeSelectedIndex',
+      success: function(res) {},
+    })
   },
 
   /**
@@ -62,5 +65,12 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+  meAction: function(e) {
+    let index = e.currentTarget.dataset.index
+    wx.setStorageSync("MeSelectedIndex", index)
+    wx.navigateTo({
+      url: '../../Pages/showme/showme',
+    })
   }
 })

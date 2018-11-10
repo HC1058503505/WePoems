@@ -114,9 +114,12 @@ scroll-view {
   text-align: center;
   width: 120rpx;
   border: solid 2rpx rgb(228, 227, 227);
+  border-radius: 5rpx;
   height: 40rpx;
   margin-top: 10rpx;
   margin-bottom: 10rpx;
+  padding-top: 5rpx;
+  padding-bottom: 5rpx;
 }
 
 .tag_container {

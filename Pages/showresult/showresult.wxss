@@ -2,5 +2,5 @@
 
 @import './searchview.wxss';
 .result_list {
-  margin-top: 200rpx;
+  margin-top: 160rpx;
 }

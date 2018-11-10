@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "诗文"
+  "navigationBarTitleText": "发现",
+  "enablePullDownRefresh": false
 }

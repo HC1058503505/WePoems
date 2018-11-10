@@ -4,7 +4,7 @@
       <view class="search">  
         <view class="df search_arr">  
           <icon class="searchcion" size='20' type='search'></icon>  
-          <input class="inputtext" bindinput="" placeholder="请输入关键字" confirm-type='search' bindconfirm='bindKeyInput' bindinput='currentInput'/>  
+          <input class="inputtext" bindinput="" placeholder="请输入关键字" confirm-type='search' bindconfirm='bindKeyInput' bindinput='currentInput' value="{{inputValue}}"/>  
         </view>  
       </view>  
   </view>
@@ -36,10 +36,12 @@
 </template>
 
 <template name="hotsearch">
-<view wx:for="{{hotsearch}}" wx:for-item="hotsection">
-  <view>{{hotsection.title}}</view>
+<view wx:for="{{hotsearch}}" wx:for-item="hotsection" wx:key="hotsection.title" class="hot_search_container">
+  <view class='setction_title'>{{hotsection.title}}</view>
   <view>
-    <text wx:for="{{hotsection.hotkeys}}" wx:key="item.poet_id" data-id="{{item.poet_id}}" data-name="item.poet_name">{{item.poet_name}}</text>
+    <view wx:for="{{hotsection.hotkeys}}" wx:key="{{index}}" class='tags_container'>
+      <text wx:for="{{item}}" wx:for-item="tags" wx:key="{{tags}}" class='tag_item' bindtap='tagTapAction' data-name="{{tags.poet_name}}">{{tags.poet_name}}</text>
+    </view>
   </view>
 </view>
 </template>

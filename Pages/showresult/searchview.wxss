@@ -55,3 +55,30 @@
   left:  0;
   right: 0;
 }
+
+.tags_container{
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 20rpx;
+}
+
+.tag_item{
+  font-size: small;
+  border: solid 1px rgb(228, 227, 227);
+  margin: 20rpx;
+  padding-top: 5rpx;
+  padding-bottom: 5rpx;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+  border-radius: 5rpx;
+}
+
+.setction_title {
+  border-left: solid 10rpx palevioletred;
+  margin-left: 40rpx;
+  padding-left: 10rpx;
+}
+
+.hot_search_container {
+  margin-top: 160rpx;
+}

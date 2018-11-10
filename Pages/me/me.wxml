@@ -1,2 +1,16 @@
 <!--Pages/me/me.wxml-->
-<text>Pages/me/me.wxml</text>
+<view class='icon'>
+  <image class='basicprofile' src='../../Sources/images/basicprofile.jpeg'></image>
+</view>
+
+
+<view class='guanyu' bindtap='meAction' data-index='0'>
+  <image class="guanyu_img" src='../../Sources/images/guanyu.png'></image>
+  <text>关于</text>
+</view>
+
+
+<view class='guanyu' bindtap='meAction' data-index="1">
+  <image class="guanyu_img" class="guanyu_img" src='../../Sources/images/huiyijieshao.png'></image>
+  <text>功能介绍</text>
+</view>

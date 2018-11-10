@@ -1,11 +1,13 @@
 <!--Pages/showresult/showresult.wxml-->
 <import src='./searchview.wxml' />
-<template is="search" data="" />
+<template is="search" data="{{inputValue}}" />
 
-<view class='result_list'>
-  <template is="section_poet" data="{{searchResult}}" />
-  <template is="section_poem" data="{{searchResult}}" />
-</view>
+<block wx:if="{{isSearch}}">
+  <view class='result_list'>
+    <template is="section_poet" data="{{searchResult}}" />
+    <template is="section_poem" data="{{searchResult}}" />
+  </view>
+</block>
 
 <block wx:if="{{!isSearch}}">
   <template is="hotsearch" data="{{hotsearch}}" />

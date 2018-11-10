@@ -9,7 +9,8 @@ Page({
   data: {
     searchResult:[],
     isSearch: false,
-    hotsearch:[]
+    hotsearch:[],
+    inputValue:""
   },
 
   /**
@@ -19,7 +20,6 @@ Page({
     var that = this
     this.requestMe()
       .then(res => {
-        console.log(res.hotsearch)
         that.setData({
           hotsearch: res.hotsearch
         })
@@ -30,9 +30,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    wx.setNavigationBarTitle({
-      title: '搜索',
-    })
+   
   },
 
   /**
@@ -54,6 +52,7 @@ Page({
    */
   onUnload: function () {
     searchContent = ""
+    page = 0
   },
 
   /**
@@ -87,18 +86,30 @@ Page({
   onShareAppMessage: function () {
 
   },
-  bindKeyInput: function(e) {
-    if (searchContent == e.detail.value) {
-      return
-    } else {
-      searchContent = e.detail.value
-      page = 0
-    }
-    
+  tagTapAction:function(e){
+    let authorName = e.currentTarget.dataset.name
+    searchContent = authorName
+    page = 0
     var that = this
     that.search(searchContent).then(res => {
       that.setData({
-        searchResult: res
+        searchResult: res,
+        isSearch: true,
+        inputValue: searchContent
+      })
+    })
+  },
+  bindKeyInput: function(e) {
+    searchContent = e.detail.value
+    page = 0
+    if (searchContent.length == 0) {
+      return
+    }
+    var that = this
+    that.search(searchContent).then(res => {
+      that.setData({
+        searchResult: res,
+        isSearch: true
       })
     })
   },
@@ -106,15 +117,30 @@ Page({
     let cursor = e.detail.cursor
     let value = e.detail.value
     if (cursor == 0) {
+      searchContent = ""
+      page = 0
       // 搜索关键字为空 
       this.setData({
         isSearch: false
       })
     } else {
-      // 搜索关键字不为空 
-      this.setData({
-        isSearch: true
-      })
+      var that = this
+      setTimeout(function () {
+        if (searchContent == e.detail.value) {
+          return
+        } else {
+          searchContent = e.detail.value
+          page = 0
+        }
+
+        that.search(searchContent).then(res => {
+          that.setData({
+            searchResult: res,
+            isSearch: true
+          })
+        })
+      }, 1000)
+      
     }
 
     
@@ -170,6 +196,7 @@ Page({
     }
   },
   requestMe: function () {
+    wx.showNavigationBarLoading()
     return new Promise((reslove, reject) => {
       var that = this
       // 1. 获取数据库引用
@@ -183,13 +210,13 @@ Page({
       }).get({
         success: function (res) {
           // 输出 [{ "title": "The Catcher in the Rye", ... }]
-          console.log(res)
           reslove(res.data[0])
         },
         fail: function (error) {
           reject(error)
         },
         complete: function () {
+          wx.hideNavigationBarLoading()
         }
       })
     })
