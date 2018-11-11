@@ -98,6 +98,7 @@ Page({
   onItemSelected: function(e) {
     let dataS = e.currentTarget.dataset
     let authorId = dataS.id
+    console.log(authorId)
     if (dataS.hasOwnProperty("name")) {
       let authorName = dataS.name
       wx.setStorageSync("AuthorName", authorName)

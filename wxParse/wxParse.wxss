@@ -25,8 +25,8 @@ view{
     margin: 0;
     padding: 0;
     font-family:'Times New Roman', Times, serif; 
-    letter-spacing: 4rpx;
-    text-align: center;
+    /* letter-spacing: 4rpx;
+    text-align: center; */
 }
 /*//标题 */
 .wxParse-div{margin: 0;padding: 0;}
@@ -234,9 +234,9 @@ view{
   font-size:small;
 }
 
-.wxParse-p {
+/* .wxParse-p {
   display: flex;
   flex-direction: column;
   align-content: center;
   align-items: center;
-}
+} */

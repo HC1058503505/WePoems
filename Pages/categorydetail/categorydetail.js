@@ -41,13 +41,6 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
     var that = this
     this.requestMe()
       .then(res => {
@@ -55,6 +48,13 @@ Page({
           poemlist: res
         })
       })
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+    
   },
 
   /**
@@ -76,7 +76,15 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    page = 0
+    var that = this
+    this.requestMe()
+      .then(res => {
+        that.setData({
+          poemlist: res
+        })
+        wx.stopPullDownRefresh()
+      })
   },
 
   /**

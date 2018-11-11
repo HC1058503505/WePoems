@@ -8,8 +8,10 @@
           <view class='copy_view'>
             <text  class='copy_btn' bindtap='copyAction'>...</text>
           </view>
-          <text class='poem_author'>{{poetryinfo.dynasty}} / {{poetryinfo.poet.name}}</text>
-          <template is="wxParse" data="{{wxParseData:poem_content.nodes}}"/>
+          <view class='poem_author_content'>
+            <text class='poem_author'>{{poetryinfo.dynasty}} / {{poetryinfo.poet.name}}</text>
+            <template is="wxParse" data="{{wxParseData:poem_content.nodes}}"/>
+          </view>
         </view>
 
         <view class='poem_tags'>

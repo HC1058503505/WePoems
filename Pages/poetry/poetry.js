@@ -105,9 +105,9 @@ Page({
     })
   },
   poemTagTapAction: function (e) {
-    wx.setStorageSync("tag", e.currentTarget.id)
+    wx.setStorageSync("CategorySearchKey", e.currentTarget.id)
     wx.navigateTo({
-      url: '../../Pages/tag/tag',
+      url: '../../Pages/categorydetail/categorydetail',
     })
   },
   copyAction: function (e) {
