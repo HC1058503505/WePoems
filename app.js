@@ -4,16 +4,21 @@ App({
   globalData : {
     navHeight : 0,
     scene:0,
-    userID: ''
+    userID: '',
+    pixelRatio: 0,
+    screenH:0,
+    screenW:0
   },
   onLaunch: function (options) {
     // 小程序启动之后 触发
     // 获取手机系统信息
+    var that = this
     wx.getSystemInfo({
       success: res => {
-        //导航高度
-        this.globalData.navHeight = res.statusBarHeight + 46;
-        this.globalData.scene = options.scene;
+        that.globalData.navHeight = res.statusBarHeight + 46,
+        that.globalData.pixelRatio = res.pixelRatio,
+        that.globalData.screenH = res.windowHeight,
+        that.globalData.screenW = res.windowWidth
       }, fail(err) {
         console.log(err);
       }

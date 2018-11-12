@@ -45,3 +45,26 @@
   padding-top: 10rpx;
   padding-bottom: 10rpx;
 }
+
+.first {
+  border-left-color: rgb(197, 62, 125);
+}
+
+.second{
+  border-left-color: blueviolet;
+}
+
+.third {
+  border-left-color: rgb(226, 131, 43);
+}
+
+scroll-view {
+  width: 100vw;
+  height: 100vh;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}

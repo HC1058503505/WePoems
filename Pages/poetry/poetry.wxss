@@ -28,7 +28,7 @@ canvas {
   position: fixed;
   background-color: green;
   top: 0;
-  width: 100% ;
+  width: 100vw ;
   height: 10000px;
 }
 

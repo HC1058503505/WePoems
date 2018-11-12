@@ -131,6 +131,8 @@ Page({
                               .replace(/<br \/>/ig,'\n')
                               .replace(/\(.*\)/ig,'')
                               .replace(/&quot/ig,'＂')
+                              .replace(/<\/span>/ig,'')
+                              .replace(/<span.*>/ig,'')
       poetry.cont = htmlContent
     }
     return datas

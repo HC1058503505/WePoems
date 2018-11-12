@@ -14,7 +14,7 @@ Page({
     isShangxi: false,
     isAuthor: false,
     scrollTop: -1,
-    systemInfo: wx.getSystemInfoSync(),
+    canvasH: 0
   },
 
   /**
@@ -134,7 +134,6 @@ Page({
             previewhidden: true,
             canvasH: canvasMsg.canvasH
           })
-          console.log(canvasMsg)
           that.generatePic(canvasMsg.line_all_items)
         }
       },
@@ -185,8 +184,8 @@ Page({
   generatePic: function (items) {
 
     var that = this;
-    let windowW = this.data.systemInfo.windowWidth
-    let windowH = this.data.systemInfo.windowHeight
+    let windowW = app.globalData.screenW
+    let windowH = app.globalData.screenH
     var scale = windowW / 750
     let poem_title = this.data.poetryinfo.name
     let poem_dynasty = this.data.poetryinfo.dynasty
@@ -219,8 +218,8 @@ Page({
     })
   },
   canvasWH: function () {
-    let windowW = this.data.systemInfo.windowWidth
-    let windowH = this.data.systemInfo.windowHeight
+    let windowW = app.globalData.screenW
+    let windowH = app.globalData.screenH
     let poem_title = this.data.poetryinfo.name
     let poem_dynasty = this.data.poetryinfo.dynasty
     let poem_author = this.data.poetryinfo.poet.name
@@ -252,16 +251,16 @@ Page({
   },
   drawPicture: function () {
     var that = this
-    let windowW = this.data.systemInfo.windowWidth
-    let windowH = this.data.systemInfo.windowHeight
+    let windowW = app.globalData.screenW
+    let windowH = app.globalData.screenH
 
     wx.canvasToTempFilePath({
       x: 0,
       y: 0,
       width: windowW,
       height: that.data.canvasH,
-      destHeight: that.data.canvasH,
-      destWidth: windowW,
+      destHeight: that.data.canvasH * app.globalData.pixelRatio,
+      destWidth: windowW * app.globalData.pixelRatio,
       canvasId: 'shareImg',
       quality: 1,
       success: function (res) {
@@ -281,8 +280,8 @@ Page({
     }, this)
   },
   canvasDrawText: function (ctx, str, beginY, isFillText) {
-    const windowW = this.data.systemInfo.windowWidth
-    const windowH = this.data.systemInfo.windowHeight
+    const windowW = app.globalData.screenW
+    const windowH = app.globalData.screenH
     const beginX = windowW * 0.5
     const canvasMaxWidth = windowW - 40
     const strList = str.split('\n')
@@ -303,7 +302,7 @@ Page({
 
   canvasTextAutoLine: function (str, ctx, initX, initY, lineHeight, isFillText) {
     var lineWidth = 0;
-    var canvasWidth = this.data.systemInfo.windowWidth;
+    var canvasWidth = app.globalData.screenW;
     var lastSubStrIndex = 0;
     for (let i = 0; i < str.length; i++) {
       lineWidth += ctx.measureText(str[i]).width;
