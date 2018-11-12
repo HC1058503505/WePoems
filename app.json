@@ -32,7 +32,7 @@
       },
       {
         "pagePath": "Pages/me/me",
-        "text": "我",
+        "text": "关于",
         "iconPath": "Sources/images/me.png",
         "selectedIconPath": "Sources/images/me_selected.png"
       }

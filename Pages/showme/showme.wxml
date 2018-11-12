@@ -7,7 +7,7 @@
       <view class='about_content'>古诗文斋是一个用于查询与阅读古诗词的实用类微信小程序，旨在帮助人们随时随地阅读古诗词，学习中国传统文化，感受诗词魅力。
       </view>
       <view class='about_content'>
-      所有诗词内容都来源于“古诗词网”，感谢“古诗词网”收集整理这些诗词内容。
+      所有诗词内容都来源于“古诗文网”，感谢“古诗文网”收集整理这些诗词内容。
       </view>
     </view>
    
@@ -17,7 +17,7 @@
       <view class='update_version'>
         <view class='version_info'>
           <text class='version_num'>V1.0.0</text>
-          <text class='version_publish'>2018.11.10</text>
+          <text class='version_publish'>2018.11.12</text>
         </view>
         <view class='version_msg'>
           <text>- 第一个版本，实现基本推荐、搜索古诗功能。</text>
