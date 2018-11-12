@@ -187,6 +187,7 @@ Page({
     if (dataSet.type == "poet") {
       wx.setStorageSync("AuthorName", dataSet.name)
       wx.setStorageSync("CategorySearchKey", dataSet.index)
+      wx.setStorageSync("categorysearch", "poet")
       pageRoute = '../../Pages/categorydetail/categorydetail'
     } else {
       wx.setStorageSync("poetryjson", dataSet.index)
