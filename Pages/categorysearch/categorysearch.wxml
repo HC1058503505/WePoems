@@ -1,12 +1,14 @@
 <!--Pages/categorysearch/categorysearch.wxml-->
+<block wx:if="{{isShow}}">
+  <view class='header_tab'>
+    <text id="tag_poet" class="{{isAuthor ? 'author_didSelected' : 'normal'}}" bindtap='tagTap'>诗人</text>
+    <text id="tag_dynasty" class="{{isDynasty ? 'dynasty_didSelected' : 'normal'}}" bindtap='tagTap'>朝代</text>
+    <text id="tag" class="{{isTag ? 'tag_didSelected' : 'normal'}}" bindtap='tagTap'>标签</text>
+    <text id="tag_poems" class="{{isPoetry ? 'poetry_didSelected' : 'normal'}}" bindtap='tagTap'>诗集</text>
+    <icon class="searchcion" size='20' type='search' bindtap='seachAction'></icon> 
+  </view>
+</block>
 
-<view class='header_tab'>
-  <text id="tag_poet" class="{{isAuthor ? 'author_didSelected' : 'normal'}}" bindtap='tagTap'>作者</text>
-  <text id="tag_dynasty" class="{{isDynasty ? 'dynasty_didSelected' : 'normal'}}" bindtap='tagTap'>朝代</text>
-  <text id="tag" class="{{isTag ? 'tag_didSelected' : 'normal'}}" bindtap='tagTap'>标签</text>
-  <text id="tag_poems" class="{{isPoetry ? 'poetry_didSelected' : 'normal'}}" bindtap='tagTap'>诗集</text>
-  <icon class="searchcion" size='20' type='search' bindtap='seachAction'></icon> 
-</view>
 
 <block wx:if="{{isAuthor}}">
   <view class='flex_box'>

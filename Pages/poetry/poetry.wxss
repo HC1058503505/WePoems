@@ -18,9 +18,9 @@ scroll-view{
 }
 
 .poem_detail_content {
-  padding-left: 20rpx;
+  padding-left: 10rpx;
   padding-bottom: 50rpx;
-  padding-right: 20rpx;
+  padding-right: 10rpx;
   font-size: medium;
 }
 

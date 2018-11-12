@@ -5,9 +5,8 @@
 }
 
 .basicprofile {
-  height: 200rpx;
-  width: 200rpx;
-  background-color: red;
+  height: 300rpx;
+  width: 300rpx;
 }
 
 .guanyu_img {

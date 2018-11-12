@@ -34,8 +34,12 @@ Page({
         wxparse.wxParse('poem_content', 'html', res.content, that, 5);
         wxparse.wxParse('poem_fanyi', 'html', res.fanyi, that, 5);
         wxparse.wxParse('poem_shangxi', 'html', res.shangxi, that, 5);
+        let titleStr = '古诗文斋'
+        if(res.hasOwnProperty('name')) {
+          titleStr = res.name
+        }
         wx.setNavigationBarTitle({
-          title: res.name
+          title: titleStr
         })
         that.setData({
           poetryinfo: res
@@ -88,7 +92,11 @@ Page({
     let targetid = event.currentTarget.id
 
     if (targetid == 'author') {
-      var poetid = this.data.poetryinfo.poet.id
+
+      var poetid = ''
+      if (this.data.poetryinfo.hasOwnProperty('id')) {
+        poetid = this.data.poetryinfo.poet.id
+      }
       // wx.setStorageSync("poem", JSON.stringify(this.data.poemlist[index]))  
       wx.setStorageSync("poetjson", "poet_" + poetid + ".json")
       wx.navigateTo({

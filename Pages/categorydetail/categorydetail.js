@@ -20,11 +20,11 @@ Page({
     tagType = wx.getStorageSync("categorysearch")
     let CategorySearchKey = wx.getStorageSync("CategorySearchKey")
     let title = ""
-    if (tagType == "tag_poet") {
+    if (tagType == "tag_poet" || tagType == "poet") {
       detailUrl += ("poem/poet/" + CategorySearchKey + "?page=")
       let authorName = wx.getStorageSync("AuthorName")
       title = "诗人." + authorName
-    } else if (tagType == "tag_dynasty") {
+    } else if (tagType == "tag_dynasty" || tagType == "dynasty") {
       detailUrl += ("poem/dynasty/" + CategorySearchKey + "?page=")
       title = "朝代." + CategorySearchKey
     } else {

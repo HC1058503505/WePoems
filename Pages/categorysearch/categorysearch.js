@@ -11,32 +11,34 @@ Page({
     isTag: false,
     isPoetry: false,
     search_conditions: [],
-    sectionId:""
+    sectionId:"",
+    isShow: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let tagType = wx.getStorageSync("categorysearch")
+    this.setData({
+      isAuthor: tagType == "tag_poet",
+      isDynasty: tagType == "tag_dynasty",
+      isTag: tagType == "tag",
+      isPoetry: tagType == "tag_poems"
+    })
+    
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
     var that = this
-
     this.requestMe()
       .then(res => {
-        let tagType = wx.getStorageSync("categorysearch")
         that.setData({
           search_conditions: res,
-          isAuthor: tagType == "tag_poet",
-          isDynasty: tagType == "tag_dynasty",
-          isTag: tagType == "tag",
-          isPoetry: tagType == "tag_poems"
+          isShow : true
         })
       })
   },
@@ -98,7 +100,7 @@ Page({
   onItemSelected: function(e) {
     let dataS = e.currentTarget.dataset
     let authorId = dataS.id
-    console.log(authorId)
+
     if (dataS.hasOwnProperty("name")) {
       let authorName = dataS.name
       wx.setStorageSync("AuthorName", authorName)
@@ -141,6 +143,7 @@ Page({
     })
   },
   requestMe: function() {
+    wx.showNavigationBarLoading()
     return new Promise((reslove,reject) => {
       var that = this
       // 1. 获取数据库引用
@@ -160,6 +163,8 @@ Page({
           reject(error)
         },
         complete: function () {
+          wx.hideNavigationBarLoading()
+          wx.vibrateShort()
         }
       })
     })

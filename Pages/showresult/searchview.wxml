@@ -14,7 +14,7 @@
 <template name="section_poet">
 <block wx:if="{{searchResult.poet_list.length > 0}}">
   <view class='sectionTitle'>诗人：</view>
-  <view class='section_cell' wx:for="{{searchResult.poet_list}}" wx:key="{{item.id}}" data-index="poet_{{item.id}}.json" bindtap="onItemSelected">
+  <view class='section_cell' wx:for="{{searchResult.poet_list}}" wx:key="{{item.id}}" data-index="{{item.id}}" data-type="poet" data-name="{{item.name}}" bindtap="onItemSelected">
     <text>{{item.name}}</text>
   </view>
 </block>
@@ -37,11 +37,15 @@
 
 <template name="hotsearch">
 <view wx:for="{{hotsearch}}" wx:for-item="hotsection" wx:key="hotsection.title" class="hot_search_container">
-  <view class='setction_title'>{{hotsection.title}}</view>
-  <view>
-    <view wx:for="{{hotsection.hotkeys}}" wx:key="{{index}}" class='tags_container'>
-      <text wx:for="{{item}}" wx:for-item="tags" wx:key="{{tags}}" class='tag_item' bindtap='tagTapAction' data-name="{{tags.poet_name}}">{{tags.poet_name}}</text>
+  <block wx:if="{{hotsection.ishot}}">
+    <view class='{{hotsection.type}}_container'>
+      <view class='{{hotsection.type}}_title'>{{hotsection.title}}</view>
+      <view>
+        <view wx:for="{{hotsection.hotkeys}}" wx:key="{{index}}" class='tags_container'>
+          <text wx:for="{{item}}" wx:for-item="tags" wx:key="{{tags}}" class='tag_item' bindtap='tagTapAction' data-name="{{tags.name}}" data-type="{{hotsection.type}}" data-id="{{tags.id}}">{{tags.name}}</text>
+        </view>
+      </view>
     </view>
-  </view>
+  </block>
 </view>
 </template>

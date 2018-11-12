@@ -87,16 +87,21 @@ Page({
 
   },
   tagTapAction:function(e){
-    let authorName = e.currentTarget.dataset.name
-    searchContent = authorName
-    page = 0
-    var that = this
-    that.search(searchContent).then(res => {
-      that.setData({
-        searchResult: res,
-        isSearch: true,
-        inputValue: searchContent
-      })
+    
+    let name = e.currentTarget.dataset.name
+    let tagtype = e.currentTarget.dataset.type
+    let tagid = e.currentTarget.dataset.id
+
+    if (tagtype == "poet") {
+      wx.setStorageSync("AuthorName", name)
+      wx.setStorageSync("CategorySearchKey", tagid)
+    } else {  
+      wx.setStorageSync("CategorySearchKey", name)
+    }
+    wx.setStorageSync("categorysearch", tagtype)
+    // https://weapp.madliar.com/poem/poet/665?page=0
+    wx.navigateTo({
+      url: '../../Pages/categorydetail/categorydetail',
     })
   },
   bindKeyInput: function(e) {
@@ -159,6 +164,7 @@ Page({
           if (result.end == false) {
             page = page + 1
           }
+
           resolve(res.data.data)
           wx.hideNavigationBarLoading()
         },
@@ -175,25 +181,22 @@ Page({
     })
   },
   onItemSelected: function(e) {
-    let select = e.currentTarget.dataset.index
-    let selectparams = select.split('_')
-    if (selectparams[0] == "poet") {
-      wx.setStorage({
-        key: 'poetjson',
-        data: select,
-      })
-      wx.navigateTo({
-        url: '../../Pages/poet/poet',
-      })
-    } else if (selectparams[0] == "poetry") {
-      wx.setStorage({
-        key: 'poetryjson',
-        data: select,
-      })
-      wx.navigateTo({
-        url: '../../Pages/poetry/poetry',
-      })
+    let dataSet = e.currentTarget.dataset
+
+    let pageRoute = ''
+    if (dataSet.type == "poet") {
+      wx.setStorageSync("AuthorName", dataSet.name)
+      wx.setStorageSync("CategorySearchKey", dataSet.index)
+      pageRoute = '../../Pages/categorydetail/categorydetail'
+    } else {
+      wx.setStorageSync("poetryjson", dataSet.index)
+      pageRoute = '../../Pages/poetry/poetry'
     }
+
+    wx.navigateTo({
+      url: pageRoute,
+    })
+
   },
   requestMe: function () {
     wx.showNavigationBarLoading()
@@ -217,6 +220,7 @@ Page({
         },
         complete: function () {
           wx.hideNavigationBarLoading()
+          wx.vibrateShort()
         }
       })
     })

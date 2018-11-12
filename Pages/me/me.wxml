@@ -1,6 +1,6 @@
 <!--Pages/me/me.wxml-->
 <view class='icon'>
-  <image class='basicprofile' src='../../Sources/images/basicprofile.jpeg'></image>
+  <image class='basicprofile' src='../../Sources/images/shici.png'></image>
 </view>
 
 

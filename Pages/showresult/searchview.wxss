@@ -73,12 +73,34 @@
   border-radius: 5rpx;
 }
 
-.setction_title {
-  border-left: solid 10rpx palevioletred;
+
+.poet_title,.tag_title,.dynasty_title,.poetry_title {
   margin-left: 40rpx;
   padding-left: 10rpx;
+  border-left-style: solid;
+  border-left-width: 10rpx;
 }
 
-.hot_search_container {
+.poet_title {
+  border-left-color: red;
+}
+
+.dynasty_title {
+  border-left-color: blueviolet;
+}
+
+.tag_title {
+  border-left-color: orange;
+}
+
+.poetry_title {
+  border-left-color: cyan;
+}
+
+.poet_container {
   margin-top: 160rpx;
+}
+
+.dynasty_container,.tag_container, .poetry_container{
+  margin-top: 60rpx;
 }
