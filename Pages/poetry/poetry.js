@@ -114,6 +114,7 @@ Page({
   },
   poemTagTapAction: function (e) {
     wx.setStorageSync("CategorySearchKey", e.currentTarget.id)
+    wx.setStorageSync("categorysearch", "tag")  
     wx.navigateTo({
       url: '../../Pages/categorydetail/categorydetail',
     })
