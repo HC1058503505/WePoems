@@ -1,5 +1,4 @@
 // Pages/tag/tag.js
-const utils = require('../../utils/util.js');
 var tag = ''
 var page = 0
 Page({

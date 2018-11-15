@@ -1,6 +1,6 @@
 /* Pages/poetry/poetry.wxss */
-@import '../detail/poem_detail_tab.wxss';
-@import '../detail/poem_detail_zhengwen.wxss';
+@import './poem_detail_tab.wxss';
+@import './poem_detail_zhengwen.wxss';
 
 .poetry_extension {
   padding: 20rpx;

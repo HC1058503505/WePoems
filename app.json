@@ -1,11 +1,8 @@
 {
   "pages": [
     "Pages/recommend/recommend",
-    "Pages/home/home",
     "Pages/poem/poem",
     "Pages/me/me",
-    "Pages/detail/detail",
-    "Pages/author/author",
     "Pages/tag/tag",
     "Pages/showresult/showresult",
     "Pages/poet/poet",
