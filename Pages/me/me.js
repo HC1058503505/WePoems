@@ -5,7 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    nickName: "点击登录",
+    avatarUrl: "../../Sources/images/shici.png"
   },
 
   /**
@@ -19,14 +20,33 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+    
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    var that = this
+    wx.getSetting({
+      success(res) {
+        if (res.authSetting["scope.userInfo"]) {
+          wx.getUserInfo({
+            success(result) {
+              that.setData({
+                nickName: result.userInfo.nickName,
+                avatarUrl: result.userInfo.avatarUrl
+              })
+            }
+          })
+        } else {
+          that.setData({
+            nickName: "点击登录",
+            avatarUrl: "../../Sources/images/shici.png"
+          })
+        }
+      }
+    })
   },
 
   /**
@@ -66,6 +86,18 @@ Page({
   onShareAppMessage: function () {
   
   },
+
+  login: function(res) {
+    let userMsg = res.detail.userInfo
+    console.log(userMsg)
+    if (userMsg) {
+      this.setData({
+        nickName : userMsg.nickName,
+        avatarUrl : userMsg.avatarUrl
+      })
+    } 
+  },
+
   meAction: function(e) {
     let index = e.currentTarget.dataset.index
     wx.setStorageSync("MeSelectedIndex", index)

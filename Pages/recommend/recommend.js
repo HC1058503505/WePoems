@@ -13,7 +13,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    // 分享内容展示
+    var poetryjson = options.poetryjson
+    if (poetryjson != undefined) {
+      wx.setStorage({
+        key: 'poetryjson',
+        data: poetryjson
+      })
+      wx.navigateTo({
+        url: '../../Pages/poetry/poetry',
+      })
+    }
   },
 
   /**

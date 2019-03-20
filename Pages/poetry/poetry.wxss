@@ -7,7 +7,7 @@
   padding-bottom: 100rpx;
 }
 
-scroll-view{
+scroll-view {
   height: calc(100vh - 100rpx);
 }
 
@@ -26,14 +26,27 @@ scroll-view{
 
 canvas {
   position: fixed;
-  background-color: green;
   top: 0;
-  width: 100vw ;
+  width: 100vw;
   height: 10000px;
 }
 
-.poem_author_content{
+.poem_author_content {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.poetry_tool_view {
+  display: flex;
+  justify-content: flex-end
+}
+
+.poetry_collection, .poetry_more, .poetry_collection {
+  background-color: red;
+}
+
+.poetry_share_img, .poetry_more_img, .poetry_collection_img {
+  width: 35rpx;
+  height: 35rpx;
 }

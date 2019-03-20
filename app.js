@@ -12,6 +12,9 @@ App({
   onLaunch: function (options) {
     // 小程序启动之后 触发
     // 获取手机系统信息
+    // 发起网络请求
+    // let appID = "wxe57c9eee18f3a179"
+    // let secretKey = "8f4c45c4e0978226217b843f862b57f2"
     var that = this
     wx.getSystemInfo({
       success: res => {
@@ -23,7 +26,6 @@ App({
         console.log(err);
       }
     })
-    
     wx.cloud.init({
       env: {
         database:"wepoems-2f5265"

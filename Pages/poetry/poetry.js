@@ -14,20 +14,22 @@ Page({
     isShangxi: false,
     isAuthor: false,
     scrollTop: -1,
-    canvasH: 0
+    canvasH: 0,
+    isCollection: false,
+    openid: ""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-
+  onLoad: function(options) {
+   
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
     var that = this
     this.requestMe()
       .then(res => {
@@ -35,7 +37,7 @@ Page({
         wxparse.wxParse('poem_fanyi', 'html', res.fanyi, that, 5);
         wxparse.wxParse('poem_shangxi', 'html', res.shangxi, that, 5);
         let titleStr = '古诗文斋'
-        if(res.hasOwnProperty('name')) {
+        if (res.hasOwnProperty('name')) {
           titleStr = res.name
         }
         wx.setNavigationBarTitle({
@@ -50,45 +52,86 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-
+  onShow: function() {
+    var that = this
+    wx.getSetting({
+      success(res) {
+        if (res.authSetting["scope.userInfo"]) {
+          wx.getUserInfo({
+            success(result) {
+              wx.cloud.callFunction({
+                name: 'getUserId',
+                complete: res => {
+                  console.log(res.result.openid)
+                  that.setData({
+                    openid : res.result.openid
+                  })
+                }
+              })
+            }
+          })
+        } else {
+          that.setData({
+            openid: ""
+          })
+        }
+      }
+    })
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
-
+  onUnload: function() {
+    wx.removeStorageSync("poetryjson")
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
+  onShareAppMessage: function() {
+    let poetryjson = wx.getStorageSync("poetryjson")
+    return {
+      path: "Pages/recommend/recommend?poetryjson=" + poetryjson,
+    }
   },
-  poemDetailTabAction: function (event) {
+  collectionAction: function(e) {
+    let userMsg = res.detail.userInfo
+    if (userMsg && this.data.openid.length > 0) {
+      // 添加收藏
+      this.collection()
+    }
+  },
+  getUserOpenId: function() {
+    wx.cloud.callFunction({
+      name: 'getUserId',
+      complete: res => {
+        console.log(res)
+      }
+    })
+  },
+  poemDetailTabAction: function(event) {
     let targetid = event.currentTarget.id
 
     if (targetid == 'author') {
@@ -112,20 +155,20 @@ Page({
       isShangxi: targetid == 'shangxi'
     })
   },
-  poemTagTapAction: function (e) {
+  poemTagTapAction: function(e) {
     wx.setStorageSync("CategorySearchKey", e.currentTarget.id)
-    wx.setStorageSync("categorysearch", "tag")  
+    wx.setStorageSync("categorysearch", "tag")
     wx.navigateTo({
       url: '../../Pages/categorydetail/categorydetail',
     })
   },
-  copyAction: function (e) {
+  moreAction: function(e) {
 
     var that = this;
     wx.showActionSheet({
       itemList: ["复制诗词", "生成图片"],
       itemColor: '#000000',
-      success: function (res) {
+      success: function(res) {
         if (res.tapIndex == 0) {
           that.copyPoems()
         } else if (res.tapIndex == 1) {
@@ -138,25 +181,25 @@ Page({
           that.generatePic(canvasMsg.line_all_items)
         }
       },
-      fail: function (res) {
+      fail: function(res) {
 
       },
-      complete: function (res) {
+      complete: function(res) {
 
       },
     })
   },
-  copyPoems: function () {
+  copyPoems: function() {
 
     var that = this;
-    let copy_content = this.data.poetryinfo.name + '\n\n'
-      + this.data.poetryinfo.dynasty + '/' + this.data.poetryinfo.poet.name + '\n\n' + this.poemslices(this.data.poem_content.nodes);
+    let copy_content = this.data.poetryinfo.name + '\n\n' +
+      this.data.poetryinfo.dynasty + '/' + this.data.poetryinfo.poet.name + '\n\n' + this.poemslices(this.data.poem_content.nodes);
     console.log(copy_content)
     wx.setClipboardData({
       data: copy_content,
-      success: function (res) {
+      success: function(res) {
         wx.getClipboardData({
-          success: function (res) {
+          success: function(res) {
             wx.showToast({
               title: '复制成功'
             })
@@ -165,7 +208,7 @@ Page({
       }
     })
   },
-  poemslices: function(nodes){
+  poemslices: function(nodes) {
     var poem_sententces = ""
     if (nodes.length == 0) {
       return poem_sententces
@@ -182,7 +225,7 @@ Page({
     }
     return poem_sententces
   },
-  generatePic: function (items) {
+  generatePic: function(items) {
 
     var that = this;
     let windowW = app.globalData.screenW
@@ -214,11 +257,11 @@ Page({
     ctx.setFillStyle('black')
     this.canvasDrawText(ctx, poem_content, poem_author_H, true)
 
-    ctx.draw(true, function () {
+    ctx.draw(true, function() {
       that.drawPicture()
     })
   },
-  canvasWH: function () {
+  canvasWH: function() {
     let windowW = app.globalData.screenW
     let windowH = app.globalData.screenH
     let poem_title = this.data.poetryinfo.name
@@ -250,7 +293,7 @@ Page({
       'canvasW': canvasW
     }
   },
-  drawPicture: function () {
+  drawPicture: function() {
     var that = this
     let windowW = app.globalData.screenW
     let windowH = app.globalData.screenH
@@ -264,23 +307,23 @@ Page({
       destWidth: windowW * app.globalData.pixelRatio,
       canvasId: 'shareImg',
       quality: 1,
-      success: function (res) {
+      success: function(res) {
         wx.previewImage({
           urls: [res.tempFilePath],
-          success: function () {
+          success: function() {
             console.log('preview success')
             that.setData({
               previewhidden: false
             })
           },
-          fail: function (err) {
+          fail: function(err) {
             console.log(err)
           }
         })
       }
     }, this)
   },
-  canvasDrawText: function (ctx, str, beginY, isFillText) {
+  canvasDrawText: function(ctx, str, beginY, isFillText) {
     const windowW = app.globalData.screenW
     const windowH = app.globalData.screenH
     const beginX = windowW * 0.5
@@ -301,13 +344,13 @@ Page({
     return beginY
   },
 
-  canvasTextAutoLine: function (str, ctx, initX, initY, lineHeight, isFillText) {
+  canvasTextAutoLine: function(str, ctx, initX, initY, lineHeight, isFillText) {
     var lineWidth = 0;
     var canvasWidth = app.globalData.screenW;
     var lastSubStrIndex = 0;
     for (let i = 0; i < str.length; i++) {
       lineWidth += ctx.measureText(str[i]).width;
-      if (lineWidth > canvasWidth - 40) {//减去initX,防止边界出现的问题
+      if (lineWidth > canvasWidth - 40) { //减去initX,防止边界出现的问题
         if (isFillText) {
           ctx.fillText(str.substring(lastSubStrIndex, i), initX, initY);
         }
@@ -323,21 +366,22 @@ Page({
 
     return initY + lineHeight
   },
-  requestMe: function () {
+  requestMe: function() {
+    console.log("requestMe----")
     wx.showNavigationBarLoading()
+    let poetryjson = wx.getStorageSync("poetryjson")
     return new Promise((reslove, reject) => {
-      let poetryjson = wx.getStorageSync("poetryjson")
       wx.request({
         url: "https://sweapp.madliar.com/" + poetryjson,
         method: "get",
         header: {
           'content-type': 'application/x-www-form-urlencoded'
         },
-        success: function (res) {
+        success: function(res) {
           reslove(res.data)
           wx.hideNavigationBarLoading()
         },
-        fail: function (error) {
+        fail: function(error) {
           wx.showToast({
             title: '请求失败',
             duration: 1500
@@ -345,10 +389,67 @@ Page({
           reject(error)
           wx.hideNavigationBarLoading()
         },
-        complete: function () {
+        complete: function() {
           // 短暂震动
           wx.vibrateShort()
-          wx.removeStorageSync("poetryjson")
+        }
+      })
+    })
+  },
+  judgeCollection: function() {
+    return Promise
+  },
+  collection: function () {
+    let poetryjson = wx.getStorageSync("poetryjson")
+    var that = this
+    return new Promise((reslove, reject) => {
+      // 1. 获取数据库引用
+      const db = wx.cloud.database()
+      // 2. 构造查询语句
+      // collection 方法获取一个集合的引用
+      // where 方法传入一个对象，数据库返回集合中字段等于指定值的 JSON 文档。API 也支持高级的查询条件（比如大于、小于、in 等），具体见文档查看支持列表
+      // get 方法会触发网络请求，往数据库取数据
+      // db.collection('poetry_collections').where({
+
+      // }).get({
+      //   success: function (res) {
+      //     // 输出 [{ "title": "The Catcher in the Rye", ... }]
+      //     console(res)
+      //     reslove(res.data[0])
+      //   },
+      //   fail: function (error) {
+      //     console.log(error)
+      //     reject(error)
+      //   },
+      //   complete: function () {
+      //     console.log("complete")
+      //   }
+      // })
+
+      db.collection("poetry_collections").add({
+        data : {
+          poetry_id: poetryjson,
+          user_id: that.openid
+        },
+        success: function (res) {
+          wx.showToast({
+            title: '收藏成功',
+            duration: 1.5,
+            mask: true,
+            success: function(res) {},
+            fail: function(res) {},
+            complete: function(res) {},
+          })
+        },
+        fail: function(error) {
+          wx.showToast({
+            title: '收藏失败',
+            duration: 1.5,
+            mask: true,
+            success: function(res) {},
+            fail: function(res) {},
+            complete: function(res) {},
+          })
         }
       })
     })
