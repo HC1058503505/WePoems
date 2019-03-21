@@ -8,7 +8,7 @@
         <view class='poetry_tool_view'>
           <view>
             <button class='poetry_collection' bindgetuserinfo='collectionAction' open-type='getUserInfo'>
-              <image class='poetry_collection_img' src='../../Sources/images/no_collection.png'></image>
+              <image class='poetry_collection_img' src="{{isCollection ? '../../Sources/images/yes_collection.png' : '../../Sources/images/no_collection.png'}}"></image>
             </button>
           </view>
           <view>

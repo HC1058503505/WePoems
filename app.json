@@ -9,7 +9,8 @@
     "Pages/poetry/poetry",
     "Pages/categorysearch/categorysearch",
     "Pages/categorydetail/categorydetail",
-    "Pages/showme/showme"
+    "Pages/showme/showme",
+    "Pages/mycollection/mycollection"
   ],
   "tabBar": {
     "color": "#CFCFCF",

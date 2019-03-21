@@ -16,7 +16,8 @@ Page({
     scrollTop: -1,
     canvasH: 0,
     isCollection: false,
-    openid: ""
+    openid: "",
+    doc_id:""
   },
 
   /**
@@ -43,6 +44,7 @@ Page({
         wx.setNavigationBarTitle({
           title: titleStr
         })
+        console.log(res)
         that.setData({
           poetryinfo: res
         })
@@ -53,6 +55,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    console.log("show")
     var that = this
     wx.getSetting({
       success(res) {
@@ -62,10 +65,10 @@ Page({
               wx.cloud.callFunction({
                 name: 'getUserId',
                 complete: res => {
-                  console.log(res.result.openid)
                   that.setData({
                     openid : res.result.openid
                   })
+                  that.judgeCollection()
                 }
               })
             }
@@ -116,11 +119,29 @@ Page({
       path: "Pages/recommend/recommend?poetryjson=" + poetryjson,
     }
   },
-  collectionAction: function(e) {
+  collectionAction: function(res) {
+    if(this.data.isCollection) {
+      this.removeCollection()
+      return
+    }
+
     let userMsg = res.detail.userInfo
-    if (userMsg && this.data.openid.length > 0) {
-      // 添加收藏
-      this.collection()
+    if (userMsg) {
+      if(this.data.openid.length == 0) {
+        var that = this
+        wx.cloud.callFunction({
+          name: 'getUserId',
+          complete: res => {
+            that.setData({
+              openid: res.result.openid
+            })
+            that.judgeCollection()
+          }
+        })
+      } else {
+        // 添加收藏
+        this.addCollection()
+      }
     }
   },
   getUserOpenId: function() {
@@ -367,7 +388,6 @@ Page({
     return initY + lineHeight
   },
   requestMe: function() {
-    console.log("requestMe----")
     wx.showNavigationBarLoading()
     let poetryjson = wx.getStorageSync("poetryjson")
     return new Promise((reslove, reject) => {
@@ -397,9 +417,45 @@ Page({
     })
   },
   judgeCollection: function() {
-    return Promise
+    var that = this
+    let poetryjson = wx.getStorageSync("poetryjson")
+    // 1. 获取数据库引用
+    const db = wx.cloud.database()
+    db.collection("poetry_collections").where({
+      _openid: that.data.openid,
+      poetry_id: poetryjson
+    }).get({
+      success: function (res) {
+        // 输出 [{ "title": "The Catcher in the Rye", ... }]
+        that.setData({
+          isCollection : true,
+          doc_id: res.data[0]._id
+        })
+      },
+      fail: function (error) {
+
+      },
+      complete: function () {
+      }
+    })
   },
-  collection: function () {
+  parseHtml: function (target) {
+    let content = this.data.poetryinfo.content
+      .replace(/<p>/ig, '')
+      .replace(/\\r/ig, '')
+      .replace(/\\n/ig, '')
+      .replace(/<\/p>/ig, '\n')
+      .replace(/<br \/>/ig, '\n')
+      .replace(/\(.*\)/ig, '')
+      .replace(/&quot/ig, '＂')
+      .replace(/<\/span>/ig, '')
+      .replace(/<span.*>/ig, '')
+      .replace(/<br>/ig,'\n')
+    console.log(content)
+    return content
+  },
+  addCollection: function () {
+    console.log("addcollection")
     let poetryjson = wx.getStorageSync("poetryjson")
     var that = this
     return new Promise((reslove, reject) => {
@@ -412,43 +468,79 @@ Page({
       // db.collection('poetry_collections').where({
 
       // }).get({
-      //   success: function (res) {
-      //     // 输出 [{ "title": "The Catcher in the Rye", ... }]
-      //     console(res)
-      //     reslove(res.data[0])
-      //   },
-      //   fail: function (error) {
-      //     console.log(error)
-      //     reject(error)
-      //   },
-      //   complete: function () {
-      //     console.log("complete")
-      //   }
+        // success: function (res) {
+        //   // 输出 [{ "title": "The Catcher in the Rye", ... }]
+        //   console(res)
+        //   reslove(res.data[0])
+        // },
+        // fail: function (error) {
+        //   console.log(error)
+        //   reject(error)
+        // },
+        // complete: function () {
+        //   console.log("complete")
+        // }
       // })
 
       db.collection("poetry_collections").add({
         data : {
           poetry_id: poetryjson,
-          user_id: that.openid
+          poetry_name: that.data.poetryinfo.name,
+          poetry_dynasty: that.data.poetryinfo.dynasty,
+          poetry_content: that.parseHtml(that),
+          poetry_author: that.data.poetryinfo.poet.name
         },
         success: function (res) {
           wx.showToast({
             title: '收藏成功',
-            duration: 1.5,
+            duration: 1500,
             mask: true,
-            success: function(res) {},
+            success: function(showOK) {
+              that.setData({
+                isCollection: true,
+                doc_id: res._id
+              })
+            },
             fail: function(res) {},
-            complete: function(res) {},
+            complete: function(showFail) {},
           })
         },
         fail: function(error) {
           wx.showToast({
             title: '收藏失败',
-            duration: 1.5,
+            duration: 1500,
             mask: true,
             success: function(res) {},
             fail: function(res) {},
             complete: function(res) {},
+          })
+        }
+      })
+    })
+  },
+  removeCollection: function(){
+    let poetryjson = wx.getStorageSync("poetryjson")
+    var that = this
+    return new Promise((reslove, reject) => {
+      // 1. 获取数据库引用
+      const db = wx.cloud.database()
+      db.collection("poetry_collections").doc(that.data.doc_id).remove({
+        success(res){
+          wx.showToast({
+            title: '取消收藏',
+            duration: 1500,
+            mask: true,
+            success: function (res) {
+              that.setData({
+                isCollection: false
+              })
+            },
+          })
+        },
+        fail(error){
+          wx.showToast({
+            title: '取消收藏失败',
+            duration: 1500,
           })
         }
       })

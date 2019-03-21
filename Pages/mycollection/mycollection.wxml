@@ -1,0 +1,13 @@
+<!--Pages/mycollection.wxml-->
+<!--Pages/recommend/recommend.wxml-->
+<scroll-view class='bg-gray overflow' style='height:calc(100vh - {{navH}}px)' scroll-y >
+    <view class='poemlist'>
+      <view wx:for="{{collections}}" data-index="{{item.poetry_id}}" wx:key="{{item.poetry_id}}" bindtap="onItemSelected">
+          <view class='poem'>
+            <text class='poem_title'>{{item.poetry_name}}</text>
+            <text class='poem_author'>{{item.poetry_dynasty}} / {{item.poetry_author}}</text>
+            <text class='poem_content'>{{item.poetry_content}}</text>
+          </view>
+      </view>
+    </view>
+</scroll-view>

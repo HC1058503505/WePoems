@@ -6,7 +6,8 @@ Page({
    */
   data: {
     nickName: "点击登录",
-    avatarUrl: "../../Sources/images/shici.png"
+    avatarUrl: "../../Sources/images/shici.png",
+    isAuthor: false
   },
 
   /**
@@ -35,14 +36,16 @@ Page({
             success(result) {
               that.setData({
                 nickName: result.userInfo.nickName,
-                avatarUrl: result.userInfo.avatarUrl
+                avatarUrl: result.userInfo.avatarUrl,
+                isAuthor: true
               })
             }
           })
         } else {
           that.setData({
             nickName: "点击登录",
-            avatarUrl: "../../Sources/images/shici.png"
+            avatarUrl: "../../Sources/images/shici.png",
+            isAuthor: false
           })
         }
       }
@@ -89,15 +92,29 @@ Page({
 
   login: function(res) {
     let userMsg = res.detail.userInfo
-    console.log(userMsg)
+
     if (userMsg) {
       this.setData({
         nickName : userMsg.nickName,
-        avatarUrl : userMsg.avatarUrl
+        avatarUrl : userMsg.avatarUrl,
+        isAuthor : true
       })
     } 
   },
+  collectionAction: function(e) {
+    if (this.data.isAuthor) {
+      wx.navigateTo({
+        url: '../../Pages/mycollection/mycollection',
+      })
+    } else {
+      wx.showToast({
+        title: '请先登录',
+        duration: 1500,
+        icon: "none"
+      })
 
+    }
+  },
   meAction: function(e) {
     let index = e.currentTarget.dataset.index
     wx.setStorageSync("MeSelectedIndex", index)

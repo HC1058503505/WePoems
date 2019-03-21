@@ -19,9 +19,9 @@ Page({
       success: function(res) {
         let index = res.data
         let title = ""
-        if (index == "0") {
+        if (index == "1") {
           title = "关于"
-        } else if (index == "1") {
+        } else if (index == "2") {
           title = "功能介绍"
         }
 
@@ -30,8 +30,8 @@ Page({
         })
 
         that.setData({
-          isAbout: index == "0",
-          isAbstract: index == "1"
+          isAbout: index == "1",
+          isAbstract: index == "2"
         })
       },
     })

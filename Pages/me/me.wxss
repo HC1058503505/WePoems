@@ -12,12 +12,12 @@
 .userInfo {
   margin-bottom: 100rpx;
 }
-.guanyu_img {
+.guanyu_img, .collection_img {
   height: 45rpx;
   width: 45rpx;
   margin-right: 10rpx;
 }
-.guanyu {
+.guanyu, .collection {
   display: flex;
   align-content: center;
   align-items: center;
