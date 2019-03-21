@@ -44,7 +44,6 @@ Page({
         wx.setNavigationBarTitle({
           title: titleStr
         })
-        console.log(res)
         that.setData({
           poetryinfo: res
         })
@@ -55,7 +54,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    console.log("show")
     var that = this
     wx.getSetting({
       success(res) {
@@ -144,14 +142,6 @@ Page({
       }
     }
   },
-  getUserOpenId: function() {
-    wx.cloud.callFunction({
-      name: 'getUserId',
-      complete: res => {
-        console.log(res)
-      }
-    })
-  },
   poemDetailTabAction: function(event) {
     let targetid = event.currentTarget.id
 
@@ -215,7 +205,6 @@ Page({
     var that = this;
     let copy_content = this.data.poetryinfo.name + '\n\n' +
       this.data.poetryinfo.dynasty + '/' + this.data.poetryinfo.poet.name + '\n\n' + this.poemslices(this.data.poem_content.nodes);
-    console.log(copy_content)
     wx.setClipboardData({
       data: copy_content,
       success: function(res) {
@@ -332,13 +321,11 @@ Page({
         wx.previewImage({
           urls: [res.tempFilePath],
           success: function() {
-            console.log('preview success')
             that.setData({
               previewhidden: false
             })
           },
           fail: function(err) {
-            console.log(err)
           }
         })
       }
@@ -451,11 +438,9 @@ Page({
       .replace(/<\/span>/ig, '')
       .replace(/<span.*>/ig, '')
       .replace(/<br>/ig,'\n')
-    console.log(content)
     return content
   },
   addCollection: function () {
-    console.log("addcollection")
     let poetryjson = wx.getStorageSync("poetryjson")
     var that = this
     return new Promise((reslove, reject) => {

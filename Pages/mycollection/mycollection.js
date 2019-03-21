@@ -117,7 +117,6 @@ Page({
       }).skip(pageFor * 10).limit(10).get({
         success: function(res) {
           // 输出 [{ "title": "The Catcher in the Rye", ... }]
-          console.log(res)
           reslove(res.data)
         },
         fail: function(error) {
