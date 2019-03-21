@@ -1,50 +1,26 @@
 <!--Pages/showme/showme.wxml-->
+<import src='./update.wxml' />
 <scroll-view scroll-y>
   <block wx:if="{{isAbout}}">
-  <view>
-    <view class='about'>
-      <view class='about_section_title first'>关于古诗文斋</view>
-      <view class='about_content'>古诗文斋是一个用于查询与阅读古诗词的实用类微信小程序，旨在帮助人们随时随地阅读古诗词，学习中国传统文化，感受诗词魅力。
+    <view>
+      <view class='about'>
+        <view class='about_section_title first'>关于古诗文斋</view>
+        <view class='about_content'>古诗文斋是一个用于查询与阅读古诗词的实用类微信小程序，旨在帮助人们随时随地阅读古诗词，学习中国传统文化，感受诗词魅力。
+        </view>
+        <view class='about_content'>
+          所有诗词内容都来源于“古诗文网”，感谢“古诗文网”收集整理这些诗词内容。
+        </view>
       </view>
-      <view class='about_content'>
-      所有诗词内容都来源于“古诗文网”，感谢“古诗文网”收集整理这些诗词内容。
+
+
+      <view class='version'>
+        <view class='about_section_title second'>版本更新记录</view>
+        <view wx:for="{{update_info}}" wx:key="{{item.version_num}}">
+          <template is="updateT" data="{{item}}" />
+        </view>
       </view>
+      
     </view>
-   
-
-    <view class='version'>
-      <view class='about_section_title second'>版本更新记录</view>
-      <view class='update_version'>
-        <view class='version_info'>
-          <text class='version_num'>V1.0.0</text>
-          <text class='version_publish'>2018.11.10</text>
-        </view>
-        <view class='version_msg'>
-          <text>- 第一个版本，实现基本推荐、搜索古诗功能。</text>
-        </view>
-      </view>
-
-      <view class='update_version'>
-        <view class='version_info'>
-          <text class='version_num'>V1.0.9</text>
-          <text class='version_publish'>2018.11.11</text>
-        </view>
-        <view class='version_msg'>
-          <text>- 完善搜索以及热搜功能</text>
-        </view>
-      </view>
-
-      <view class='update_version'>
-        <view class='version_info'>
-          <text class='version_num'>V1.1.0</text>
-          <text class='version_publish'>2018.11.12</text>
-        </view>
-        <view class='version_msg'>
-          <text>- 完善诗词生成图片模糊问题以及其他细节</text>
-        </view>
-      </view>
-    </view>
-  </view>
   </block>
 
   <block wx:if="{{isAbstract}}">
@@ -78,6 +54,3 @@
     </view>
   </block>
 </scroll-view>
-
-
-

@@ -13,7 +13,7 @@
     "Pages/mycollection/mycollection"
   ],
   "tabBar": {
-    "color": "#CFCFCF",
+    "color": "#8A8A8A",
     "selectedColor": "#000000",
     "list": [
       {
@@ -30,7 +30,7 @@
       },
       {
         "pagePath": "Pages/me/me",
-        "text": "关于",
+        "text": "我",
         "iconPath": "Sources/images/me.png",
         "selectedIconPath": "Sources/images/me_selected.png"
       }

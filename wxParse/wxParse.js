@@ -28,7 +28,7 @@ wx.getSystemInfo({
 /**
  * 主函数入口区
  **/
-function wxParse(bindName = 'wxParseData', type = 'html', data ='<div class="wrong">抱歉，数据异常，还是看看别的吧...(╯﹏╰)...</div>', target,imagePadding) {
+function wxParse(bindName = 'wxParseData', type = 'html', data ='<div class="wrong">数据暂无</div>', target,imagePadding) {
   var that = target;
   var transData = {};//存放转化后的数据
   if (type == 'html') {
