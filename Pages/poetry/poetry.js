@@ -24,13 +24,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-   
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
     var that = this
     this.requestMe()
       .then(res => {
@@ -51,9 +44,9 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面显示
+   * 生命周期函数--监听页面初次渲染完成
    */
-  onShow: function() {
+  onReady: function() {
     var that = this
     wx.getSetting({
       success(res) {
@@ -64,7 +57,7 @@ Page({
                 name: 'getUserId',
                 complete: res => {
                   that.setData({
-                    openid : res.result.openid
+                    openid: res.result.openid
                   })
                   that.judgeCollection()
                 }
@@ -78,6 +71,13 @@ Page({
         }
       }
     })
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function() {
+    
   },
 
   /**
@@ -386,7 +386,6 @@ Page({
         },
         success: function(res) {
           reslove(res.data)
-          wx.hideNavigationBarLoading()
         },
         fail: function(error) {
           wx.showToast({
@@ -394,9 +393,10 @@ Page({
             duration: 1500
           })
           reject(error)
-          wx.hideNavigationBarLoading()
+          
         },
         complete: function() {
+          wx.hideNavigationBarLoading()
           // 短暂震动
           wx.vibrateShort()
         }

@@ -86,7 +86,6 @@ Page({
         },
         success: function(res) {
           reslove(res.data)
-          wx.hideNavigationBarLoading()
         },
         fail: function(error) {
           wx.showToast({
@@ -94,9 +93,11 @@ Page({
             duration: 1500
           })
           reject(error)
-          wx.hideNavigationBarLoading()
         },
         complete: function() {
+          // 短暂震动
+          wx.vibrateShort()
+          wx.hideNavigationBarLoading()
           wx.removeStorageSync("poetjson")
         }
       })
