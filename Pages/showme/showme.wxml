@@ -42,10 +42,11 @@
     </view>
 
     <view class='version'>
-      <view class='about_section_title third'>分享</view>
+      <view class='about_section_title third'>收藏分享</view>
       <view class='update_version'>
         <view class='recommend_msg'>
-          <text class='recommend_desc'>— 查看诗文详情，可复制或是生成图片分享给好友</text>
+          <text class='recommend_desc'>— 收藏喜欢的诗文，记录每次的心跳</text>
+          <text class='recommend_desc'>— 可复制诗文或是生成图片分享给好友，知识加倍</text>
         </view>
       </view>
     </view>
