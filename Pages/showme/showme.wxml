@@ -7,9 +7,6 @@
         <view class='about_section_title first'>关于古诗文斋</view>
         <view class='about_content'>古诗文斋是一个用于查询与阅读古诗词的实用类微信小程序，旨在帮助人们随时随地阅读古诗词，学习中国传统文化，感受诗词魅力。
         </view>
-        <view class='about_content'>
-          所有诗词内容都来源于“古诗文网”，感谢“古诗文网”收集整理这些诗词内容。
-        </view>
       </view>
 
 
