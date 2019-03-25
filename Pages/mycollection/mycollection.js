@@ -42,6 +42,20 @@ Page({
    */
   onShow: function() {
     
+    let cancleCollection = wx.getStorageSync("CancelCollection")
+    if(cancleCollection && this.data.collections.length > 0) {
+      console.log("Show", this.data.collections.length)
+      var that = this
+      this.requestCollections(0).then(res => {
+        that.setData({
+          collections: res
+        })
+      })
+    }
+    wx.setStorage({
+      key: 'CancelCollection',
+      data: false,
+    })
   },
 
   /**

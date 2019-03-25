@@ -499,6 +499,7 @@ Page({
             duration: 1500,
             mask: true,
             success: function (res) {
+              wx.setStorageSync("CancelCollection", true)
               that.setData({
                 isCollection: false
               })
