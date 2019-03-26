@@ -7,7 +7,8 @@ App({
     userID: '',
     pixelRatio: 0,
     screenH:0,
-    screenW:0
+    screenW:0,
+    baseURL: "https://app.gushiwen.org"
   },
   onLaunch: function (options) {
     // 小程序启动之后 触发

@@ -1,5 +1,5 @@
 /* Pages/poet/poet.wxss */
-
+@import '../poetry/poem_detail_zhengwen.wxss';
 /* 头像 */
 .poet_portrait_block {
   display: flex;
@@ -19,12 +19,15 @@
 .poet_abstract_block {
   display: flex;
   flex-direction: column;
-  padding: 40rpx;
+  padding-top: 40rpx;
+  padding-left: 40rpx;
+  padding-right: 40rpx;
 }
 
 .poet_abstract_title {
   font-weight: 600;
   font-size: x-large;
+  margin-bottom: 20rpx;
   border-bottom: 2rpx dashed rgb(228, 227, 227);
   padding-bottom: 20rpx;
 }
@@ -36,4 +39,43 @@
   padding-left: 40rpx;
   padding-right: 40rpx;
   padding-bottom: 40rpx;
+}
+
+.showMore {
+  padding: 40rpx;
+}
+
+.authorMoreTitle , .goodPoemTitle{
+  font-weight: bolder;
+  font-size: x-large;
+  margin-bottom: 20rpx;
+  margin-top: 20rpx;
+  display: block;
+  border-bottom: 2rpx dashed rgb(228, 227, 227);
+  padding-bottom: 20rpx;
+}
+
+.poem_content {
+  text-align: center;
+  font-size: medium;
+}
+
+.poem_title_more {
+  text-align: center;
+  font-size: medium;
+}
+
+.poem_author_more {
+  text-align: center;
+  color: grey;
+  font-size: small;
+}
+
+.poem_more {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  /*align-items: center;*/
+  padding: 20rpx;
+  border-bottom: 20rpx #f7f7f7 solid;
 }

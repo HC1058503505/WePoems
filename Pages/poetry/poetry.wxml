@@ -1,7 +1,7 @@
 <!--Pages/poetry/poetry.wxml-->
 <import src="../../wxParse/wxParse.wxml" />
 <scroll-view scroll-y scroll-top="{{scrollTop}}">
-  <block wx:if="{{isZhengwen && poetryinfo.name.length > 0}}">
+  <block wx:if="{{isZhengwen && poetryinfo.tb_gushiwen.nameStr.length > 0}}">
     <!----正文--->
     <view class='poem'>
       <view class='poem_detail_content'>
@@ -23,13 +23,13 @@
           </view>
         </view>
         <view class='poem_author_content'>
-          <text class='poem_author'>{{poetryinfo.dynasty}} / {{poetryinfo.poet.name}}</text>
+          <text class='poem_author'>{{poetryinfo.tb_gushiwen.chaodai}} / {{poetryinfo.tb_gushiwen.author}}</text>
           <template is="wxParse" data="{{wxParseData:poem_content.nodes}}" />
         </view>
       </view>
 
       <view class='poem_tags'>
-        <view class='tag' wx:for="{{poetryinfo.tags}}" data-index="{{index}}" wx:key="{{item.poem_id}}">
+        <view class='tag' wx:for="{{poetryinfo.tb_gushiwen.tags}}" data-index="{{index}}" wx:key="{{item.poem_id}}">
           <text id='{{item}}' class='poem_tag' bindtap='poemTagTapAction'>{{item}}</text>
         </view>
       </view>
@@ -39,7 +39,41 @@
   <block wx:if="{{isYizhu}}">
 
     <view class='poetry_extension'>
-      <template is="wxParse" data="{{wxParseData:poem_fanyi.nodes}}" />
+      <block wx:for="{{poetryinfo.tb_fanyis.fanyis}}" wx:for-index="idx" wx:key="">
+        <block wx:if="{{idx == 0}}">
+          <template is="wxParse" data="{{wxParseData:poem_fanyi_0.nodes}}" />
+        </block>
+        <block wx:elif="{{idx == 1}}">
+          <template is="wxParse" data="{{wxParseData:poem_fanyi_1.nodes}}" />
+        </block>
+        <block wx:elif="{{idx == 2}}">
+          <template is="wxParse" data="{{wxParseData:poem_fanyi_2.nodes}}" />
+        </block>
+        <block wx:elif="{{idx == 3}}">
+          <template is="wxParse" data="{{wxParseData:poem_fanyi_3.nodes}}" />
+        </block>
+        <block wx:elif="{{idx == 4}}">
+          <template is="wxParse" data="{{wxParseData:poem_fanyi_4.nodes}}" />
+        </block>
+        <block wx:elif="{{idx == 5}}">
+          <template is="wxParse" data="{{wxParseData:poem_fanyi_5.nodes}}" />
+        </block>
+        <block wx:elif="{{idx == 6}}">
+          <template is="wxParse" data="{{wxParseData:poem_fanyi_6.nodes}}" />
+        </block>
+        <block wx:elif="{{idx == 7}}">
+          <template is="wxParse" data="{{wxParseData:poem_fanyi_7.nodes}}" />
+        </block>
+        <block wx:elif="{{idx == 8}}">
+          <template is="wxParse" data="{{wxParseData:poem_fanyi_8.nodes}}" />
+        </block>
+        <block wx:elif="{{idx == 9}}">
+          <template is="wxParse" data="{{wxParseData:poem_fanyi_9.nodes}}" />
+        </block>
+        <block wx:elif="{{idx == 10}}">
+          <template is="wxParse" data="{{wxParseData:poem_fanyi_10.nodes}}" />
+        </block>
+      </block>
     </view>
 
   </block>
@@ -48,9 +82,155 @@
   <block wx:if="{{isShangxi}}">
 
     <view class='poetry_extension'>
-      <template is="wxParse" data="{{wxParseData:poem_shangxi.nodes}}" />
+      <block wx:for="{{poetryinfo.tb_shangxis.shangxis}}" wx:for-index="idx" wx:key="{{idx}}">
+        <view class='shangxiTitle'>{{item.nameStr}}</view>
+        <block wx:if="{{idx == 0}}">
+          <template is="wxParse" data="{{wxParseData:poem_shangxi_0.nodes}}" />
+        </block>
+        <block wx:elif="{{idx == 1}}">
+          <template is="wxParse" data="{{wxParseData:poem_shangxi_1.nodes}}" />
+        </block>
+        <block wx:elif="{{idx == 2}}">
+          <template is="wxParse" data="{{wxParseData:poem_shangxi_2.nodes}}" />
+        </block>
+        <block wx:elif="{{idx == 3}}">
+          <template is="wxParse" data="{{wxParseData:poem_shangxi_3.nodes}}" />
+        </block>
+        <block wx:elif="{{idx == 4}}">
+          <template is="wxParse" data="{{wxParseData:poem_shangxi_4.nodes}}" />
+        </block>
+        <block wx:elif="{{idx == 5}}">
+          <template is="wxParse" data="{{wxParseData:poem_shangxi_5.nodes}}" />
+        </block>
+        <block wx:elif="{{idx == 6}}">
+          <template is="wxParse" data="{{wxParseData:poem_shangxi_6.nodes}}" />
+        </block>
+        <block wx:elif="{{idx == 7}}">
+          <template is="wxParse" data="{{wxParseData:poem_shangxi_7.nodes}}" />
+        </block>
+        <block wx:elif="{{idx == 8}}">
+          <template is="wxParse" data="{{wxParseData:poem_shangxi_8.nodes}}" />
+        </block>
+        <block wx:elif="{{idx == 9}}">
+          <template is="wxParse" data="{{wxParseData:poem_shangxi_9.nodes}}" />
+        </block>
+        <block wx:elif="{{idx == 10}}">
+          <template is="wxParse" data="{{wxParseData:poem_shangxi_10.nodes}}" />
+        </block>
+      </block>
     </view>
 
+  </block>
+
+  <block wx:if="{{isAuthor}}">
+    <view>
+      <!---头像--->
+      <view class='poet_portrait_block'>
+        <image class='poet_portrait' src="{{poetryinfo.tb_author.pic}}"></image>
+      </view>
+      <!---简介--->
+      <view class='poet_abstract_block'>
+        <block wx:if="{{poetryinfo.tb_author.cont.length > 0}}">
+          <text class='poet_abstract_title'>简介</text>
+          <template is="wxParse" data="{{wxParseData:poem_author.nodes}}" />
+        </block>
+      </view>
+      <block wx:if="{{isShowMore}}">
+        <view class='showMore'>
+          <block wx:for="{{authorMoreInfo.tb_ziliaos.ziliaos}}" wx:for-index="idx" wx:key="{{idx}}">
+            <view class='poet_abstract_block'>
+              <text class='authorMoreTitle'>{{item.nameStr}}</text>
+            </view>
+            
+            <block wx:if="{{idx == 0}}">
+              <view class='poet_extension'>
+                <template is="wxParse" data="{{wxParseData:author_ziliao_0.nodes}}" />
+              </view>
+            </block>
+            <block wx:if="{{idx == 1}}">
+              <view class='poet_extension'>
+                <template is="wxParse" data="{{wxParseData:author_ziliao_1.nodes}}" />
+              </view>
+            </block>
+            <block wx:if="{{idx == 2}}">
+              <view class='poet_extension'>
+                <template is="wxParse" data="{{wxParseData:author_ziliao_2.nodes}}" />
+              </view>
+            </block>
+            <block wx:if="{{idx == 3}}">
+              <view class='poet_extension'>
+                <template is="wxParse" data="{{wxParseData:author_ziliao_3.nodes}}" />
+              </view>
+            </block>
+            <block wx:if="{{idx == 4}}">
+              <view class='poet_extension'>
+                <template is="wxParse" data="{{wxParseData:author_ziliao_4.nodes}}" />
+              </view>
+            </block>
+            <block wx:if="{{idx == 5}}">
+              <view class='poet_extension'>
+                <template is="wxParse" data="{{wxParseData:author_ziliao_5.nodes}}" />
+              </view>
+            </block>
+            <block wx:if="{{idx == 6}}">
+              <view class='poet_extension'>
+                <template is="wxParse" data="{{wxParseData:author_ziliao_6.nodes}}" />
+              </view>
+            </block>
+            <block wx:if="{{idx == 7}}">
+              <view class='poet_extension'>
+                <template is="wxParse" data="{{wxParseData:author_ziliao_7.nodes}}" />
+              </view>
+            </block>
+            <block wx:if="{{idx == 8}}">
+              <view class='poet_extension'>
+                <template is="wxParse" data="{{wxParseData:author_ziliao_8.nodes}}" />
+              </view>
+            </block>
+            <block wx:if="{{idx == 9}}">
+              <view class='poet_extension'>
+                <template is="wxParse" data="{{wxParseData:author_ziliao_9.nodes}}" />
+              </view>
+            </block>
+            <block wx:if="{{idx == 10}}">
+              <view class='poet_extension'>
+                <template is="wxParse" data="{{wxParseData:author_ziliao_10.nodes}}" />
+              </view>
+            </block>
+            <block wx:if="{{idx == 11}}">
+              <view class='poet_extension'>
+                <template is="wxParse" data="{{wxParseData:author_ziliao_11.nodes}}" />
+              </view>
+            </block>
+            <block wx:if="{{idx == 12}}">
+              <view class='poet_extension'>
+                <template is="wxParse" data="{{wxParseData:author_ziliao_12.nodes}}" />
+              </view>
+            </block>
+          </block>
+        </view>
+      </block>
+      <block wx:else>
+        <!---查看更多--->
+        <button class='more' bindtap='moreAuthorMsg' disabled='{{poetryinfo.tb_author.idnew == null}}'>{{poetryinfo.tb_author.idnew == null ? poetryinfo.tb_gushiwen.author : "查看更多"}}</button>
+      </block>
+      <!---代表作--->
+      <view class='poemlist_more'>
+        <block wx:if="{{authorMoreInfo.tb_gushiwens.gushiwens.length > 0}}">
+          <view class='poet_abstract_block'>
+            <text class='goodPoemTitle'>代表作</text>
+          </view>
+        </block>
+
+        <view wx:for="{{authorMoreInfo.tb_gushiwens.gushiwens}}" data-index="{{item.idnew}}" wx:key="{{item.id}}" bindtap="onItemSelected">
+          <view class='poem_more'>
+            <text class='poem_title_more'>{{item.nameStr}}</text>
+            <text class='poem_author_more'>{{item.chaodai}} / {{item.author}}</text>
+            <text class='poem_content_more'>{{item.cont}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
   </block>
 </scroll-view>
 

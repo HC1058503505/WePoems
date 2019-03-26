@@ -4,8 +4,9 @@
 
 <block wx:if="{{isSearch}}">
   <view class='result_list'>
-    <template is="section_poet" data="{{searchResult}}" />
-    <template is="section_poem" data="{{searchResult}}" />
+    <template is="search_poet" data="{{searchResult}}" />
+    <template is="search_mingju" data="{{searchResult}}" />
+    <template is="search_author" data="{{searchResult}}" />
   </view>
 </block>
 

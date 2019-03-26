@@ -49,3 +49,33 @@
   </block>
 </view>
 </template>
+
+<template name="search_poet">
+<block wx:if="{{searchResult.gushiwens.length > 0}}">
+  <view class='sectionTitle'>诗文：</view>
+  <view class='section_cell' wx:for="{{searchResult.gushiwens}}" wx:key="{{item.idnew}}" data-index="{{item.idnew}}" data-type="poetry" data-name="{{item.nameStr}}" bindtap="onItemSelected">
+     <view>
+      <text class="poem_title">{{item.nameStr}}</text>
+      <text class="poem_author_info">{{item.author}}</text>
+    </view>
+  </view>
+</block>
+</template>
+
+<template name="search_mingju">
+<block wx:if="{{searchResult.mingjus.length > 0}}">
+  <view class='sectionTitle'>名句：</view>
+  <view class='section_cell' wx:for="{{searchResult.mingjus}}" wx:key="{{item.idnew}}" data-index="{{item.idnew}}" data-type="mingju" data-name="{{item.nameStr}}" bindtap="onItemSelected">
+    <text>{{item.nameStr}}</text>
+  </view>
+</block>
+</template>
+
+<template name="search_author">
+<block wx:if="{{searchResult.authors.length > 0}}">
+  <view class='sectionTitle'>作者：</view>
+  <view class='section_cell' wx:for="{{searchResult.authors}}" wx:key="{{item.idnew}}" data-index="{{item.idnew}}" data-type="author" data-name="{{item.nameStr}}" bindtap="onItemSelected">
+    <text>{{item.nameStr}}</text>
+  </view>
+</block>
+</template>

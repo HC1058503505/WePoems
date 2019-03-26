@@ -1,8 +1,8 @@
 // Pages/categorydetail/categorydetail.js
+let wxparse = require("../../wxParse/wxParse.js");
 var tagType = ""
-const baseUrl = "https://weapp.madliar.com/"
-var detailUrl = baseUrl
-var page = 0
+let app = getApp()
+var page = 1
 Page({
 
   /**
@@ -10,7 +10,8 @@ Page({
    */
   data: {
     poemlist: [],
-    hide_bottom_line: true 
+    hide_bottom_line: true,
+    postData: {}
   },
 
   /**
@@ -20,17 +21,27 @@ Page({
     tagType = wx.getStorageSync("categorysearch")
     let CategorySearchKey = wx.getStorageSync("CategorySearchKey")
     let title = ""
+    let postDS = {
+      token: "gswapi",
+      id: "",
+      page: page
+    }
+
     if (tagType == "tag_poet" || tagType == "poet") {
-      detailUrl += ("poem/poet/" + CategorySearchKey + "?page=")
+      postDS.astr = CategorySearchKey
       let authorName = wx.getStorageSync("AuthorName")
       title = "诗人." + authorName
     } else if (tagType == "tag_dynasty" || tagType == "dynasty") {
-      detailUrl += ("poem/dynasty/" + CategorySearchKey + "?page=")
+      postDS.cstr = CategorySearchKey
       title = "朝代." + CategorySearchKey
     } else {
-      detailUrl += ("poem/tag/" + CategorySearchKey + "?page=")
+      postDS.tstr = CategorySearchKey
       title = tagType == "tag" ? ("标签." + CategorySearchKey) : ("诗集." + CategorySearchKey)
     }
+
+    this.setData({
+      postData: postDS
+    })
 
     wx.setNavigationBarTitle({
       title: title,
@@ -68,15 +79,15 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-     detailUrl = baseUrl
-     page = 0
+     this.data.postData.page = 1
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    page = 0
+    this.data.postData.page = 1
+    console.log(this.data.postData)
     var that = this
     this.requestMe()
       .then(res => {
@@ -102,7 +113,20 @@ Page({
     let temp = this.data.poemlist
     this.requestMe()
       .then(res => {
-        temp.poem_list = temp.poem_list.concat(res.poem_list)
+        // wxparse.wxParse("poem_content", "html", poetry.cont, this, 5)
+        // let poem_content_nodes = this.data.poem_content.nodes
+        // if (poem_content_nodes.length == 0) {
+        //   return
+        // }
+
+        // var poem_content_first_node = poem_content_nodes[0]
+        // console.log(poem_content_first_node)
+        // while (poem_content_first_node.node != "text") {
+        //   poem_content_first_node = poem_content_first_node.nodes[0]
+        // }
+        // poetry.cont = poem_content_first_node.text
+        
+        temp = temp.concat(res)
         that.setData({
           poemlist: temp
         })
@@ -125,21 +149,40 @@ Page({
       url: '../../Pages/poetry/poetry',
     })
   },
+  parseHtml: function (datas) {
+
+    for (var index in datas) {
+      let poetry = datas[index]
+      wxparse.wxParse("poem_content", "html", poetry.cont, this, 5)
+      let poem_content_nodes = this.data.poem_content.nodes
+      if (poem_content_nodes.length == 0) {
+        return
+      }
+
+      var poem_content_first_node = poem_content_nodes[0]
+      while (poem_content_first_node.node != "text") {
+        poem_content_first_node = poem_content_first_node.nodes[0]
+      }
+      poetry.cont = poem_content_first_node.text
+    }
+    console.log(datas)
+    return datas
+  },
   requestMe: function() {
     wx.showNavigationBarLoading()
+    var that = this
     return new Promise((reslove, reject) => {
       wx.request({
-        url: detailUrl + page,
-        data: '',
+        url: app.globalData.baseURL + "/api/shiwen/Default.aspx",
+        data: that.data.postData,
         header: {
           'content-type': 'application/x-www-form-urlencoded'
         },
-        method: 'GET',
-        dataType: 'json',
-        responseType: 'text',
+        method: 'POST',
         success: function (res) {
-          page ++
-          reslove(res.data.data)
+          that.data.postData.page ++;
+          let poem_list = that.parseHtml(res.data.gushiwens)
+          reslove(poem_list)
         },
         fail: function (res) { 
           wx.showToast({

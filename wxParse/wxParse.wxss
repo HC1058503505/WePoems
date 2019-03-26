@@ -220,6 +220,7 @@ view{
 .wxParse-strong {
   font-weight: bolder;
   font-size: large;
+  margin-bottom: 20rpx;
   margin-top: 20rpx;
   display: block;
   border-bottom: 2rpx dashed rgb(228, 227, 227);

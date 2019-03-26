@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    poetryinfo: [],
+    poetryinfo: {},
     isZhengwen: true,
     isYizhu: false,
     isShangxi: false,
@@ -17,7 +17,9 @@ Page({
     canvasH: 0,
     isCollection: false,
     openid: "",
-    doc_id:""
+    doc_id: "",
+    isShowMore: false,
+    authorMoreInfo: {}
   },
 
   /**
@@ -27,15 +29,31 @@ Page({
     var that = this
     this.requestMe()
       .then(res => {
-        wxparse.wxParse('poem_content', 'html', res.content, that, 5);
-        wxparse.wxParse('poem_fanyi', 'html', res.fanyi, that, 5);
-        wxparse.wxParse('poem_shangxi', 'html', res.shangxi, that, 5);
-        let titleStr = '古诗文斋'
-        if (res.hasOwnProperty('name')) {
-          titleStr = res.name
+        res.tb_gushiwen.tags = res.tb_gushiwen.tag.split('|')
+        // 诗词内容
+        wxparse.wxParse('poem_content', 'html', res.tb_gushiwen.cont.replace(/\(.*\)/ig, ''), that, 5);
+        // 翻译
+        for (var i = 0; i < res.tb_fanyis.fanyis.length; i++) {
+          let fanyi = res.tb_fanyis.fanyis[i]
+          wxparse.wxParse('poem_fanyi_' + i, 'html', fanyi.cont, that, 5)
         }
+        // 赏析
+        for (var j = 0; j < res.tb_shangxis.shangxis.length; j++) {
+          let shangxi = res.tb_shangxis.shangxis[j]
+          wxparse.wxParse('poem_shangxi_' + j, 'html', shangxi.cont, that, 5)
+        }
+        // 作者头像
+        if (res.tb_author.pic) {
+          res.tb_author.pic = "https://img.gushiwen.org" + "/authorImg/" + res.tb_author.pic + ".jpg"
+        }
+        
+        // 作者信息
+        if (res.tb_author.cont) {
+          wxparse.wxParse('poem_author', 'html', res.tb_author.cont, that, 5)
+        }
+        
         wx.setNavigationBarTitle({
-          title: titleStr
+          title: res.tb_gushiwen.nameStr
         })
         that.setData({
           poetryinfo: res
@@ -77,7 +95,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    
+
   },
 
   /**
@@ -113,19 +131,20 @@ Page({
    */
   onShareAppMessage: function() {
     let poetryjson = wx.getStorageSync("poetryjson")
+    console.log(poetryjson)
     return {
       path: "Pages/recommend/recommend?poetryjson=" + poetryjson,
     }
   },
   collectionAction: function(res) {
-    if(this.data.isCollection) {
+    if (this.data.isCollection) {
       this.removeCollection()
       return
     }
 
     let userMsg = res.detail.userInfo
     if (userMsg) {
-      if(this.data.openid.length == 0) {
+      if (this.data.openid.length == 0) {
         var that = this
         wx.cloud.callFunction({
           name: 'getUserId',
@@ -144,26 +163,50 @@ Page({
   },
   poemDetailTabAction: function(event) {
     let targetid = event.currentTarget.id
-
-    if (targetid == 'author') {
-
-      var poetid = ''
-      if (this.data.poetryinfo.hasOwnProperty('id')) {
-        poetid = this.data.poetryinfo.poet.id
-      }
-      // wx.setStorageSync("poem", JSON.stringify(this.data.poemlist[index]))  
-      wx.setStorageSync("poetjson", "poet_" + poetid + ".json")
-      wx.navigateTo({
-        url: '../../Pages/poet/poet',
-      })
+    if (!this.data.poetryinfo.hasOwnProperty("tb_gushiwen")) {
       return
     }
+
+    let navBarTitle = targetid == "author" ? this.data.poetryinfo.tb_gushiwen.author : this.data.poetryinfo.tb_gushiwen.nameStr
+    wx.setNavigationBarTitle({
+      title: navBarTitle,
+    })
 
     this.setData({
       scrollTop: 0,
       isZhengwen: targetid == 'zhengwen',
       isYizhu: targetid == 'yizhu',
-      isShangxi: targetid == 'shangxi'
+      isShangxi: targetid == 'shangxi',
+      isAuthor: targetid == 'author'
+    })
+  },
+  // ---查看跟多信息---
+  moreAuthorMsg: function(e) {
+    var that = this
+
+    that.requestAuthorMore().then(res => {
+      for (var i = 0; i < res.tb_ziliaos.ziliaos.length; i++) {
+        let ziliao = res.tb_ziliaos.ziliaos[i]
+        wxparse.wxParse('author_ziliao_' + i, 'html', ziliao.cont, that, 5)
+      }
+      for (var j = 0; j < res.tb_gushiwens.gushiwens.length; j++) {
+        let gushiwen = res.tb_gushiwens.gushiwens[j]
+        res.tb_gushiwens.gushiwens[j].cont = that.parseHtml(gushiwen.cont)
+      }
+      that.setData({
+        isShowMore: true,
+        authorMoreInfo: res
+      })
+    })
+  },
+  onItemSelected: function (e) {
+    let select = e.currentTarget.dataset.index
+    wx.setStorage({
+      key: 'poetryjson',
+      data: select,
+    })
+    wx.navigateTo({
+      url: '../../Pages/poetry/poetry',
     })
   },
   poemTagTapAction: function(e) {
@@ -203,8 +246,9 @@ Page({
   copyPoems: function() {
 
     var that = this;
-    let copy_content = this.data.poetryinfo.name + '\n\n' +
-      this.data.poetryinfo.dynasty + '/' + this.data.poetryinfo.poet.name + '\n\n' + this.poemslices(this.data.poem_content.nodes);
+    let gushiwen = this.data.poetryinfo.tb_gushiwen
+    let copy_content = gushiwen.nameStr + '\n\n' +
+      gushiwen.chaodai + '/' + gushiwen.author + '\n\n' + this.poemslices(this.data.poem_content.nodes);
     wx.setClipboardData({
       data: copy_content,
       success: function(res) {
@@ -241,9 +285,10 @@ Page({
     let windowW = app.globalData.screenW
     let windowH = app.globalData.screenH
     var scale = windowW / 750
-    let poem_title = this.data.poetryinfo.name
-    let poem_dynasty = this.data.poetryinfo.dynasty
-    let poem_author = this.data.poetryinfo.poet.name
+    let gushiwen = this.data.poetryinfo.tb_gushiwen
+    let poem_title = gushiwen.nameStr
+    let poem_dynasty = gushiwen.chaodai
+    let poem_author = gushiwen.author
     let poem_content = this.poemslices(this.data.poem_content.nodes);
 
     const ctx = wx.createCanvasContext('shareImg', this)
@@ -274,9 +319,10 @@ Page({
   canvasWH: function() {
     let windowW = app.globalData.screenW
     let windowH = app.globalData.screenH
-    let poem_title = this.data.poetryinfo.name
-    let poem_dynasty = this.data.poetryinfo.dynasty
-    let poem_author = this.data.poetryinfo.poet.name
+    let gushiwen = this.data.poetryinfo.tb_gushiwen
+    let poem_title = gushiwen.nameStr
+    let poem_dynasty = gushiwen.chaodai
+    let poem_author = gushiwen.author
     let poem_content = this.poemslices(this.data.poem_content.nodes);
     const ctx = wx.createCanvasContext('shareImg', this)
 
@@ -325,8 +371,7 @@ Page({
               previewhidden: false
             })
           },
-          fail: function(err) {
-          }
+          fail: function(err) {}
         })
       }
     }, this)
@@ -377,10 +422,16 @@ Page({
   requestMe: function() {
     wx.showNavigationBarLoading()
     let poetryjson = wx.getStorageSync("poetryjson")
+    let postData = {
+      "token": "gswapi",
+      "id": poetryjson
+    }
+
     return new Promise((reslove, reject) => {
       wx.request({
-        url: "https://sweapp.madliar.com/" + poetryjson,
-        method: "get",
+        url: app.globalData.baseURL + "/api/shiwen/shiwenv.aspx?token=gswapi&id=" + poetryjson,
+        data: postData,
+        method: "POST",
         header: {
           'content-type': 'application/x-www-form-urlencoded'
         },
@@ -393,7 +444,7 @@ Page({
             duration: 1500
           })
           reject(error)
-          
+
         },
         complete: function() {
           wx.hideNavigationBarLoading()
@@ -412,37 +463,37 @@ Page({
       _openid: that.data.openid,
       poetry_id: poetryjson
     }).get({
-      success: function (res) {
+      success: function(res) {
         // 输出 [{ "title": "The Catcher in the Rye", ... }]
         that.setData({
-          isCollection : true,
+          isCollection: true,
           doc_id: res.data[0]._id
         })
       },
-      fail: function (error) {
+      fail: function(error) {
 
       },
-      complete: function () {
-      }
+      complete: function() {}
     })
   },
-  parseHtml: function (target) {
-    let content = this.data.poetryinfo.content
+  parseHtml: function(poetryContent) {
+    let content = poetryContent
       .replace(/<p>/ig, '')
-      .replace(/\\r/ig, '')
-      .replace(/\\n/ig, '')
+      .replace(/\r/ig, '')
+      .replace(/\n/ig, '')
       .replace(/<\/p>/ig, '\n')
       .replace(/<br \/>/ig, '\n')
       .replace(/\(.*\)/ig, '')
       .replace(/&quot/ig, '＂')
       .replace(/<\/span>/ig, '')
       .replace(/<span.*>/ig, '')
-      .replace(/<br>/ig,'\n')
+      .replace(/<br>/ig, '\n')
     return content
   },
-  addCollection: function () {
+  addCollection: function() {
     let poetryjson = wx.getStorageSync("poetryjson")
     var that = this
+    let gushiwen = this.data.poetryinfo.tb_gushiwen
     return new Promise((reslove, reject) => {
       // 1. 获取数据库引用
       const db = wx.cloud.database()
@@ -451,14 +502,14 @@ Page({
       // where 方法传入一个对象，数据库返回集合中字段等于指定值的 JSON 文档。API 也支持高级的查询条件（比如大于、小于、in 等），具体见文档查看支持列表
       // get 方法会触发网络请求，往数据库取数据
       db.collection("poetry_collections").add({
-        data : {
+        data: {
           poetry_id: poetryjson,
-          poetry_name: that.data.poetryinfo.name,
-          poetry_dynasty: that.data.poetryinfo.dynasty,
-          poetry_content: that.parseHtml(that),
-          poetry_author: that.data.poetryinfo.poet.name
+          poetry_name: gushiwen.nameStr,
+          poetry_dynasty: gushiwen.chaodai,
+          poetry_content: that.poemslices(that.data.poem_content.nodes),
+          poetry_author: gushiwen.author
         },
-        success: function (res) {
+        success: function(res) {
           wx.showToast({
             title: '收藏成功',
             duration: 1500,
@@ -486,19 +537,19 @@ Page({
       })
     })
   },
-  removeCollection: function(){
+  removeCollection: function() {
     let poetryjson = wx.getStorageSync("poetryjson")
     var that = this
     return new Promise((reslove, reject) => {
       // 1. 获取数据库引用
       const db = wx.cloud.database()
       db.collection("poetry_collections").doc(that.data.doc_id).remove({
-        success(res){
+        success(res) {
           wx.showToast({
             title: '取消收藏',
             duration: 1500,
             mask: true,
-            success: function (res) {
+            success: function(res) {
               wx.setStorageSync("CancelCollection", true)
               that.setData({
                 isCollection: false
@@ -506,11 +557,44 @@ Page({
             },
           })
         },
-        fail(error){
+        fail(error) {
           wx.showToast({
             title: '取消收藏失败',
             duration: 1500,
           })
+        }
+      })
+    })
+  },
+  requestAuthorMore: function() {
+    var that = this
+    let postData = {
+      'token': 'gswapi',
+      'id': that.data.poetryinfo.tb_author.idnew
+    }
+    return new Promise((reslove, reject) => {
+      wx.request({
+        url: app.globalData.baseURL + '/api/author/author2.aspx',
+        method: 'POST',
+        data: postData,
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        success: function(res) {
+          reslove(res.data)
+        },
+        fail: function(error) {
+          wx.showToast({
+            title: '请求失败',
+            duration: 1500
+          })
+          reject(error)
+
+        },
+        complete: function() {
+          wx.hideNavigationBarLoading()
+          // 短暂震动
+          wx.vibrateShort()
         }
       })
     })

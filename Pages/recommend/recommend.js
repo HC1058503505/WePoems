@@ -1,4 +1,5 @@
 // Pages/recommend/recommend.js
+var app = getApp()
 var page = 0
 Page({
 
@@ -101,14 +102,20 @@ Page({
   },
   requestMe: function(){
     wx.showNavigationBarLoading()
+    let postData = {
+      "pwd" : "",
+      "token" : "gswapi",
+      "id" : "",
+      "page" : page
+    }
     return new Promise((reslove, reject) => {
       wx.request({
-        url: 'https://app.gushiwen.org/api/upTimeTop11.aspx?pwd=&token=gswapi&id=&page=' + page,
-        data: '',
+        url: app.globalData.baseURL + '/api/upTimeTop11.aspx',
+        data: postData,
         header: {
           'content-type': 'application/x-www-form-urlencoded'
         },
-        method: 'GET',
+        method: 'POST',
         dataType: 'json',
         responseType: 'text',
         success: function (res) {
@@ -133,16 +140,16 @@ Page({
 
     for (var index in datas) {
       let poetry = datas[index]
-      let htmlContent = poetry.cont
-                              .replace(/<p>/ig,'')
-                              .replace(/\\r/ig,'')
-                              .replace(/\\n/ig,'')
-                              .replace(/<\/p>/ig,'\n')
-                              .replace(/<br \/>/ig,'\n')
-                              .replace(/\(.*\)/ig,'')
-                              .replace(/&quot/ig,'＂')
-                              .replace(/<\/span>/ig,'')
-                              .replace(/<span.*>/ig,'')
+      let htmlContent = poetry.cont.replace(/\(.*\)/ig, '')
+                              // .replace(/<p>/ig,'')
+                              // .replace(/\\r/ig,'')
+                              // .replace(/\n/ig,'')
+                              // .replace(/<\/p>/ig,'\n')
+                              // .replace(/<br \/>/ig,'\n')
+                              
+                              // .replace(/&quot/ig,'＂')
+                              // .replace(/<\/span>/ig,'')
+                              // .replace(/<span.*>/ig,'')
       poetry.cont = htmlContent
     }
     return datas

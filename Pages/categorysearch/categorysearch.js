@@ -99,16 +99,16 @@ Page({
   },
   onItemSelected: function(e) {
     let dataS = e.currentTarget.dataset
-    let authorId = dataS.id
+    let authorName = dataS.id
 
     if (dataS.hasOwnProperty("name")) {
-      let authorName = dataS.name
+      let authorName = dataS.id
       wx.setStorageSync("AuthorName", authorName)
     }
     
     // https://weapp.madliar.com/poem/poet/665?page=0
 
-    wx.setStorageSync("CategorySearchKey", authorId)
+    wx.setStorageSync("CategorySearchKey", authorName)
     wx.navigateTo({
       url: '../../Pages/categorydetail/categorydetail',
     })

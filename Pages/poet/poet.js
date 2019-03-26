@@ -1,20 +1,30 @@
 // Pages/poet/poet.js
 //在使用的View中引入WxParse模块
 let wxparse = require("../../wxParse/wxParse.js");
+var app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    poetinfo:[]
+    poetryinfo:{},
+    authorId: ""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that = this
+    wx.getStorage({
+      key: 'CategorySearchKey',
+      success: function(res) {
+        that.setData({
+          authorId:res.data
+        })
+      },
+    })
   },
 
   /**
@@ -22,11 +32,11 @@ Page({
    */
   onReady: function () {
     var that = this
-    this.requestMe()
+    this.requestAuthorMore()
       .then(res => {
         wxparse.wxParse('dkcontent', 'html', res.content, that, 5);
         that.setData({
-          poetinfo: res
+          poetryinfo: res
         })
       })
 
@@ -74,31 +84,38 @@ Page({
   onShareAppMessage: function () {
 
   },
-  requestMe: function() {
-    wx.showNavigationBarLoading()
+  requestAuthorMore: function () {
+    var that = this
+    let postData = {
+      'token': 'gswapi',
+      'id': that.data.authorId
+    }
+    console.log(postData)
     return new Promise((reslove, reject) => {
-      let poetjson = wx.getStorageSync("poetjson")
       wx.request({
-        url: "https://sweapp.madliar.com/" + poetjson,
-        method: "get",
+        url: app.globalData.baseURL + '/api/author/author2.aspx',
+        method: 'POST',
+        data: postData,
         header: {
           'content-type': 'application/x-www-form-urlencoded'
         },
-        success: function(res) {
+        success: function (res) {
+          console.log(res.data)
+          res.data.tb_author.pic = "https://img.gushiwen.org" + "/authorImg/" + res.data.tb_author.pic + ".jpg"
           reslove(res.data)
         },
-        fail: function(error) {
+        fail: function (error) {
           wx.showToast({
             title: '请求失败',
             duration: 1500
           })
           reject(error)
+
         },
-        complete: function() {
+        complete: function () {
+          wx.hideNavigationBarLoading()
           // 短暂震动
           wx.vibrateShort()
-          wx.hideNavigationBarLoading()
-          wx.removeStorageSync("poetjson")
         }
       })
     })

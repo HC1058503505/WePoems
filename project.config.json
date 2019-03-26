@@ -1,5 +1,5 @@
 {
-  "cloudfunctionRoot": "./cloud-functions",
+	"cloudfunctionRoot": "cloud-functions/",
 	"description": "项目配置文件。",
 	"packOptions": {
 		"ignore": []
@@ -34,8 +34,15 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
-			"list": []
+			"current": 0,
+			"list": [
+				{
+					"id": -1,
+					"name": "Categorydetail",
+					"pathName": "Pages/categorydetail/categorydetail",
+					"scene": null
+				}
+			]
 		}
 	}
 }

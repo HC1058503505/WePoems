@@ -1,12 +1,12 @@
 <!--Pages/categorydetail/categorydetail.wxml-->
-<view wx:for="{{poemlist.poem_list}}" data-index="poetry_{{item.id}}.json" wx:key="{{item.id}}" bindtap='onItemSelected'>
+<view wx:for="{{poemlist}}" data-index="{{item.idnew}}" wx:key="{{item.id}}" bindtap='onItemSelected'>
   <view class='poem_cell'>
     <view class='poem_top'>
-      <text class='poem_title'>{{item.name}}</text>
-      <text class='poem_dynasy_author'>{{item.author_info}}</text>
+      <text class='poem_title'>{{item.nameStr}}</text>
+      <text class='poem_dynasy_author'>{{item.author}} / {{item.chaodai}}</text>
     </view>
     <view class='poem_bottom'>
-      <text class='poem_abstract'>{{item.first_row}}</text>
+      <text class='poem_abstract'>{{item.cont}}</text>
     </view>
   </view>
 </view>

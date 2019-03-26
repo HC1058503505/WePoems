@@ -1,5 +1,7 @@
 // Pages/showresult/showresult.js
-var page = 0
+let wxparse = require("../../wxParse/wxParse.js");
+let app = getApp()
+var page = 1
 var searchContent = ""
 Page({
 
@@ -10,7 +12,8 @@ Page({
     searchResult:[],
     isSearch: false,
     hotsearch:[],
-    inputValue:""
+    inputValue:"",
+    postData: {}
   },
 
   /**
@@ -52,7 +55,7 @@ Page({
    */
   onUnload: function () {
     searchContent = ""
-    page = 0
+    page = 1
   },
 
   /**
@@ -66,18 +69,18 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    if(this.data.searchResult.end) {
-      return
-    } 
+    // if(this.data.searchResult.end) {
+    //   return
+    // } 
 
-    var that = this
-    var tempSearchResult = this.data.searchResult
-    that.search(searchContent).then(res => {
-      tempSearchResult.poem_list = tempSearchResult.poem_list.concat(res.poem_list)
-      that.setData({
-        searchResult: tempSearchResult
-      })
-    })
+    // var that = this
+    // var tempSearchResult = this.data.searchResult
+    // that.search(searchContent).then(res => {
+    //   tempSearchResult.poem_list = tempSearchResult.poem_list.concat(res.poem_list)
+    //   that.setData({
+    //     searchResult: tempSearchResult
+    //   })
+    // })
   },
 
   /**
@@ -106,7 +109,7 @@ Page({
   },
   bindKeyInput: function(e) {
     searchContent = e.detail.value
-    page = 0
+    page = 1
     if (searchContent.length == 0) {
       return
     }
@@ -119,11 +122,12 @@ Page({
     })
   },
   currentInput:function(e) {
+    console.log(e)
     let cursor = e.detail.cursor
     let value = e.detail.value
     if (cursor == 0) {
       searchContent = ""
-      page = 0
+      page = 1
       // 搜索关键字为空 
       this.setData({
         isSearch: false
@@ -135,7 +139,14 @@ Page({
           return
         } else {
           searchContent = e.detail.value
-          page = 0
+          page = 1
+          let postDS = {
+            token: "gswapi",
+            valuekey: searchContent
+          }
+          that.setData({
+            postData: postDS
+          })
         }
 
         that.search(searchContent).then(res => {
@@ -152,20 +163,18 @@ Page({
   },
   search: function(searchContent){
     wx.showNavigationBarLoading()
+    var that = this
+    console.log(that.data.postData)
     return new Promise((resolve, reject) => {
       wx.request({
-        url: "https://weapp.madliar.com/search/?" + "page=" + page + "&q=" + searchContent,
-        method: "get",
+        url: app.globalData.baseURL + "/api/ajaxSearch3.aspx",
+        data: that.data.postData,
+        method: "POST",
         header: {
           'content-type': 'application/x-www-form-urlencoded'
         },
         success: function(res){
-          let result = res.data.data
-          if (result.end == false) {
-            page = page + 1
-          }
-
-          resolve(res.data.data)
+          resolve(res.data)
           wx.hideNavigationBarLoading()
         },
         fail: function(error){
@@ -182,16 +191,19 @@ Page({
   },
   onItemSelected: function(e) {
     let dataSet = e.currentTarget.dataset
-
+    console.log(dataSet)
     let pageRoute = ''
-    if (dataSet.type == "poet") {
+    if (dataSet.type == "poetry") {
       wx.setStorageSync("AuthorName", dataSet.name)
       wx.setStorageSync("CategorySearchKey", dataSet.index)
       wx.setStorageSync("categorysearch", "poet")
-      pageRoute = '../../Pages/categorydetail/categorydetail'
-    } else {
+      pageRoute = '../../Pages/poet/poet'
+    } else if (dataSet.type == "mingju"){
       wx.setStorageSync("poetryjson", dataSet.index)
       pageRoute = '../../Pages/poetry/poetry'
+    } else {
+      wx.setStorageSync("CategorySearchKey", dataSet.index)
+      pageRoute = '../../Pages/poet/poet'
     }
 
     wx.navigateTo({
