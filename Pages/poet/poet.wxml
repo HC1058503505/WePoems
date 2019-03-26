@@ -24,21 +24,47 @@
     <image class='poet_portrait' src="{{poetryinfo.tb_author.pic}}"></image>
   </view>
   <!---简介--->
-  <view class='poet_abstract_block'>
-    <block wx:if="{{poetryinfo.tb_author.cont.length > 0}}">
-      <text class='poet_abstract_title'>简介</text>
-      <!-- <template is="wxParse" data="{{wxParseData:poem_author.nodes}}" /> -->
-      <rich-text nodes="{{poetryinfo.tb_author.cont}}"></rich-text>
-    </block>
+  <view class='poet_header'>
+    <view class='poet_abstract_block'>
+      <block wx:if="{{poetryinfo.tb_author.cont.length > 0}}">
+        <text class='poet_abstract_title'>简介</text>
+        <!-- <template is="wxParse" data="{{wxParseData:poem_author.nodes}}" /> -->
+        <rich-text nodes="{{poetryinfo.tb_author.cont}}"></rich-text>
+      </block>
+    </view>
   </view>
 
+  <!---代表作--->
+  <view class='poemlist_more'>
+    <block wx:if="{{poetryinfo.tb_gushiwens.gushiwens.length > 0}}">
+      <view class='poet_abstract_block'>
+        <text class='goodPoemTitle'>代表作</text>
+      </view>
+    </block>
+
+    <view wx:for="{{poetryinfo.tb_gushiwens.gushiwens}}" data-index="{{item.idnew}}" wx:key="{{item.id}}" bindtap="onItemSelected">
+
+      <view class='poem_cell'>
+        <view class='poem_top'>
+          <text class='poem_title'>{{item.nameStr}}</text>
+          <text class='poem_dynasy_author'>{{item.author}} / {{item.chaodai}}</text>
+        </view>
+        <view class='poem_bottom'>
+          <text class='poem_abstract'>{{item.cont}}</text>
+        </view>
+      </view>
+
+    </view>
+  </view>
+
+  <!----诗人详情---->
   <view class='showMore'>
     <block wx:for="{{poetryinfo.tb_ziliaos.ziliaos}}" wx:for-index="idx" wx:key="{{idx}}">
       <view class='poet_abstract_block'>
         <text class='authorMoreTitle'>{{item.nameStr}}</text>
       </view>
-      <rich-text class='author_ziliaos' nodes="{{item.cont}}"></rich-text>
-      <!-- <block wx:if="{{idx == 0}}">
+      <!-- <rich-text class='author_ziliaos' nodes="{{item.cont}}"></rich-text> -->
+      <block wx:if="{{idx == 0}}">
         <view class='poet_extension'>
           <template is="wxParse" data="{{wxParseData:author_ziliao_0.nodes}}" />
         </view>
@@ -102,25 +128,9 @@
         <view class='poet_extension'>
           <template is="wxParse" data="{{wxParseData:author_ziliao_12.nodes}}" />
         </view>
-      </block> -->
+      </block>
     </block>
   </view>
 
-  <!---代表作--->
-  <view class='poemlist_more'>
-    <block wx:if="{{poetryinfo.tb_gushiwens.gushiwens.length > 0}}">
-      <view class='poet_abstract_block'>
-        <text class='goodPoemTitle'>代表作</text>
-      </view>
-    </block>
-
-    <view wx:for="{{poetryinfo.tb_gushiwens.gushiwens}}" data-index="{{item.idnew}}" wx:key="{{item.id}}" bindtap="onItemSelected">
-      <view class='poem_more'>
-        <text class='poem_title_more'>{{item.nameStr}}</text>
-        <text class='poem_author_more'>{{item.chaodai}} / {{item.author}}</text>
-        <!-- <text class='poem_content_more'>{{item.cont}}</text> -->
-        <rich-text class='poem_content' nodes="{{item.cont}}"></rich-text>
-      </view>
-    </view>
-  </view>
+  
 </view>

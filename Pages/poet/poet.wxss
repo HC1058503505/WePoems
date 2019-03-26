@@ -1,5 +1,6 @@
 /* Pages/poet/poet.wxss */
 @import '../poetry/poem_detail_zhengwen.wxss';
+@import '../categorydetail/categorydetail.wxss'
 /* 头像 */
 .poet_portrait_block {
   display: flex;
@@ -19,9 +20,8 @@
 .poet_abstract_block {
   display: flex;
   flex-direction: column;
-  padding-top: 40rpx;
-  padding-left: 40rpx;
-  padding-right: 40rpx;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
 }
 
 .poet_abstract_title {
@@ -36,13 +36,9 @@
 }
 
 .poet_extension {
-  padding-left: 40rpx;
-  padding-right: 40rpx;
-  padding-bottom: 40rpx;
-}
-
-.showMore {
-  padding: 40rpx;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  padding-bottom: 20rpx;
 }
 
 .authorMoreTitle , .goodPoemTitle{

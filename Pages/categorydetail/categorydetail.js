@@ -165,7 +165,7 @@ Page({
       }
       poetry.cont = poem_content_first_node.text
     }
-    console.log(datas)
+
     return datas
   },
   requestMe: function() {

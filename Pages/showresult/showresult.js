@@ -97,7 +97,7 @@ Page({
 
     if (tagtype == "poet") {
       wx.setStorageSync("AuthorName", name)
-      wx.setStorageSync("CategorySearchKey", tagid)
+      wx.setStorageSync("CategorySearchKey", name)
     } else {  
       wx.setStorageSync("CategorySearchKey", name)
     }
@@ -175,6 +175,7 @@ Page({
         },
         success: function(res){
           resolve(res.data)
+          console.log(res.data)
           wx.hideNavigationBarLoading()
         },
         fail: function(error){
@@ -194,14 +195,14 @@ Page({
     console.log(dataSet)
     let pageRoute = ''
     if (dataSet.type == "poetry") {
-      wx.setStorageSync("AuthorName", dataSet.name)
       wx.setStorageSync("CategorySearchKey", dataSet.index)
       wx.setStorageSync("categorysearch", "poet")
-      pageRoute = '../../Pages/poet/poet'
+      pageRoute = '../../Pages/poetry/poetry'
     } else if (dataSet.type == "mingju"){
       wx.setStorageSync("poetryjson", dataSet.index)
       pageRoute = '../../Pages/poetry/poetry'
     } else {
+      wx.setStorageSync("AuthorName", dataSet.name)
       wx.setStorageSync("CategorySearchKey", dataSet.index)
       pageRoute = '../../Pages/poet/poet'
     }

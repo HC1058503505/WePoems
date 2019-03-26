@@ -422,6 +422,7 @@ Page({
   requestMe: function() {
     wx.showNavigationBarLoading()
     let poetryjson = wx.getStorageSync("poetryjson")
+    console.log(poetryjson)
     let postData = {
       "token": "gswapi",
       "id": poetryjson
