@@ -135,85 +135,7 @@
           <template is="wxParse" data="{{wxParseData:poem_author.nodes}}" />
         </block>
       </view>
-      <block wx:if="{{isShowMore}}">
-        <view class='showMore'>
-          <block wx:for="{{authorMoreInfo.tb_ziliaos.ziliaos}}" wx:for-index="idx" wx:key="{{idx}}">
-            <view class='poet_abstract_block'>
-              <text class='authorMoreTitle'>{{item.nameStr}}</text>
-            </view>
-            
-            <block wx:if="{{idx == 0}}">
-              <view class='poet_extension'>
-                <template is="wxParse" data="{{wxParseData:author_ziliao_0.nodes}}" />
-              </view>
-            </block>
-            <block wx:if="{{idx == 1}}">
-              <view class='poet_extension'>
-                <template is="wxParse" data="{{wxParseData:author_ziliao_1.nodes}}" />
-              </view>
-            </block>
-            <block wx:if="{{idx == 2}}">
-              <view class='poet_extension'>
-                <template is="wxParse" data="{{wxParseData:author_ziliao_2.nodes}}" />
-              </view>
-            </block>
-            <block wx:if="{{idx == 3}}">
-              <view class='poet_extension'>
-                <template is="wxParse" data="{{wxParseData:author_ziliao_3.nodes}}" />
-              </view>
-            </block>
-            <block wx:if="{{idx == 4}}">
-              <view class='poet_extension'>
-                <template is="wxParse" data="{{wxParseData:author_ziliao_4.nodes}}" />
-              </view>
-            </block>
-            <block wx:if="{{idx == 5}}">
-              <view class='poet_extension'>
-                <template is="wxParse" data="{{wxParseData:author_ziliao_5.nodes}}" />
-              </view>
-            </block>
-            <block wx:if="{{idx == 6}}">
-              <view class='poet_extension'>
-                <template is="wxParse" data="{{wxParseData:author_ziliao_6.nodes}}" />
-              </view>
-            </block>
-            <block wx:if="{{idx == 7}}">
-              <view class='poet_extension'>
-                <template is="wxParse" data="{{wxParseData:author_ziliao_7.nodes}}" />
-              </view>
-            </block>
-            <block wx:if="{{idx == 8}}">
-              <view class='poet_extension'>
-                <template is="wxParse" data="{{wxParseData:author_ziliao_8.nodes}}" />
-              </view>
-            </block>
-            <block wx:if="{{idx == 9}}">
-              <view class='poet_extension'>
-                <template is="wxParse" data="{{wxParseData:author_ziliao_9.nodes}}" />
-              </view>
-            </block>
-            <block wx:if="{{idx == 10}}">
-              <view class='poet_extension'>
-                <template is="wxParse" data="{{wxParseData:author_ziliao_10.nodes}}" />
-              </view>
-            </block>
-            <block wx:if="{{idx == 11}}">
-              <view class='poet_extension'>
-                <template is="wxParse" data="{{wxParseData:author_ziliao_11.nodes}}" />
-              </view>
-            </block>
-            <block wx:if="{{idx == 12}}">
-              <view class='poet_extension'>
-                <template is="wxParse" data="{{wxParseData:author_ziliao_12.nodes}}" />
-              </view>
-            </block>
-          </block>
-        </view>
-      </block>
-      <block wx:else>
-        <!---查看更多--->
-        <button class='more' bindtap='moreAuthorMsg' disabled='{{poetryinfo.tb_author.idnew == null}}'>{{poetryinfo.tb_author.idnew == null ? poetryinfo.tb_gushiwen.author : "查看更多"}}</button>
-      </block>
+
       <!---代表作--->
       <view class='poemlist_more'>
         <block wx:if="{{authorMoreInfo.tb_gushiwens.gushiwens.length > 0}}">
@@ -223,14 +145,101 @@
         </block>
 
         <view wx:for="{{authorMoreInfo.tb_gushiwens.gushiwens}}" data-index="{{item.idnew}}" wx:key="{{item.id}}" bindtap="onItemSelected">
-          <view class='poem_more'>
-            <text class='poem_title_more'>{{item.nameStr}}</text>
-            <text class='poem_author_more'>{{item.chaodai}} / {{item.author}}</text>
-            <text class='poem_content_more'>{{item.cont}}</text>
+          <view class='poem_cell'>
+            <view class='poem_top'>
+              <text class='poem_title'>{{item.nameStr}}</text>
+              <text class='poem_dynasy_author'>{{item.author}} / {{item.chaodai}}</text>
+            </view>
+            <view class='poem_bottom'>
+              <text class='poem_abstract'>{{item.cont}}</text>
+            </view>
           </view>
         </view>
+        <block wx:if="{{authorMoreInfo.tb_gushiwens.gushiwens.length > 0}}">
+          <button bindtap='morePoetry' data-name='{{poetryinfo.tb_author.nameStr}}'>更多诗词 》</button>
+        </block>
       </view>
     </view>
+
+    <block wx:if="{{isShowMore}}">
+      <view class='showMore'>
+        <block wx:for="{{authorMoreInfo.tb_ziliaos.ziliaos}}" wx:for-index="idx" wx:key="{{idx}}">
+          <view class='poet_abstract_block'>
+            <text class='authorMoreTitle'>{{item.nameStr}}</text>
+          </view>
+
+          <block wx:if="{{idx == 0}}">
+            <view class='poet_extension'>
+              <template is="wxParse" data="{{wxParseData:author_ziliao_0.nodes}}" />
+            </view>
+          </block>
+          <block wx:if="{{idx == 1}}">
+            <view class='poet_extension'>
+              <template is="wxParse" data="{{wxParseData:author_ziliao_1.nodes}}" />
+            </view>
+          </block>
+          <block wx:if="{{idx == 2}}">
+            <view class='poet_extension'>
+              <template is="wxParse" data="{{wxParseData:author_ziliao_2.nodes}}" />
+            </view>
+          </block>
+          <block wx:if="{{idx == 3}}">
+            <view class='poet_extension'>
+              <template is="wxParse" data="{{wxParseData:author_ziliao_3.nodes}}" />
+            </view>
+          </block>
+          <block wx:if="{{idx == 4}}">
+            <view class='poet_extension'>
+              <template is="wxParse" data="{{wxParseData:author_ziliao_4.nodes}}" />
+            </view>
+          </block>
+          <block wx:if="{{idx == 5}}">
+            <view class='poet_extension'>
+              <template is="wxParse" data="{{wxParseData:author_ziliao_5.nodes}}" />
+            </view>
+          </block>
+          <block wx:if="{{idx == 6}}">
+            <view class='poet_extension'>
+              <template is="wxParse" data="{{wxParseData:author_ziliao_6.nodes}}" />
+            </view>
+          </block>
+          <block wx:if="{{idx == 7}}">
+            <view class='poet_extension'>
+              <template is="wxParse" data="{{wxParseData:author_ziliao_7.nodes}}" />
+            </view>
+          </block>
+          <block wx:if="{{idx == 8}}">
+            <view class='poet_extension'>
+              <template is="wxParse" data="{{wxParseData:author_ziliao_8.nodes}}" />
+            </view>
+          </block>
+          <block wx:if="{{idx == 9}}">
+            <view class='poet_extension'>
+              <template is="wxParse" data="{{wxParseData:author_ziliao_9.nodes}}" />
+            </view>
+          </block>
+          <block wx:if="{{idx == 10}}">
+            <view class='poet_extension'>
+              <template is="wxParse" data="{{wxParseData:author_ziliao_10.nodes}}" />
+            </view>
+          </block>
+          <block wx:if="{{idx == 11}}">
+            <view class='poet_extension'>
+              <template is="wxParse" data="{{wxParseData:author_ziliao_11.nodes}}" />
+            </view>
+          </block>
+          <block wx:if="{{idx == 12}}">
+            <view class='poet_extension'>
+              <template is="wxParse" data="{{wxParseData:author_ziliao_12.nodes}}" />
+            </view>
+          </block>
+        </block>
+      </view>
+    </block>
+    <block wx:else>
+      <!---查看更多--->
+      <button class='more' bindtap='moreAuthorMsg' disabled='{{poetryinfo.tb_author.idnew == null}}'>{{poetryinfo.tb_author.idnew == null ? poetryinfo.tb_gushiwen.author : "查看更多"}}</button>
+    </block>
   </block>
 </scroll-view>
 

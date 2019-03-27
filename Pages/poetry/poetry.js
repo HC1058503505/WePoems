@@ -31,7 +31,7 @@ Page({
       .then(res => {
         res.tb_gushiwen.tags = res.tb_gushiwen.tag.split('|')
         // 诗词内容
-        wxparse.wxParse('poem_content', 'html', res.tb_gushiwen.cont.replace(/\(.*\)/ig, ''), that, 5);
+        wxparse.wxParse('poem_content', 'html', res.tb_gushiwen.cont.replace(/（.*\）/ig, '').replace(/\(.*\)/ig,''), that, 5);
         // 翻译
         for (var i = 0; i < res.tb_fanyis.fanyis.length; i++) {
           let fanyi = res.tb_fanyis.fanyis[i]
@@ -69,17 +69,13 @@ Page({
     wx.getSetting({
       success(res) {
         if (res.authSetting["scope.userInfo"]) {
-          wx.getUserInfo({
-            success(result) {
-              wx.cloud.callFunction({
-                name: 'getUserId',
-                complete: res => {
-                  that.setData({
-                    openid: res.result.openid
-                  })
-                  that.judgeCollection()
-                }
+          wx.cloud.callFunction({
+            name: 'getUserId',
+            complete: res => {
+              that.setData({
+                openid: res.result.openid
               })
+              that.judgeCollection()
             }
           })
         } else {
@@ -161,6 +157,16 @@ Page({
       }
     }
   },
+  morePoetry: function (e) {
+
+    pageRoute = '../../Pages/poet/poet'
+    wx.setStorageSync("AuthorName", e.target.dataset.name)
+    wx.setStorageSync("categorysearch", "poet")
+    let pageRoute = '../../Pages/categorydetail/categorydetail'
+    wx.navigateTo({
+      url: pageRoute,
+    })
+  },
   poemDetailTabAction: function(event) {
     let targetid = event.currentTarget.id
     if (!this.data.poetryinfo.hasOwnProperty("tb_gushiwen")) {
@@ -189,10 +195,25 @@ Page({
         let ziliao = res.tb_ziliaos.ziliaos[i]
         wxparse.wxParse('author_ziliao_' + i, 'html', ziliao.cont, that, 5)
       }
-      for (var j = 0; j < res.tb_gushiwens.gushiwens.length; j++) {
-        let gushiwen = res.tb_gushiwens.gushiwens[j]
-        res.tb_gushiwens.gushiwens[j].cont = that.parseHtml(gushiwen.cont)
+      // for (var j = 0; j < res.tb_gushiwens.gushiwens.length; j++) {
+      //   let gushiwen = res.tb_gushiwens.gushiwens[j]
+      //   res.tb_gushiwens.gushiwens[j].cont = that.parseHtml(gushiwen.cont)
+      // }
+      for (var i in res.tb_gushiwens.gushiwens) {
+        let poetry = res.tb_gushiwens.gushiwens[i]
+        wxparse.wxParse("poem_content", "html", poetry.cont.replace(/\(.*\)/ig, ''), this, 5)
+        let poem_content_nodes = this.data.poem_content.nodes
+        if (poem_content_nodes.length == 0) {
+          return
+        }
+
+        var poem_content_first_node = poem_content_nodes[0]
+        while (poem_content_first_node.node != "text") {
+          poem_content_first_node = poem_content_first_node.nodes[0]
+        }
+        poetry.cont = poem_content_first_node.text
       }
+
       that.setData({
         isShowMore: true,
         authorMoreInfo: res
@@ -422,7 +443,8 @@ Page({
   requestMe: function() {
     wx.showNavigationBarLoading()
     let poetryjson = wx.getStorageSync("poetryjson")
-    console.log(poetryjson)
+    let categorysearch = wx.getStorageSync("categorysearch")
+    let urlPath = categorysearch == "mingju" ? "/api/mingju/juv2.aspx" : "/api/shiwen/shiwenv.aspx"
     let postData = {
       "token": "gswapi",
       "id": poetryjson
@@ -430,7 +452,7 @@ Page({
 
     return new Promise((reslove, reject) => {
       wx.request({
-        url: app.globalData.baseURL + "/api/shiwen/shiwenv.aspx?token=gswapi&id=" + poetryjson,
+        url: app.globalData.baseURL + urlPath,
         data: postData,
         method: "POST",
         header: {

@@ -1,6 +1,6 @@
 /* Pages/poet/poet.wxss */
 @import '../poetry/poem_detail_zhengwen.wxss';
-@import '../categorydetail/categorydetail.wxss'
+@import '../categorydetail/categorydetail.wxss';
 /* 头像 */
 .poet_portrait_block {
   display: flex;
@@ -74,4 +74,13 @@
   /*align-items: center;*/
   padding: 20rpx;
   border-bottom: 20rpx #f7f7f7 solid;
+}
+
+button {
+  background: none !important;
+  color: hsl(202, 100%, 50%)
+}
+
+button::after {
+  border: none;
 }

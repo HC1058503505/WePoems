@@ -1,8 +1,8 @@
 // Pages/showresult/showresult.js
 let wxparse = require("../../wxParse/wxParse.js");
 let app = getApp()
-var page = 1
 var searchContent = ""
+var timerSearch
 Page({
 
   /**
@@ -13,7 +13,8 @@ Page({
     isSearch: false,
     hotsearch:[],
     inputValue:"",
-    postData: {}
+    postData: {},
+    searchContent: ""
   },
 
   /**
@@ -55,7 +56,6 @@ Page({
    */
   onUnload: function () {
     searchContent = ""
-    page = 1
   },
 
   /**
@@ -94,26 +94,42 @@ Page({
     let name = e.currentTarget.dataset.name
     let tagtype = e.currentTarget.dataset.type
     let tagid = e.currentTarget.dataset.id
-
+    let pageRoute = '../../Pages/categorydetail/categorydetail'
     if (tagtype == "poet") {
+      pageRoute = '../../Pages/poet/poet'
       wx.setStorageSync("AuthorName", name)
-      wx.setStorageSync("CategorySearchKey", name)
+      wx.setStorageSync("CategorySearchKey", tagid)
+      wx.setStorageSync("categorysearch", "poet")
     } else {  
       wx.setStorageSync("CategorySearchKey", name)
     }
     wx.setStorageSync("categorysearch", tagtype)
     // https://weapp.madliar.com/poem/poet/665?page=0
     wx.navigateTo({
-      url: '../../Pages/categorydetail/categorydetail',
+      url: pageRoute,
     })
   },
   bindKeyInput: function(e) {
+    if(timerSearch) {
+      clearTimeout(timerSearch)
+    }
     searchContent = e.detail.value
-    page = 1
     if (searchContent.length == 0) {
+      console.log("searchContent 0")
+      // 搜索关键字为空 
+      this.setData({
+        isSearch: false
+      })
       return
     }
     var that = this
+    let postDS = {
+      token: "gswapi",
+      valuekey: searchContent
+    }
+    that.setData({
+      postData: postDS
+    })
     that.search(searchContent).then(res => {
       that.setData({
         searchResult: res,
@@ -122,49 +138,42 @@ Page({
     })
   },
   currentInput:function(e) {
-    console.log(e)
     let cursor = e.detail.cursor
     let value = e.detail.value
-    if (cursor == 0) {
-      searchContent = ""
-      page = 1
-      // 搜索关键字为空 
-      this.setData({
-        isSearch: false
-      })
-    } else {
-      var that = this
-      setTimeout(function () {
-        if (searchContent == e.detail.value) {
-          return
-        } else {
-          searchContent = e.detail.value
-          page = 1
-          let postDS = {
-            token: "gswapi",
-            valuekey: searchContent
-          }
-          that.setData({
-            postData: postDS
-          })
-        }
-
-        that.search(searchContent).then(res => {
-          that.setData({
-            searchResult: res,
-            isSearch: true
-          })
-        })
-      }, 1000)
-      
+    var that = this
+    if (timerSearch) {
+      clearTimeout(timerSearch)
     }
+    searchContent = e.detail.value
+    timerSearch = setTimeout(function () {
+      if (searchContent.length == 0) {
+        that.setData({
+          isSearch: false
+        })
+        return
+      } else {
 
-    
+        let postDS = {
+          token: "gswapi",
+          valuekey: searchContent
+        }
+        that.setData({
+          isSearch: true,
+          postData: postDS
+        })
+      }
+
+      that.search(searchContent).then(res => {
+        that.setData({
+          searchResult: res,
+          isSearch: true
+        })
+      })
+    }, 1000)
   },
   search: function(searchContent){
     wx.showNavigationBarLoading()
     var that = this
-    console.log(that.data.postData)
     return new Promise((resolve, reject) => {
       wx.request({
         url: app.globalData.baseURL + "/api/ajaxSearch3.aspx",
@@ -175,7 +184,6 @@ Page({
         },
         success: function(res){
           resolve(res.data)
-          console.log(res.data)
           wx.hideNavigationBarLoading()
         },
         fail: function(error){
@@ -192,13 +200,13 @@ Page({
   },
   onItemSelected: function(e) {
     let dataSet = e.currentTarget.dataset
-    console.log(dataSet)
     let pageRoute = ''
     if (dataSet.type == "poetry") {
-      wx.setStorageSync("CategorySearchKey", dataSet.index)
+      wx.setStorageSync("poetryjson", dataSet.index)
       wx.setStorageSync("categorysearch", "poet")
       pageRoute = '../../Pages/poetry/poetry'
     } else if (dataSet.type == "mingju"){
+      wx.setStorageSync("categorysearch", "mingju")
       wx.setStorageSync("poetryjson", dataSet.index)
       pageRoute = '../../Pages/poetry/poetry'
     } else {

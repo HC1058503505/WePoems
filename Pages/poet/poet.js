@@ -112,6 +112,12 @@ Page({
   onShareAppMessage: function () {
 
   },
+  morePoetry: function(e) {
+    let pageRoute = '../../Pages/categorydetail/categorydetail'
+    wx.navigateTo({
+      url: pageRoute,
+    })
+  },
   onItemSelected: function(e) {
     let select = e.currentTarget.dataset.index
     wx.setStorage({

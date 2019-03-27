@@ -2,7 +2,7 @@
 
 .poem_cell {
   border-bottom: 1rpx solid rgb(228, 227, 227);
-  padding: 20rpx;
+  padding: 10rpx;
   margin: 20rpx;
   display: flex;
   flex-direction: column;

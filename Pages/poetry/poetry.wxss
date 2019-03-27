@@ -29,7 +29,7 @@ canvas {
   position: fixed;
   top: 0;
   width: 100vw;
-  height: 10000px;
+  height: 12000px;
 }
 
 .poem_author_content {

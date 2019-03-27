@@ -53,8 +53,10 @@
           <text class='poem_abstract'>{{item.cont}}</text>
         </view>
       </view>
-
     </view>
+    <block wx:if="{{poetryinfo.tb_gushiwens.gushiwens.length > 0}}">
+      <button bindtap='morePoetry'>更多诗词 》</button>
+    </block>
   </view>
 
   <!----诗人详情---->
@@ -132,5 +134,5 @@
     </block>
   </view>
 
-  
+
 </view>

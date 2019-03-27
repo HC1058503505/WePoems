@@ -28,8 +28,10 @@ Page({
     }
 
     if (tagType == "tag_poet" || tagType == "poet") {
-      postDS.astr = CategorySearchKey
+      
       let authorName = wx.getStorageSync("AuthorName")
+      postDS.astr = authorName
+      console.log(CategorySearchKey)
       title = "诗人." + authorName
     } else if (tagType == "tag_dynasty" || tagType == "dynasty") {
       postDS.cstr = CategorySearchKey
@@ -153,7 +155,7 @@ Page({
 
     for (var index in datas) {
       let poetry = datas[index]
-      wxparse.wxParse("poem_content", "html", poetry.cont, this, 5)
+      wxparse.wxParse("poem_content", "html", poetry.cont.replace(/（.*\）/ig, '').replace(/\(.*\)/ig, ''), this, 5)
       let poem_content_nodes = this.data.poem_content.nodes
       if (poem_content_nodes.length == 0) {
         return
@@ -182,6 +184,7 @@ Page({
         success: function (res) {
           that.data.postData.page ++;
           let poem_list = that.parseHtml(res.data.gushiwens)
+
           reslove(poem_list)
         },
         fail: function (res) { 
