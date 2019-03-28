@@ -115,7 +115,6 @@ Page({
     }
     searchContent = e.detail.value
     if (searchContent.length == 0) {
-      console.log("searchContent 0")
       // 搜索关键字为空 
       this.setData({
         isSearch: false
@@ -152,7 +151,6 @@ Page({
         })
         return
       } else {
-
         let postDS = {
           token: "gswapi",
           valuekey: searchContent

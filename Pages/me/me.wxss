@@ -17,7 +17,16 @@
   width: 45rpx;
   margin-right: 10rpx;
 }
-.guanyu, .collection {
+.collection {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  padding-bottom: 30rpx;
+  margin-left: 40rpx;
+  margin-right: 40rpx;
+
+}
+.guanyu {
   display: flex;
   align-content: center;
   align-items: center;
@@ -42,3 +51,9 @@
 }
 
 button::after{ border: none; }
+
+.divider {
+  height: 15rpx;
+  background-color: #f7f7f7;
+  margin-bottom: 40rpx;
+}

@@ -27,6 +27,11 @@ Page({
         "version_num": "V1.2.0",
         "version_publish": "2019.3.2",
         "version_msgs": ["- 增加用户登录、分享与收藏功能"]
+      },
+      {
+        "version_num": "V1.3.0",
+        "version_publish": "2019.3.29",
+        "version_msgs": ["- 修复有些诗词无法展示问题，完善优化"]
       }
     ]
   },

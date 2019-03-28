@@ -12,6 +12,8 @@
     <text>我的收藏</text>
   </view>
   
+  <view class='divider'></view>
+
   <view class='guanyu' bindtap='meAction' data-index='1'>
     <image class="guanyu_img" src='../../Sources/images/guanyu.png'></image>
     <text>关于</text>
