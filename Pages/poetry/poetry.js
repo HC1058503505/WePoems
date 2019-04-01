@@ -127,7 +127,6 @@ Page({
    */
   onShareAppMessage: function() {
     let poetryjson = wx.getStorageSync("poetryjson")
-    console.log(poetryjson)
     return {
       path: "Pages/recommend/recommend?poetryjson=" + poetryjson,
     }

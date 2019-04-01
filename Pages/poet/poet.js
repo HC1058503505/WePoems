@@ -134,7 +134,6 @@ Page({
       'token': 'gswapi',
       'id': that.data.authorId
     }
-    console.log(postData)
     return new Promise((reslove, reject) => {
       wx.request({
         url: app.globalData.baseURL + '/api/author/author2.aspx',
@@ -144,7 +143,6 @@ Page({
           'content-type': 'application/x-www-form-urlencoded'
         },
         success: function (res) {
-          console.log(res.data)
           reslove(res.data)
         },
         fail: function (error) {
