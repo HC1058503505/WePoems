@@ -220,12 +220,16 @@ view{
 .wxParse-strong {
   font-weight: bolder;
   font-size: large;
-  margin-bottom: 20rpx;
+  /* margin-bottom: 20rpx; */
   margin-top: 20rpx;
   display: block;
   border-bottom: 2rpx dashed rgb(228, 227, 227);
   padding-bottom: 20rpx;
+}
 
+.wxParse-strong > .wxParse-inline {
+  border-left: palevioletred solid 10rpx;
+  padding-left: 10rpx;
 }
 
 .wrong {

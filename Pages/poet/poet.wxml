@@ -43,7 +43,6 @@
 
 
       <view wx:for="{{poetryinfo.tb_gushiwens.gushiwens}}" data-index="{{item.idnew}}" wx:key="{{item.id}}" bindtap="onItemSelected">
-
         <view class='poem_cell'>
           <view class='poem_top'>
             <text class='poem_title'>{{item.nameStr}}</text>
