@@ -8,20 +8,20 @@ Page({
    * 页面的初始数据
    */
   data: {
-    poetryinfo:{},
+    poetryinfo: {},
     authorId: ""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     var that = this
     wx.getStorage({
       key: 'CategorySearchKey',
       success: function(res) {
         that.setData({
-          authorId:res.data
+          authorId: res.data
         })
       },
     })
@@ -39,14 +39,18 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
     var that = this
     this.requestAuthorMore()
       .then(res => {
         res.tb_author.pic = "https://img.gushiwen.org" + "/authorImg/" + res.tb_author.pic + ".jpg"
-        for(var i in res.tb_gushiwens.gushiwens) {
+        for (var i in res.tb_gushiwens.gushiwens) {
           let poetry = res.tb_gushiwens.gushiwens[i]
-          wxparse.wxParse("poem_content", "html", poetry.cont.replace(/\(.*\)/ig, ''), this, 5)
+          let poetry_cont = poetry.cont.replace(/（.*）/ig, '')
+            .replace(/\(.*\)/ig, '')
+            .replace(/<span style=\"font-family:SimSun;\">/ig, '')
+            .replace(/<strong>.*<\/strong><br \/>/ig, '')
+          wxparse.wxParse("poem_content", "html", poetry_cont, this, 5)
           let poem_content_nodes = this.data.poem_content.nodes
           if (poem_content_nodes.length == 0) {
             return
@@ -59,7 +63,7 @@ Page({
           poetry.cont = poem_content_first_node.text
         }
 
-        for(var j in res.tb_ziliaos.ziliaos) {
+        for (var j in res.tb_ziliaos.ziliaos) {
           let ziliao = res.tb_ziliaos.ziliaos[j]
           wxparse.wxParse('author_ziliao_' + j, 'html', ziliao.cont.replace(/\(.*\)/ig, ''), that, 5)
         }
@@ -68,48 +72,48 @@ Page({
         })
       })
 
-    
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   },
   morePoetry: function(e) {
@@ -128,7 +132,7 @@ Page({
       url: '../../Pages/poetry/poetry',
     })
   },
-  requestAuthorMore: function () {
+  requestAuthorMore: function() {
     var that = this
     let postData = {
       'token': 'gswapi',
@@ -142,10 +146,10 @@ Page({
         header: {
           'content-type': 'application/x-www-form-urlencoded'
         },
-        success: function (res) {
+        success: function(res) {
           reslove(res.data)
         },
-        fail: function (error) {
+        fail: function(error) {
           wx.showToast({
             title: '请求失败',
             duration: 1500
@@ -153,7 +157,7 @@ Page({
           reject(error)
 
         },
-        complete: function () {
+        complete: function() {
           wx.hideNavigationBarLoading()
           // 短暂震动
           wx.vibrateShort()

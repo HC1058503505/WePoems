@@ -104,7 +104,6 @@ Page({
     if (dataS.hasOwnProperty("name")) {
       let authorName = dataS.id
       wx.setStorageSync("AuthorName", authorName)
-      console.log(authorName)
     }
     
     // https://weapp.madliar.com/poem/poet/665?page=0

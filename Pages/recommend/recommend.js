@@ -141,15 +141,7 @@ Page({
     for (var index in datas) {
       let poetry = datas[index]
       let htmlContent = poetry.cont.replace(/\(.*\)/ig, '')
-                              // .replace(/<p>/ig,'')
-                              // .replace(/\\r/ig,'')
-                              // .replace(/\n/ig,'')
-                              // .replace(/<\/p>/ig,'\n')
-                              // .replace(/<br \/>/ig,'\n')
-                              
-                              // .replace(/&quot/ig,'＂')
-                              // .replace(/<\/span>/ig,'')
-                              // .replace(/<span.*>/ig,'')
+                                   .replace(/（.*）/ig, '')
       poetry.cont = htmlContent
     }
     return datas

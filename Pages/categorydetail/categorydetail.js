@@ -31,7 +31,6 @@ Page({
       
       let authorName = wx.getStorageSync("AuthorName")
       postDS.astr = authorName
-      console.log(CategorySearchKey)
       title = "诗人." + authorName
     } else if (tagType == "tag_dynasty" || tagType == "dynasty") {
       postDS.cstr = CategorySearchKey
@@ -89,7 +88,6 @@ Page({
    */
   onPullDownRefresh: function () {
     this.data.postData.page = 1
-    console.log(this.data.postData)
     var that = this
     this.requestMe()
       .then(res => {
@@ -115,19 +113,6 @@ Page({
     let temp = this.data.poemlist
     this.requestMe()
       .then(res => {
-        // wxparse.wxParse("poem_content", "html", poetry.cont, this, 5)
-        // let poem_content_nodes = this.data.poem_content.nodes
-        // if (poem_content_nodes.length == 0) {
-        //   return
-        // }
-
-        // var poem_content_first_node = poem_content_nodes[0]
-        // console.log(poem_content_first_node)
-        // while (poem_content_first_node.node != "text") {
-        //   poem_content_first_node = poem_content_first_node.nodes[0]
-        // }
-        // poetry.cont = poem_content_first_node.text
-        
         temp = temp.concat(res)
         that.setData({
           poemlist: temp
@@ -155,7 +140,13 @@ Page({
 
     for (var index in datas) {
       let poetry = datas[index]
-      wxparse.wxParse("poem_content", "html", poetry.cont.replace(/（.*\）/ig, '').replace(/\(.*\)/ig, ''), this, 5)
+
+      let  poetry_cont = poetry.cont.replace(/（.*）/ig, '')
+                               .replace(/\(.*\)/ig, '')
+                               .replace(/<span style=\"font-family:SimSun;\">/ig, '')
+                               .replace(/<strong>.*<\/strong><br \/>/ig,'')
+
+      wxparse.wxParse("poem_content", "html", poetry_cont, this, 5)
       let poem_content_nodes = this.data.poem_content.nodes
       if (poem_content_nodes.length == 0) {
         return
