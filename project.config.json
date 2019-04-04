@@ -34,12 +34,19 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": 1,
 			"list": [
 				{
 					"id": -1,
 					"name": "Categorydetail",
 					"pathName": "Pages/categorydetail/categorydetail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "searcy",
+					"pathName": "Pages/categorysearch/categorysearch",
 					"scene": null
 				}
 			]

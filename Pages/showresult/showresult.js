@@ -117,7 +117,8 @@ Page({
     if (searchContent.length == 0) {
       // 搜索关键字为空 
       this.setData({
-        isSearch: false
+        isSearch: false,
+        inputValue: ""
       })
       return
     }
@@ -127,12 +128,13 @@ Page({
       valuekey: searchContent
     }
     that.setData({
-      postData: postDS
+      postData: postDS,
+      inputValue: searchContent
     })
     that.search(searchContent).then(res => {
       that.setData({
         searchResult: res,
-        isSearch: true
+        isSearch: true,
       })
     })
   },
@@ -147,7 +149,8 @@ Page({
     timerSearch = setTimeout(function () {
       if (searchContent.length == 0) {
         that.setData({
-          isSearch: false
+          isSearch: false,
+          inputValue: ""
         })
         return
       } else {
@@ -157,14 +160,15 @@ Page({
         }
         that.setData({
           isSearch: true,
-          postData: postDS
+          postData: postDS,
+          inputValue: searchContent
         })
       }
 
       that.search(searchContent).then(res => {
         that.setData({
           searchResult: res,
-          isSearch: true
+          isSearch: true,
         })
       })
     }, 1000)

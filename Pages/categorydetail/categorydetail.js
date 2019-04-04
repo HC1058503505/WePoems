@@ -140,12 +140,12 @@ Page({
 
     for (var index in datas) {
       let poetry = datas[index]
-
       let  poetry_cont = poetry.cont.replace(/（.*）/ig, '')
-                               .replace(/\(.*\)/ig, '')
-                               .replace(/<span style=\"font-family:SimSun;\">/ig, '')
-                               .replace(/<strong>.*<\/strong><br \/>/ig,'')
-
+                                    .replace(/\(.*\)/ig, '')
+                                    .replace(/<span style=\"font-family:SimSun;\">/ig, '')
+                                    .replace(/<strong>.*<\/strong><br \/>/ig,'')
+                                    .replace(/其.*<br \/>/ig,'')
+                                    .replace(/一<br \/>/ig, '')
       wxparse.wxParse("poem_content", "html", poetry_cont, this, 5)
       let poem_content_nodes = this.data.poem_content.nodes
       if (poem_content_nodes.length == 0) {

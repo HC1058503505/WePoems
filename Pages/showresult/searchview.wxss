@@ -9,7 +9,7 @@
   align-items: center;
 }
 
-.searchcion {
+.searchicon {
   margin-left: 20rpx;
 }
 
