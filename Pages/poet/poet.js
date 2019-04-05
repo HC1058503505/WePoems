@@ -49,6 +49,8 @@ Page({
           let poetry = res.tb_gushiwens.gushiwens[i]
           let poetry_cont = poetry.cont.replace(/（.*）/ig, '')
                                        .replace(/\(.*\)/ig, '')
+                                       .replace(/\(.*）/ig, '')
+                                       .replace(/（.*\)/ig, '')
                                        .replace(/<span style=\"font-family:SimSun;\">/ig, '')
                                        .replace(/<strong>.*<\/strong><br \/>/ig, '')
                                        .replace(/其.*<br \/>/ig, '')
@@ -68,7 +70,7 @@ Page({
 
         for (var j in res.tb_ziliaos.ziliaos) {
           let ziliao = res.tb_ziliaos.ziliaos[j]
-          wxparse.wxParse('author_ziliao_' + j, 'html', ziliao.cont.replace(/\(.*\)/ig, ''), that, 5)
+          wxparse.wxParse('author_ziliao_' + j, 'html', ziliao.cont, that, 5)
         }
         that.setData({
           poetryinfo: res

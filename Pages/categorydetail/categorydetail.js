@@ -143,6 +143,8 @@ Page({
       let poetry = datas[index]
       let  poetry_cont = poetry.cont.replace(/（.*）/ig, '')
                                     .replace(/\(.*\)/ig, '')
+                                    .replace(/\(.*）/ig, '')
+                                    .replace(/（.*\)/ig, '')
                                     .replace(/<span style=\"font-family:SimSun;\">/ig, '')
                                     .replace(/<strong>.*<\/strong><br \/>/ig,'')
                                     .replace(/其.*<br \/>/ig,'')
