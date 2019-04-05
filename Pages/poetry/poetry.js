@@ -49,9 +49,9 @@ Page({
         }
         
         // 作者信息
-        if (res.tb_author.cont) {
-          wxparse.wxParse('poem_author', 'html', res.tb_author.cont, that, 5)
-        }
+        // if (res.tb_author.cont) {
+        //   wxparse.wxParse('poem_author', 'html', res.tb_author.cont, that, 5)
+        // }
         
         wx.setNavigationBarTitle({
           title: res.tb_gushiwen.nameStr
