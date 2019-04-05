@@ -19,7 +19,8 @@ Page({
     openid: "",
     doc_id: "",
     isShowMore: false,
-    authorMoreInfo: {}
+    authorMoreInfo: {},
+    defaultPng: "../../Sources/images/headericon.png"
   },
 
   /**

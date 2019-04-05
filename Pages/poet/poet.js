@@ -9,7 +9,8 @@ Page({
    */
   data: {
     poetryinfo: {},
-    authorId: ""
+    authorId: "",
+    defaultPng: "../../Sources/images/headericon.png"
   },
 
   /**
@@ -119,7 +120,14 @@ Page({
 
   },
   morePoetry: function(e) {
+    let author = e.currentTarget.dataset.author
+    let tagType = e.currentTarget.dataset.type
+
+    wx.setStorageSync("CategorySearchKey", author)
+    wx.setStorageSync("categorysearch", tagType)
+
     let pageRoute = '../../Pages/categorydetail/categorydetail'
+  
     wx.navigateTo({
       url: pageRoute,
     })

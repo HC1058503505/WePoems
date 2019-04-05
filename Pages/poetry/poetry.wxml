@@ -126,13 +126,14 @@
     <view>
       <!---头像--->
       <view class='poet_portrait_block'>
-        <image class='poet_portrait' src="{{poetryinfo.tb_author.pic}}"></image>
+        <image class='poet_portrait' src="{{poetryinfo.tb_author.pic.length > 0 ? poetryinfo.tb_author.pic : defaultPng}}"></image>
       </view>
       <!---简介--->
       <view class='poet_abstract_block'>
         <block wx:if="{{poetryinfo.tb_author.cont.length > 0}}">
           <text class='poet_abstract_title'>简介</text>
-          <template is="wxParse" data="{{wxParseData:poem_author.nodes}}" />
+          <!-- <template is="wxParse" data="{{wxParseData:poem_author.nodes}}" /> -->
+          <rich-text nodes="{{poetryinfo.tb_author.cont}}"></rich-text>
         </block>
       </view>
 

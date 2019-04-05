@@ -21,7 +21,7 @@
 <view>
   <!---头像--->
   <view class='poet_portrait_block'>
-    <image class='poet_portrait' src="{{poetryinfo.tb_author.pic}}"></image>
+    <image class='poet_portrait' src="{{defaultPng}}"></image>
   </view>
   <!---简介--->
   <view class='poet_header'>
@@ -54,7 +54,7 @@
         </view>
       </view>
       <block wx:if="{{poetryinfo.tb_author.shiCount > 5}}">
-        <button bindtap='morePoetry'>更多诗词 》</button>
+        <button bindtap='morePoetry' data-type="poet" data-author='{{poetryinfo.tb_author.nameStr}}'>更多诗词 》</button>
       </block>
     </block>
   </view>
