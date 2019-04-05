@@ -3,13 +3,18 @@
 @import './poem_detail_zhengwen.wxss';
 @import '../poet/poet.wxss';
 
+
 .poetry_extension {
   padding: 20rpx;
   padding-bottom: 100rpx;
 }
 
-scroll-view {
+.normal_scroll_view {
   height: calc(100vh - 100rpx);
+}
+
+.x_scroll_view {
+  height: calc(100vh - 124rpx);
 }
 
 ::-webkit-scrollbar {

@@ -1,5 +1,4 @@
 /* Pages/categorydetail/categorydetail.wxss */
-
 .poem_cell {
   border-bottom: 1rpx solid rgb(228, 227, 227);
   padding: 10rpx;
@@ -7,6 +6,10 @@
   display: flex;
   flex-direction: column;
 }
+.x_poem_list {
+  padding-bottom: 34px;
+}
+
 
 .poem_top {
   display: flex;

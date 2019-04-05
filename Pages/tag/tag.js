@@ -11,7 +11,6 @@ Page({
   },
 
   onItemSelected: function(e){
-    console.log(e)
     let index = e.currentTarget.dataset.index
     // wx.setStorageSync("poem", JSON.stringify(this.data.poemlist[index]))  
     wx.setStorageSync("poem", this.data.poemlist[index])

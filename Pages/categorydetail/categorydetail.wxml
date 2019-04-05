@@ -1,14 +1,18 @@
 <!--Pages/categorydetail/categorydetail.wxml-->
-<view wx:for="{{poemlist}}" data-index="{{item.idnew}}" wx:key="{{item.id}}" bindtap='onItemSelected'>
-  <view class='poem_cell'>
-    <view class='poem_top'>
-      <text class='poem_title'>{{item.nameStr}}</text>
-      <text class='poem_dynasy_author'>{{item.author}} / {{item.chaodai}}</text>
-    </view>
-    <view class='poem_bottom'>
-      <text class='poem_abstract'>{{item.cont}}</text>
+<view class='{{isiPhoneX ? "x_poem_list" : "poem_list"}}'>
+  <view wx:for="{{poemlist}}" data-index="{{item.idnew}}" wx:key="{{item.id}}" bindtap='onItemSelected'>
+    <view class='poem_cell'>
+      <view class='poem_top'>
+        <text class='poem_title'>{{item.nameStr}}</text>
+        <text class='poem_dynasy_author'>{{item.author}} / {{item.chaodai}}</text>
+      </view>
+      <view class='poem_bottom'>
+        <text class='poem_abstract'>{{item.cont}}</text>
+      </view>
     </view>
   </view>
 </view>
+
+
 
 <view class="bottom_line" hidden="{{hide_bottom_line}}">---------我是底线---------</view>

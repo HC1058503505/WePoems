@@ -20,7 +20,8 @@ Page({
     doc_id: "",
     isShowMore: false,
     authorMoreInfo: {},
-    defaultPng: "../../Sources/images/headericon.png"
+    defaultPng: "../../Sources/images/headericon.png",
+    isiPhoneX: app.globalData.isX
   },
 
   /**
@@ -30,19 +31,32 @@ Page({
     var that = this
     this.requestMe()
       .then(res => {
-        res.tb_gushiwen.tags = res.tb_gushiwen.tag.split('|')
-        // 诗词内容
-        wxparse.wxParse('poem_content', 'html', res.tb_gushiwen.cont.replace(/（.*\）/ig, '').replace(/\(.*\)/ig,''), that, 5);
-        // 翻译
-        for (var i = 0; i < res.tb_fanyis.fanyis.length; i++) {
-          let fanyi = res.tb_fanyis.fanyis[i]
-          wxparse.wxParse('poem_fanyi_' + i, 'html', fanyi.cont, that, 5)
+
+        if (res.tb_gushiwen.tag) {
+          res.tb_gushiwen.tags = res.tb_gushiwen.tag.split('|')
         }
-        // 赏析
-        for (var j = 0; j < res.tb_shangxis.shangxis.length; j++) {
-          let shangxi = res.tb_shangxis.shangxis[j]
-          wxparse.wxParse('poem_shangxi_' + j, 'html', shangxi.cont, that, 5)
+        
+        if (res.tb_gushiwen.cont) {
+          // 诗词内容
+          wxparse.wxParse('poem_content', 'html', res.tb_gushiwen.cont.replace(/（.*\）/ig, '').replace(/\(.*\)/ig, ''), that, 5);
         }
+        
+        if (res.tb_fanyis.fanyis) {
+          // 翻译
+          for (var i = 0; i < res.tb_fanyis.fanyis.length; i++) {
+            let fanyi = res.tb_fanyis.fanyis[i]
+            wxparse.wxParse('poem_fanyi_' + i, 'html', fanyi.cont, that, 5)
+          }
+        }
+        
+        if (res.tb_shangxis.shangxis) {
+          // 赏析
+          for (var j = 0; j < res.tb_shangxis.shangxis.length; j++) {
+            let shangxi = res.tb_shangxis.shangxis[j]
+            wxparse.wxParse('poem_shangxi_' + j, 'html', shangxi.cont, that, 5)
+          }
+        }
+        
         // 作者头像
         if (res.tb_author.pic) {
           res.tb_author.pic = "https://img.gushiwen.org" + "/authorImg/" + res.tb_author.pic + ".jpg"
@@ -53,9 +67,11 @@ Page({
         //   wxparse.wxParse('poem_author', 'html', res.tb_author.cont, that, 5)
         // }
         
-        wx.setNavigationBarTitle({
-          title: res.tb_gushiwen.nameStr
-        })
+        if (res.tb_gushiwen.nameStr) {
+          wx.setNavigationBarTitle({
+            title: res.tb_gushiwen.nameStr
+          })
+        }
         that.setData({
           poetryinfo: res
         })
@@ -92,7 +108,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    
   },
 
   /**
@@ -201,8 +217,8 @@ Page({
       // }
       for (var i in res.tb_gushiwens.gushiwens) {
         let poetry = res.tb_gushiwens.gushiwens[i]
-        wxparse.wxParse("poem_content", "html", poetry.cont.replace(/\(.*\)/ig, ''), this, 5)
-        let poem_content_nodes = this.data.poem_content.nodes
+        wxparse.wxParse("poetry_more", "html", poetry.cont.replace(/\(.*\)/ig, ''), this, 5)
+        let poem_content_nodes = this.data.poetry_more.nodes
         if (poem_content_nodes.length == 0) {
           return
         }

@@ -11,7 +11,8 @@ Page({
   data: {
     poemlist: [],
     hide_bottom_line: true,
-    postData: {}
+    postData: {},
+    isiPhoneX: app.globalData.isX
   },
 
   /**

@@ -33,6 +33,7 @@
 }
 
 scroll-view {
+  display: flex;
   height: calc(100vh - 100rpx);
   width: 100vw;
 }
@@ -128,3 +129,8 @@ scroll-view {
 .section_tag_container {
   padding-bottom: 40rpx;
 }
+
+.x_style {
+  padding-bottom: 34px;
+}
+

@@ -8,7 +8,8 @@ App({
     pixelRatio: 0,
     screenH:0,
     screenW:0,
-    baseURL: "https://app.gushiwen.org"
+    baseURL: "https://app.gushiwen.org",
+    isX: false
   },
   onLaunch: function (options) {
     // 小程序启动之后 触发
@@ -23,8 +24,8 @@ App({
         that.globalData.pixelRatio = res.pixelRatio,
         that.globalData.screenH = res.windowHeight,
         that.globalData.screenW = res.windowWidth
+        that.globalData.isX = res.statusBarHeight != 20
       }, fail(err) {
-        console.log(err);
       }
     })
     wx.cloud.init({

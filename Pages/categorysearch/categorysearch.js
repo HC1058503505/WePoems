@@ -12,7 +12,8 @@ Page({
     isPoetry: false,
     search_conditions: [],
     sectionId:"",
-    isShow: false
+    isShow: false,
+    isiPhoneX: getApp().globalData.isX
   },
 
   /**
