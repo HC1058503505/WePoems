@@ -7,6 +7,10 @@
   align-items: center;
 }
 
+#tag_poet,#tag_dynasty,#tag,#tag_poems{
+  font-size: large;
+}
+
 .normal {
   color: grey;
 }
@@ -62,11 +66,19 @@ scroll-view {
   text-align: center;
 }
 
+.zimu {
+  font-size: medium;
+  padding-top: 2rpx;
+  padding-bottom: 2rpx;
+}
 
 .section_title {
   padding-left: 40rpx;
-  height: 60rpx;
+  font-size: large;
+}
+.section_title_container {
   background-color: rgb(242, 242, 242);
+  height: 60rpx;
 }
 
 .item_info {
@@ -75,7 +87,7 @@ scroll-view {
   align-content: center;
   align-items: center;
   height: 100rpx;
-    border-bottom: solid 2rpx rgb(242, 242, 242);
+  border-bottom: solid 2rpx rgb(242, 242, 242);
 }
 
 .author_name {
@@ -97,10 +109,11 @@ scroll-view {
 }
 
 .section_tag {
-  border-left: solid 8rpx red;
+  border-left: solid 4px red;
   padding-left: 20rpx;
   margin-top: 40rpx;
   margin-left: 40rpx;
+  font-size: large;
 }
 
 .tag_items_container {
@@ -116,9 +129,7 @@ scroll-view {
   width: 120rpx;
   border: solid 2rpx rgb(228, 227, 227);
   border-radius: 5rpx;
-  height: 40rpx;
-  margin-top: 10rpx;
-  margin-bottom: 10rpx;
+  margin-bottom: 20rpx;
   padding-top: 5rpx;
   padding-bottom: 5rpx;
 }

@@ -1,7 +1,7 @@
 /* Pages/me/me.wxss */
 .basicprofile {
-  height: 200rpx;
-  width: 200rpx;
+  height: 150px;
+  width: 150px;
   border-radius: 100rpx;
   margin-bottom: 50rpx;
   margin-top: 50rpx;
@@ -13,8 +13,8 @@
   margin-bottom: 100rpx;
 }
 .guanyu_img, .collection_img {
-  height: 45rpx;
-  width: 45rpx;
+  height: 25px;
+  width: 25px;
   margin-right: 10rpx;
 }
 .collection {
@@ -26,6 +26,11 @@
   margin-right: 40rpx;
 
 }
+
+text {
+  font-size: large;
+}
+
 .guanyu {
   display: flex;
   align-content: center;

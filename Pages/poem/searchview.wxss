@@ -10,9 +10,10 @@
 }
 
 .searchcion {
-  margin-left: 20rpx;
+  margin-left: 20px;
 }
 
 .inputtext {
+  font-size: large;
   margin-left: 20rpx;
 }

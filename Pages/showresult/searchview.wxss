@@ -10,11 +10,12 @@
 }
 
 .searchicon {
-  margin-left: 20rpx;
+  margin-left: 20px;
 }
 
 .inputtext {
   margin-left: 20rpx;
+  font-size: large;
 }
 
 /* section_title */
@@ -63,7 +64,7 @@
 }
 
 .tag_item{
-  font-size: small;
+  font-size: medium;
   border: solid 1px rgb(228, 227, 227);
   margin: 20rpx;
   padding-top: 5rpx;
@@ -78,7 +79,8 @@
   margin-left: 40rpx;
   padding-left: 10rpx;
   border-left-style: solid;
-  border-left-width: 10rpx;
+  border-left-width: 4px;
+  font-size: large;
 }
 
 .poet_title {

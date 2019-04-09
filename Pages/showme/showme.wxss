@@ -1,9 +1,10 @@
 /* Pages/showme/showme.wxss */
 
 .about_section_title {
-  border-left: solid 8rpx rgb(197, 62, 125);
+  border-left: solid 4px rgb(197, 62, 125);
   padding-left: 10rpx;
   margin: 20rpx;
+  font-size: large;
 }
 
 .about_content {

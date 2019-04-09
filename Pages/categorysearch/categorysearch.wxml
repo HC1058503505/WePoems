@@ -15,7 +15,9 @@
     <scroll-view scroll-y scroll-with-animation scroll-into-view='{{sectionId}}'>
       <view class='{{isiPhoneX ? "x_style" : "normal_style"}}'>
         <view wx:for="{{search_conditions.author}}" wx:key="item.title" id="{{item.title}}">
-          <view class="section_title">{{item.title}}</view>
+          <view class="section_title_container">
+            <text class="section_title">{{item.title}}</text>
+          </view>
           <view wx:for="{{item.list}}" wx:for-item="info" wx:key="info.poet_id" class="item_info" data-id="{{info.poet_name}}" data-name="{{info.poet_name}}" bindtap='onItemSelected'>
             <view class="author_name">{{info.poet_name}}</view>
             <view class="poetry_count">{{info.poetry_count}}首</view>

@@ -10,9 +10,9 @@
 }
 
 .poet_portrait {
-  width: 210rpx;
-  height: 300rpx;
-  border-radius: 105rpx;
+  width: 105px;
+  height: 150px;
+  border-radius: 52.5px;
 
 }
 
@@ -31,8 +31,10 @@
   border-bottom: 2rpx dashed rgb(228, 227, 227);
   padding-bottom: 20rpx;
 }
+
 .poet_abstract_content {
-  padding-top: 10rpx;
+  font-size: medium;
+  font-family:'Times New Roman', Times, serif; 
 }
 
 .poet_extension {

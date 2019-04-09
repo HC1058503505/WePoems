@@ -23,10 +23,10 @@
   color: transparent;
 }
 
-.poet_abstract_content {
+/* .poet_abstract_content {
   font-size: medium;
   font-family:'Times New Roman', Times, serif; 
-}
+} */
 
 .poem_detail_content {
   padding-left: 10rpx;
