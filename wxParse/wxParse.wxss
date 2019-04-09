@@ -228,7 +228,7 @@ view{
 }
 
 .wxParse-strong > .wxParse-inline {
-  border-left: palevioletred solid 10rpx;
+  border-left: palevioletred solid 4px;
   padding-left: 10rpx;
 }
 
@@ -239,9 +239,10 @@ view{
   font-size:small;
 }
 
-/* .wxParse-p {
-  display: flex;
+.wxParse-inline {
+  /* display: flex;
   flex-direction: column;
   align-content: center;
-  align-items: center;
-} */
+  align-items: center; */
+  font-size: medium;
+}

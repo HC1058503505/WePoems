@@ -23,11 +23,17 @@
   color: transparent;
 }
 
+.poet_abstract_content {
+  font-size: medium;
+  font-family:'Times New Roman', Times, serif; 
+}
+
 .poem_detail_content {
   padding-left: 10rpx;
   padding-bottom: 50rpx;
   padding-right: 10rpx;
   font-size: medium;
+  font-family:'Times New Roman', Times, serif; 
 }
 
 canvas {
@@ -53,8 +59,8 @@ canvas {
 }
 
 .poetry_share_img, .poetry_more_img, .poetry_collection_img {
-  width: 35rpx;
-  height: 35rpx;
+  width: 18px;
+  height: 18px;
 }
 
 .shangxiTitle, .authorMoreTitle, .goodPoemTitle {
@@ -91,9 +97,9 @@ canvas {
   font-size: medium;
 }
 
-.poem_author_more {
+.poem_author {
   text-align: center;
-  color: grey;
+  color: black;
   font-size: small;
 }
 

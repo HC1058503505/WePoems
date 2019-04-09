@@ -134,7 +134,7 @@
           <block wx:if="{{poetryinfo.tb_author.cont.length > 0}}">
             <text class='poet_abstract_title'>简介</text>
             <!-- <template is="wxParse" data="{{wxParseData:poem_author.nodes}}" /> -->
-            <rich-text nodes="{{poetryinfo.tb_author.cont}}"></rich-text>
+            <rich-text class='poet_abstract_content' nodes="{{poetryinfo.tb_author.cont}}"></rich-text>
           </block>
         </view>
 

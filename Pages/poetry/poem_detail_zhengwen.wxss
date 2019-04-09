@@ -28,8 +28,8 @@ text {
 }
 
 .poem_tags {
-    padding-left: 50rpx;
-    padding-right: 50rpx;
+    padding-left: 40rpx;
+    padding-right: 40rpx;
     /*设置弹性布局的方向*/
     flex-direction: row;
     /*是否换行*/
@@ -51,20 +51,11 @@ text {
   padding-left: 10rpx;
   padding-right: 10rpx;
   border-radius: 5rpx;
+  display: flex;
+  align-content: center;
 }
 
 
 .tag>text{
-  font-size: small;
-}
-
-.copy_view{
-  display: flex;
-  justify-content: flex-end;
-}
-
-.copy_btn{
-  width: 80rpx;
-  height: 80rpx;
-  text-align: center;
+  font-size: medium;
 }
