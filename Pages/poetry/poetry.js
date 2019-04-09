@@ -37,8 +37,13 @@ Page({
         }
         
         if (res.tb_gushiwen.cont) {
+          
+          let poetry_cont = res.tb_gushiwen.cont.replace(/（.*\）/ig, '')
+                                                .replace(/\(.*\)/ig, '')
+                                                .replace(/\(.*）/ig, '')
+                                                .replace(/（.*\)/ig, '')
           // 诗词内容
-          wxparse.wxParse('poem_content', 'html', res.tb_gushiwen.cont.replace(/（.*\）/ig, '').replace(/\(.*\)/ig, ''), that, 5);
+          wxparse.wxParse('poem_content', 'html', poetry_cont, that, 5);
         }
         
         if (res.tb_fanyis.fanyis) {
@@ -217,7 +222,11 @@ Page({
       // }
       for (var i in res.tb_gushiwens.gushiwens) {
         let poetry = res.tb_gushiwens.gushiwens[i]
-        wxparse.wxParse("poetry_more", "html", poetry.cont.replace(/\(.*\)/ig, ''), this, 5)
+        let poetry_cont = poetry.cont.replace(/（.*\）/ig, '')
+                                     .replace(/\(.*\)/ig, '')
+                                     .replace(/\(.*）/ig, '')
+                                     .replace(/（.*\)/ig, '')
+        wxparse.wxParse("poetry_more", "html", poetry_cont, this, 5)
         let poem_content_nodes = this.data.poetry_more.nodes
         if (poem_content_nodes.length == 0) {
           return
