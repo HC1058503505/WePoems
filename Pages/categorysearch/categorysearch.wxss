@@ -75,10 +75,12 @@ scroll-view {
 .section_title {
   padding-left: 40rpx;
   font-size: large;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
 }
 .section_title_container {
   background-color: rgb(242, 242, 242);
-  height: 60rpx;
+  line-height: 60rpx;
 }
 
 .item_info {
