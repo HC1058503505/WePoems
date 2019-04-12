@@ -1,8 +1,8 @@
 /* Pages/me/me.wxss */
 .basicprofile {
-  height: 150px;
-  width: 150px;
-  border-radius: 100rpx;
+  height: 130px;
+  width: 130px;
+  border-radius: 65px;
   margin-bottom: 50rpx;
   margin-top: 50rpx;
 }
