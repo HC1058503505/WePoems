@@ -5,7 +5,9 @@
           <view class='poem'>
             <text class='poem_title'>{{item.nameStr}}</text>
             <text class='poem_author'>{{item.chaodai}} / {{item.author}}</text>
+            <view class='poem_content_view'>
             <rich-text class='poem_content' nodes="{{item.cont}}"></rich-text>
+            </view>
           </view>
       </view>
     </view>

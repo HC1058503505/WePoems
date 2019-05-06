@@ -25,9 +25,15 @@
   font-size: small;
 }
 
-.poem_content {
+.poem_content_view {
   text-align: center;
+  align-content: center;
+}
+.poem_content {
+  text-align: left;
+  display: inline-block;
   font-size: medium;
+
 }
 
 .bg-gray{
