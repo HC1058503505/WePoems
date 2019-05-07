@@ -145,6 +145,9 @@ Page({
                                    .replace(/\(.*）/ig, '')
                                    .replace(/（.*\)/ig, '')
                                    .replace(/<br \/>/ig,'<br \/><br \/>')
+                                   .replace(/<\/p>/ig,'<br \/><br \/>')
+                                   .replace(/<p>/ig,'')
+
 
       datas[index].cont = htmlContent
     }
