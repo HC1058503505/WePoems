@@ -110,7 +110,7 @@ Page({
     }
     return new Promise((reslove, reject) => {
       wx.request({
-        url: app.globalData.baseURL + '/api/upTimeTop11.aspx',
+        url: app.globalData.baseURL + '/api/Default.aspx',
         data: postData,
         header: {
           'content-type': 'application/x-www-form-urlencoded'

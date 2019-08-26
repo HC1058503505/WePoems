@@ -417,7 +417,9 @@ Page({
               previewhidden: false
             })
           },
-          fail: function(err) {}
+          fail: function(err) {
+            console.log(err);
+          }
         })
       }
     }, this)
