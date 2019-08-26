@@ -48,9 +48,17 @@
 					"scene": null
 				},
 				{
+					"id": 1,
+					"name": "Search",
+					"pathName": "Pages/poem/poem",
+					"query": "",
+					"scene": null
+				},
+				{
 					"id": -1,
-					"name": "searcy",
-					"pathName": "Pages/categorysearch/categorysearch",
+					"name": "Pages/me/me",
+					"pathName": "Pages/me/me",
+					"query": "",
 					"scene": null
 				}
 			]
