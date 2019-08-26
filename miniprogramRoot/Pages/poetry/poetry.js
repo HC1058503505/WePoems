@@ -21,7 +21,8 @@ Page({
     isShowMore: false,
     authorMoreInfo: {},
     defaultPng: "../../Sources/images/headericon.png",
-    isiPhoneX: app.globalData.isX
+    isiPhoneX: app.globalData.isX,
+    canvasShareHidden: true
   },
 
   /**
@@ -358,9 +359,24 @@ Page({
     ctx.setFillStyle('black')
     this.canvasDrawText(ctx, poem_content, poem_author_H, true)
 
-    ctx.draw(true, function() {
-      that.drawPicture()
+    // canvas.draw 绘图结束后的回调再IOS上不执行，安卓手机未见此问题。
+
+    // 原因为：页面上设置了 wx: if  hidden，本想在绘图结束后再显示，不过再IOS11上不行。
+
+    // 解决办法：去掉hidden / wx: if   或者再draw之前显示页面，总之页面不显示没办法在IOS上执行draw的回调函数
+
+    // canvas画圆形的问题：
+
+    // 不写初始弧度在安卓手机上不能正常显示，在IOS手机上未见此问题。
+    // ————————————————
+    // 版权声明：本文为CSDN博主「胜天一子半」的原创文章，遵循CC 4.0 by - sa版权协议，转载请附上原文出处链接及本声明。
+    // 原文链接：https://blog.csdn.net/qq_37942845/article/details/80571251 
+  
+    that.setData({
+      canvasShareHidden:false
     })
+
+    ctx.draw(true, this.drawPicture)
   },
   canvasWH: function() {
     let windowW = app.globalData.screenW
@@ -397,9 +413,12 @@ Page({
   },
   drawPicture: function() {
     var that = this
+  
     let windowW = app.globalData.screenW
     let windowH = app.globalData.screenH
-
+    that.setData({
+      canvasShareHidden: true,
+    })
     wx.canvasToTempFilePath({
       x: 0,
       y: 0,
@@ -417,12 +436,15 @@ Page({
               previewhidden: false
             })
           },
-          fail: function(err) {
-            console.log(err);
-          }
+          fail: function(err) {}
         })
+      },
+      fail: function(error){
+      },
+      complete: function(){
+
       }
-    }, this)
+    }, that)
   },
   canvasDrawText: function(ctx, str, beginY, isFillText) {
     const windowW = app.globalData.screenW
