@@ -44,5 +44,6 @@
     "backgroundTextStyle": "light",
     "enablePullDownRefresh": true,
     "onReachBottomDistance": 150
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }
