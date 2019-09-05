@@ -129,6 +129,7 @@ Page({
    */
   onUnload: function() {
     wx.removeStorageSync("poetryjson")
+    wx.removeStorageSync("categorysearch")
   },
 
   /**
@@ -531,6 +532,7 @@ Page({
     let poetryjson = wx.getStorageSync("poetryjson")
     // 1. 获取数据库引用
     const db = wx.cloud.database()
+
     db.collection("poetry_collections").where({
       _openid: that.data.openid,
       poetry_id: poetryjson
@@ -564,6 +566,7 @@ Page({
   },
   addCollection: function() {
     let poetryjson = wx.getStorageSync("poetryjson")
+    let categorysearch = wx.getStorageSync("categorysearch")
     var that = this
     let gushiwen = this.data.poetryinfo.tb_gushiwen
     return new Promise((reslove, reject) => {
@@ -579,7 +582,9 @@ Page({
           poetry_name: gushiwen.nameStr,
           poetry_dynasty: gushiwen.chaodai,
           poetry_content: that.poemslices(that.data.poem_content.nodes),
-          poetry_author: gushiwen.author
+          poetry_author: gushiwen.author,
+          poetry_collection_date: Date.parse(Date()),
+          poetry_search_type: categorysearch
         },
         success: function(res) {
           wx.showToast({

@@ -21,6 +21,12 @@ Page({
         that.setData({
           openid: res.result.openid
         })
+
+        that.requestCollections(0).then(res => {
+          that.setData({
+            collections: res
+          })
+        })
       }
     })
   },
@@ -29,19 +35,14 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-    var that = this
-    this.requestCollections(0).then(res => {
-      that.setData({
-        collections: res
-      })
-    })
+    
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    
+
     let cancleCollection = wx.getStorageSync("CancelCollection")
     if(cancleCollection && this.data.collections.length > 0) {
       var that = this
@@ -108,8 +109,11 @@ Page({
   },
   onItemSelected: function(e) {
     let poetry_info_json = e.currentTarget.dataset.index
+    let poetry_search_type = e.currentTarget.dataset.categorysearch
+
     if(poetry_info_json){
       wx.setStorageSync("poetryjson", poetry_info_json)
+      wx.setStorageSync("categorysearch", poetry_search_type)
       wx.navigateTo({
         url: '../../Pages/poetry/poetry',
       })
@@ -119,13 +123,14 @@ Page({
     wx.showNavigationBarLoading()
     var that = this
     return new Promise((reslove, reject) => {
+
       // 1. 获取数据库引用
       const db = wx.cloud.database()
       // 2. 构造查询语句
       // collection 方法获取一个集合的引用
       // where 方法传入一个对象，数据库返回集合中字段等于指定值的 JSON 文档。API 也支持高级的查询条件（比如大于、小于、in 等），具体见文档查看支持列表
       // get 方法会触发网络请求，往数据库取数据
-      db.collection('poetry_collections').where({
+      db.collection('poetry_collections').orderBy('poetry_collection_date', 'desc').where({
         _openid: that.data.openid
       }).skip(pageFor * 10).limit(10).get({
         success: function(res) {
