@@ -151,8 +151,9 @@ Page({
    */
   onShareAppMessage: function() {
     let poetryjson = wx.getStorageSync("poetryjson")
+    let categorysearch = wx.getStorageSync("categorysearch")
     return {
-      path: "Pages/recommend/recommend?poetryjson=" + poetryjson,
+      path: "Pages/recommend/recommend?poetryjson=" + poetryjson + "&categorysearch=" + categorysearch,
     }
   },
   collectionAction: function(res) {

@@ -16,11 +16,18 @@ Page({
   onLoad: function (options) {
     // 分享内容展示
     var poetryjson = options.poetryjson
-    if (poetryjson != undefined) {
+    var categorysearch = options.categorysearch
+    if (poetryjson != undefined && categorysearch != undefined) {
       wx.setStorage({
         key: 'poetryjson',
         data: poetryjson
       })
+
+      wx.setStorage({
+        key: 'categorysearch',
+        data: categorysearch
+      })
+      
       wx.navigateTo({
         url: '../../Pages/poetry/poetry',
       })
