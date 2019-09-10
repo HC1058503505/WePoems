@@ -1,7 +1,14 @@
 <!--Pages/recommend/recommend.wxml-->
+
+
+
 <scroll-view class='bg-gray overflow' style='height:calc(100vh - {{navH}}px)' scroll-y >
     <view class='poemlist'>
-      <view wx:for="{{gushiwens}}" data-index="{{item.idnew}}" wx:key="{{item.poem_id}}" bindtap="onItemSelected">
+      <view wx:for="{{gushiwens}}"  data-index="{{index}}" wx:key="{{item.poem_id}}" bindtap="onItemSelected">
+          <block wx:if="{{index % 10 == 0 && index != 0}}">
+            <ad unit-id="adunit-ef63cac06fc2580c"></ad>
+          </block>
+
           <view class='poem'>
             <text class='poem_title'>{{item.nameStr}}</text>
             <text class='poem_author'>{{item.chaodai}} / {{item.author}}</text>

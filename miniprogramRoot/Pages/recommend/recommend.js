@@ -161,7 +161,9 @@ Page({
     return datas
   },
   onItemSelected: function (e) {
-    let select = e.currentTarget.dataset.index
+    let selectIndex = e.currentTarget.dataset.index
+    let gushiwen = this.data.gushiwens[selectIndex]
+    let select = gushiwen.idnew
     wx.setStorage({
       key: 'poetryjson',
       data: select,

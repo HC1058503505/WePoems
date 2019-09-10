@@ -1,6 +1,11 @@
 <!--Pages/tag/tag.wxml-->
 
 <view wx:for="{{poemlist}}" data-index="{{index}}" wx:key="{{item.poem_id}}" bindtap='onItemSelected'>
+
+  <block wx:if="{{index % 10 == 0 && index != 0}}">
+    <ad unit-id="adunit-ef63cac06fc2580c"></ad>
+  </block>
+  
   <view class='poem_cell'>
     <view class='poem_top'>
       <text class='poem_title'>{{item.poem_title}}</text>

@@ -2,6 +2,7 @@
 <import src='./update.wxml' />
 <scroll-view scroll-y>
   <block wx:if="{{isAbout}}">
+    <ad unit-id="adunit-ef63cac06fc2580c" ad-intervals="60"></ad>
     <view>
       <view class='about'>
         <view class='about_section_title first'>关于古诗文斋</view>
@@ -50,5 +51,6 @@
         </view>
       </view>
     </view>
+    <ad unit-id="adunit-ef63cac06fc2580c" ad-intervals="60"></ad>
   </block>
 </scroll-view>
