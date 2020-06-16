@@ -35,6 +35,7 @@
 </template>
 
 <template name="hotsearch">
+
   <view wx:for="{{hotsearch}}" wx:for-item="hotsection" wx:key="title" class="hot_search_container">
     <block wx:if="{{hotsection.ishot}}">
       <view class='{{hotsection.type}}_container'>

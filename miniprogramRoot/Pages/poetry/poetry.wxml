@@ -143,8 +143,26 @@
 
         <!---代表作--->
         <view class='poemlist_more'>
-          <block wx:if="{{authorMoreInfo.tb_author.shiCount > 0}}">
-            
+          <block wx:if="{{authorMoreInfo.tb_gushiwens.gushiwens.length > 0}}">
+            <view class='poet_abstract_block'>
+              <text class='goodPoemTitle'>代表作</text>
+            </view>
+
+
+            <view wx:for="{{authorMoreInfo.tb_gushiwens.gushiwens}}" data-index="{{item.idnew}}" wx:key="{{item.id}}" bindtap="onItemSelected">
+              <view class='poem_cell'>
+                <view class='poem_top'>
+                  <text class='poem_title'>{{item.nameStr}}</text>
+                  <text class='poem_dynasy_author'>{{item.author}} / {{item.chaodai}}</text>
+                </view>
+                <view class='poem_bottom'>
+                  <text class='poem_abstract'>{{item.cont}}</text>
+                </view>
+              </view>
+            </view>
+            <block wx:if="{{authorMoreInfo.tb_author.shiCount > 5}}">
+              <button bindtap='morePoetry' data-name='{{poetryinfo.tb_author.nameStr}}'>更多诗词 》</button>
+            </block>
           </block>
         </view>
       </view>
