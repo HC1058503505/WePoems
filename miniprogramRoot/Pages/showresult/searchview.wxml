@@ -41,7 +41,7 @@
       <view class='{{hotsection.type}}_container'>
         <view class='{{hotsection.type}}_title'>{{hotsection.title}}</view>
         <view>
-          <view wx:for="{{hotsection.hotkeys}}" wx:key="{{index}}" class='tags_container'>
+          <view wx:for="{{hotsection.hotkeys}}" wx:key="index" class='tags_container'>
             <text wx:for="{{item}}" wx:for-item="tags" wx:key="tags" class='tag_item' bindtap='tagTapAction' data-name="{{tags.name}}" data-type="{{hotsection.type}}" data-id="{{tags.id}}">{{tags.name}}</text>
           </view>
         </view>
