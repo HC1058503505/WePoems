@@ -1,0 +1,43 @@
+.tags_container {
+  margin: 40rpx;
+}
+
+.tag_title {
+  border-left-style: solid;
+  border-left-width: 4px;
+  border-left-color: palevioletred;
+  padding-left: 10rpx;
+  font-size: large;
+}
+
+.tags {
+  margin-top: 40rpx;
+  display: flex;
+  justify-content: space-between;
+}
+
+.tag_poet, .tag_dynasty, .tag, .tag_poems{
+  border-bottom: 2rpx solid;
+  padding-bottom: 10rpx;
+  font-size: medium;
+}
+
+.tag_poet {
+  color: red;
+  border-bottom-color: red;
+}
+
+.tag_dynasty {
+  color: blueviolet;
+  border-bottom-color: blueviolet;
+}
+
+.tag {
+  color: orange;
+  border-bottom-color: orange;
+}
+
+.tag_poems {
+  color: cyan;
+  border-bottom-color: cyan;
+}

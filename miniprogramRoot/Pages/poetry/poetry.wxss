@@ -1,0 +1,109 @@
+/* Pages/poetry/poetry.wxss */
+@import './poem_detail_tab.wxss';
+@import './poem_detail_zhengwen.wxss';
+@import '../poet/poet.wxss';
+
+
+.poetry_extension {
+  padding: 20rpx;
+  padding-bottom: 100rpx;
+}
+
+.normal_scroll_view {
+  height: calc(100vh - 100rpx);
+}
+
+.x_scroll_view {
+  height: calc(100vh - 124rpx);
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+/* .poet_abstract_content {
+  font-size: medium;
+  font-family:'Times New Roman', Times, serif; 
+} */
+
+.poem_detail_content {
+  padding-left: 10rpx;
+  padding-bottom: 50rpx;
+  padding-right: 10rpx;
+  font-size: medium;
+  font-family:'Times New Roman', Times, serif; 
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 12000px;
+}
+
+.poem_author_content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.poetry_tool_view {
+  display: flex;
+  justify-content: flex-end
+}
+
+.poetry_collection, .poetry_more, .poetry_collection {
+  background-color: red;
+}
+
+.poetry_share_img, .poetry_more_img, .poetry_collection_img {
+  width: 18px;
+  height: 18px;
+}
+
+.shangxiTitle, .authorMoreTitle, .goodPoemTitle {
+  font-weight: bolder;
+  font-size: x-large;
+  margin-bottom: 20rpx;
+  margin-top: 20rpx;
+  display: block;
+  border-bottom: 2rpx dashed rgb(228, 227, 227);
+  padding-bottom: 20rpx;
+}
+
+.more, .author_more_poems {
+  color: hsl(202, 100%, 50%);
+}
+
+.poemlist_more{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10rpx;
+}
+
+.poem_more {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  /*align-items: center;*/
+  padding: 20rpx;
+  border-bottom: 20rpx #f7f7f7 solid;
+}
+
+.poem_title_more {
+  text-align: center;
+  font-size: medium;
+}
+
+.poem_author {
+  text-align: center;
+  color: black;
+  font-size: small;
+}
+
+.poem_content_more {
+  text-align: center;
+  font-size: medium;
+}

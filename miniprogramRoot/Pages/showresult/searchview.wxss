@@ -1,0 +1,108 @@
+.df {
+  height: 80rpx;
+  background-color: white;
+  margin: 40rpx;
+  display: flex;
+  flex-direction: row;
+  border: 2rpx solid lightgrey;
+  border-radius: 10rpx;
+  align-items: center;
+}
+
+.searchicon {
+  margin-left: 20px;
+}
+
+.inputtext {
+  margin-left: 20rpx;
+  font-size: large;
+}
+
+/* section_title */
+.sectionTitle {
+  padding-left: 40rpx;
+  background-color: rgb(228, 227, 227);
+  /* margin-top: -42rpx; */
+  height: 60rpx;
+  vertical-align: middle;
+  padding-top: 16rpx;
+}
+
+/* section_cell */
+.section_cell {
+  margin: 40rpx;
+  border-bottom: solid 1rpx rgb(228, 227, 227);
+  padding-bottom: 10rpx;
+}
+
+.poem_title {
+
+}
+
+.poem_author_info {
+  margin-left: 20rpx;
+  color: gray;
+  font-size: medium;
+}
+
+.poem_first_row {
+  font-size: medium;
+}
+
+.page_row {
+  background-color: white;
+  position: fixed;
+  top: 0;
+  left:  0;
+  right: 0;
+}
+
+.tags_container{
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 20rpx;
+}
+
+.tag_item{
+  font-size: medium;
+  border: solid 1px rgb(228, 227, 227);
+  margin: 20rpx;
+  padding-top: 5rpx;
+  padding-bottom: 5rpx;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+  border-radius: 5rpx;
+}
+
+
+.poet_title,.tag_title,.dynasty_title,.poetry_title {
+  margin-left: 40rpx;
+  padding-left: 10rpx;
+  border-left-style: solid;
+  border-left-width: 4px;
+  font-size: large;
+}
+
+.poet_title {
+  border-left-color: red;
+}
+
+.dynasty_title {
+  border-left-color: blueviolet;
+}
+
+.tag_title {
+  border-left-color: orange;
+}
+
+.poetry_title {
+  border-left-color: cyan;
+}
+
+.poet_container {
+  margin-top: 160rpx;
+}
+
+.dynasty_container,.tag_container, .poetry_container{
+  margin-top: 60rpx;
+}

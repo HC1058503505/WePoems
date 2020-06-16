@@ -1,0 +1,7 @@
+<!--Pages/poem/poem.wxml-->
+
+<import src='./searchview.wxml' />
+<template is="search" data="" />
+
+<import src='./tags.wxml' />
+<template is="tags" data="" />

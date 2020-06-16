@@ -1,0 +1,80 @@
+<template name="search">
+  <view class='page_row'>
+    <view class="search">
+      <view class="df search_arr">
+        <icon class="searchicon" size='20' type='search'></icon>
+        <input class="inputtext" bindinput="" placeholder="请输入关键字" confirm-type='search' bindconfirm='bindKeyInput' bindinput='currentInput' value="{{inputValue}}" />
+      </view>
+    </view>
+  </view>
+</template>
+
+
+<template name="section_poet">
+  <block wx:if="{{searchResult.poet_list.length > 0}}">
+    <view class='sectionTitle'>诗人：</view>
+    <view class='section_cell' wx:for="{{searchResult.poet_list}}" wx:key="id" data-index="{{item.id}}" data-type="poet" data-name="{{item.name}}" bindtap="onItemSelected">
+      <text>{{item.name}}</text>
+    </view>
+  </block>
+</template>
+
+<template name="section_poem">
+  <block wx:if="{{searchResult.poem_list.length > 0}}">
+    <view class='sectionTitle'>诗词：</view>
+    <view class='section_cell' wx:for="{{searchResult.poem_list}}" wx:key="id" data-index="poetry_{{item.id}}.json" bindtap="onItemSelected">
+      <view>
+        <text class="poem_title">{{item.name}}</text>
+        <text class="poem_author_info">{{item.author_info}}</text>
+      </view>
+      <view>
+        <text class="poem_first_row">{{item.first_row}}</text>
+      </view>
+    </view>
+  </block>
+</template>
+
+<template name="hotsearch">
+  <view wx:for="{{hotsearch}}" wx:for-item="hotsection" wx:key="title" class="hot_search_container">
+    <block wx:if="{{hotsection.ishot}}">
+      <view class='{{hotsection.type}}_container'>
+        <view class='{{hotsection.type}}_title'>{{hotsection.title}}</view>
+        <view>
+          <view wx:for="{{hotsection.hotkeys}}" wx:key="{{index}}" class='tags_container'>
+            <text wx:for="{{item}}" wx:for-item="tags" wx:key="tags" class='tag_item' bindtap='tagTapAction' data-name="{{tags.name}}" data-type="{{hotsection.type}}" data-id="{{tags.id}}">{{tags.name}}</text>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+</template>
+
+<template name="search_poet">
+  <block wx:if="{{searchResult.gushiwens.length > 0}}">
+    <view class='sectionTitle'>诗文：</view>
+    <view class='section_cell' wx:for="{{searchResult.gushiwens}}" wx:key="idnew" data-index="{{item.idnew}}" data-type="poetry" data-name="{{item.nameStr}}" bindtap="onItemSelected">
+      <view>
+        <text class="poem_title">{{item.nameStr}}</text>
+        <text class="poem_author_info">{{item.author}}</text>
+      </view>
+    </view>
+  </block>
+</template>
+
+<template name="search_mingju">
+  <block wx:if="{{searchResult.mingjus.length > 0}}">
+    <view class='sectionTitle'>名句：</view>
+    <view class='section_cell' wx:for="{{searchResult.mingjus}}" wx:key="idnew" data-index="{{item.idnew}}" data-type="mingju" data-name="{{item.nameStr}}" bindtap="onItemSelected">
+      <text>{{item.nameStr}}</text>
+    </view>
+  </block>
+</template>
+
+<template name="search_author">
+  <block wx:if="{{searchResult.authors.length > 0}}">
+    <view class='sectionTitle'>作者：</view>
+    <view class='section_cell' wx:for="{{searchResult.authors}}" wx:key="idnew" data-index="{{item.idnew}}" data-type="author" data-name="{{item.nameStr}}" bindtap="onItemSelected">
+      <text>{{item.nameStr}}</text>
+    </view>
+  </block>
+</template>

@@ -1,0 +1,11 @@
+<template name="updateT">
+  <view class='update_version'>
+    <view class='version_info'>
+      <text class='version_num'>{{item.version_num}}</text>
+      <text class='version_publish'>{{item.version_publish}}</text>
+    </view>
+    <view class='version_msg' wx:for="{{item.version_msgs}}" wx:for-item="msg" wx:key="msg.index">
+      <text>{{msg}}</text>
+    </view>
+  </view>
+</template>

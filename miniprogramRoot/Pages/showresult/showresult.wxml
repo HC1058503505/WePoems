@@ -1,0 +1,19 @@
+<!--Pages/showresult/showresult.wxml-->
+<import src='./searchview.wxml' />
+<template is="search" data="{{inputValue}}" />
+
+<block wx:if="{{isSearch}}">
+  <view class='result_list'>
+    <block wx:if="{{searchResult.authors.length == 0 && searchResult.mingjus.length == 0 && searchResult.gushiwens.length == 0}}">    <view class='no_data'>没有相关数据</view>
+    </block>
+    <block wx:else>
+      <template is="search_poet" data="{{searchResult}}" />
+      <template is="search_mingju" data="{{searchResult}}" />
+      <template is="search_author" data="{{searchResult}}" />
+    </block>
+  </view>
+</block>
+
+<block wx:if="{{!isSearch}}">
+  <template is="hotsearch" data="{{hotsearch}}" />
+</block>

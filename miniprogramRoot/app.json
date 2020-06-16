@@ -1,0 +1,49 @@
+{
+  "pages": [
+    "Pages/recommend/recommend",
+    "Pages/poem/poem",
+    "Pages/me/me",
+    "Pages/tag/tag",
+    "Pages/showresult/showresult",
+    "Pages/poet/poet",
+    "Pages/poetry/poetry",
+    "Pages/categorysearch/categorysearch",
+    "Pages/categorydetail/categorydetail",
+    "Pages/showme/showme",
+    "Pages/mycollection/mycollection"
+  ],
+  "tabBar": {
+    "color": "#8A8A8A",
+    "selectedColor": "#000000",
+    "list": [
+      {
+        "pagePath": "Pages/recommend/recommend",
+        "text": "推荐",
+        "iconPath": "Sources/images/recommand.png",
+        "selectedIconPath": "Sources/images/recommand_selected.png"
+      },
+      {
+        "pagePath": "Pages/poem/poem",
+        "text": "发现",
+        "iconPath": "Sources/images/poem_search.png",
+        "selectedIconPath": "Sources/images/poem_search_selected.png"
+      },
+      {
+        "pagePath": "Pages/me/me",
+        "text": "我",
+        "iconPath": "Sources/images/me.png",
+        "selectedIconPath": "Sources/images/me_selected.png"
+      }
+    ]
+  },
+  "window": {
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "古诗文斋",
+    "backgroundColor": "#eeeeee",
+    "backgroundTextStyle": "light",
+    "enablePullDownRefresh": true,
+    "onReachBottomDistance": 150
+  },
+  "sitemapLocation": "sitemap.json"
+}

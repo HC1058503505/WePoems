@@ -1,0 +1,61 @@
+.poem {
+  width: 100%;
+  height: 100%;
+}
+.poem_detail_content {
+   /* display: flex;
+   flex-direction: column; */
+   background-color: rgb(242, 242, 242);
+   margin: 40rpx;
+}
+
+.poem_author {
+   padding-bottom: 20rpx;
+   text-align: center;
+   font-size: 30rpx;
+}
+
+.poem_content {
+   text-align:center;
+   padding: 10rpx;
+   padding-bottom: 40rpx;
+   line-height: 60rpx;
+}
+
+
+text {
+  font-size: large;
+}
+
+.poem_tags {
+    padding-left: 40rpx;
+    padding-right: 40rpx;
+    /*设置弹性布局的方向*/
+    flex-direction: row;
+    /*是否换行*/
+    flex-wrap: wrap;
+    /*设置子元素排列*/
+    /* justify-content: space-between; */
+    /*设置按照弹性布局展示*/
+    display: flex;
+    /*设置子元素交叉轴排列*/
+    /*align-items: stretch;*/
+    align-items: center;
+    float: left;
+    padding-bottom: 20rpx;
+}
+.tag {
+  border: 2rpx solid gainsboro;
+  margin-right: 40rpx;
+  margin-bottom: 30rpx;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+  border-radius: 5rpx;
+  display: flex;
+  align-content: center;
+}
+
+
+.tag>text{
+  font-size: medium;
+}

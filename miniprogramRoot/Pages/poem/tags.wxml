@@ -1,0 +1,16 @@
+
+<template name="tags">
+  <view class='tags_container'>
+    <view>
+      <text class='tag_title'>分类查找</text>
+    </view>
+    
+    <view class='tags'>
+      <text id='tag_poet' class='tag_poet' bindtap='tagTap'>诗人</text>
+      <text id='tag_dynasty' class='tag_dynasty' bindtap='tagTap'>朝代</text>
+      <text id='tag' class='tag' bindtap='tagTap'>标签</text>
+      <text id='tag_poems' class='tag_poems' bindtap='tagTap'>诗集</text>
+    </view>
+  
+  </view>
+</template>

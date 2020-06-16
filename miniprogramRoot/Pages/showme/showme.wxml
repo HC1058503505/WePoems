@@ -1,0 +1,56 @@
+<!--Pages/showme/showme.wxml-->
+<import src='./update.wxml' />
+<scroll-view scroll-y>
+  <block wx:if="{{isAbout}}">
+    <ad unit-id="adunit-ef63cac06fc2580c" ad-intervals="60"></ad>
+    <view>
+      <view class='about'>
+        <view class='about_section_title first'>关于古诗文斋</view>
+        <view class='about_content'>古诗文斋是一个用于查询与阅读古诗词的实用类微信小程序，旨在帮助人们随时随地阅读古诗词，学习中国传统文化，感受诗词魅力。
+        </view>
+      </view>
+
+
+      <view class='version'>
+        <view class='about_section_title second'>版本更新记录</view>
+        <view wx:for="{{update_info}}" wx:key="{{item.version_num}}">
+          <template is="updateT" data="{{item}}" />
+        </view>
+      </view>
+      
+    </view>
+  </block>
+
+  <block wx:if="{{isAbstract}}">
+    <view class='version'>
+      <view class='about_section_title first'>推荐</view>
+      <view class='update_version'>
+        <view class='recommend_msg'>
+          <text class='recommend_desc'>— 为您推荐最近更新的诗词，让诗不止在远方，更在我们的手掌之中</text>
+        </view>
+      </view>
+    </view>
+
+    <view class='version'>
+      <view class='about_section_title second'>发现</view>
+      <view class='update_version'>
+        <view class='recommend_msg'>
+          <text class='recommend_desc'>— 随心输入，获取您心中的诗。</text>
+          <text class='recommend_desc'>— 根据诗人、朝代、标签、诗集查找你喜欢的诗。</text>
+          <text class='recommend_desc'>— 根据热搜了解大家喜欢的古诗与诗人。</text>
+        </view>
+      </view>
+    </view>
+
+    <view class='version'>
+      <view class='about_section_title third'>收藏分享</view>
+      <view class='update_version'>
+        <view class='recommend_msg'>
+          <text class='recommend_desc'>— 收藏喜欢的诗文，记录每次的心跳</text>
+          <text class='recommend_desc'>— 可复制诗文或是生成图片分享给好友，知识加倍</text>
+        </view>
+      </view>
+    </view>
+    <ad unit-id="adunit-ef63cac06fc2580c" ad-intervals="60"></ad>
+  </block>
+</scroll-view>

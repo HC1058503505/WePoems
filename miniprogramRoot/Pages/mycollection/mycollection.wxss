@@ -1,0 +1,39 @@
+/* Pages/mycollection/mycollection.wxss */
+
+.poemlist{
+  display: flex;
+  flex-direction: column;
+}
+
+.poem {
+  display: flex;
+  flex-direction: column;
+  margin-top: 15rpx;
+  background-color: #fff;
+  /*align-items: center;*/
+  padding: 20rpx;
+}
+
+.poem_title {
+  text-align: center;
+  font-size: medium;
+}
+
+.poem_author {
+  text-align: center;
+  color: grey;
+  font-size: small;
+}
+
+.poem_content {
+  text-align: center;
+  font-size: medium;
+}
+
+.bg-gray{
+  background-color: #f7f7f7;
+}
+
+text {
+  margin-bottom: 10rpx;
+}

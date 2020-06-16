@@ -1,0 +1,27 @@
+<!--Pages/me/me.wxml-->
+<view class='userInfo'>
+  <button class='loginView' bindgetuserinfo='login' open-type='getUserInfo' style='background-color:white'>
+    <image class='basicprofile' src='{{avatarUrl}}'></image>
+    <text class='nickname'>{{nickName}}</text>
+  </button>
+</view>
+
+<view class='info_list'>
+  <view class='collection' bindtap='collectionAction' data-index='0'>
+    <image class="collection_img" src='../../Sources/images/yes_collection.png'></image>
+    <text>我的收藏</text>
+  </view>
+  
+  <view class='divider'></view>
+
+  <view class='guanyu' bindtap='meAction' data-index='1'>
+    <image class="guanyu_img" src='../../Sources/images/guanyu.png'></image>
+    <text>关于</text>
+  </view>
+
+
+  <view class='guanyu' bindtap='meAction' data-index="2">
+    <image class="guanyu_img" src='../../Sources/images/huiyijieshao.png'></image>
+    <text>功能介绍</text>
+  </view>
+</view>

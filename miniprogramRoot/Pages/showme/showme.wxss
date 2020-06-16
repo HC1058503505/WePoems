@@ -1,0 +1,71 @@
+/* Pages/showme/showme.wxss */
+
+.about_section_title {
+  border-left: solid 4px rgb(197, 62, 125);
+  padding-left: 10rpx;
+  margin: 20rpx;
+  font-size: large;
+}
+
+.about_content {
+  margin: 20rpx;
+  font-size: medium;
+}
+
+.version {
+  margin-top: 80rpx;
+}
+
+.version_num, .version_publish {
+  color: grey;
+  font-size: medium;
+  padding-right: 100rpx;
+}
+
+.update_version {
+  margin: 20rpx;
+  border-bottom: solid 2rpx rgb(242, 242, 242);
+  padding-bottom: 10rpx;
+}
+.version_msg {
+  font-size: small;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+}
+
+.recommend_msg {
+  font-size: medium;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+  letter-spacing: 4rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.recommend_desc {
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+}
+
+.first {
+  border-left-color: rgb(197, 62, 125);
+}
+
+.second{
+  border-left-color: blueviolet;
+}
+
+.third {
+  border-left-color: rgb(226, 131, 43);
+}
+
+scroll-view {
+  width: 100vw;
+  height: 100vh;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}

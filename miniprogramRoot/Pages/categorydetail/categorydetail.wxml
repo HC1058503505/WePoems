@@ -1,0 +1,23 @@
+<!--Pages/categorydetail/categorydetail.wxml-->
+<view class='{{isiPhoneX ? "x_poem_list" : "poem_list"}}'>
+  <view wx:for="{{poemlist}}" data-index="{{item.idnew}}" wx:key="id" bindtap='onItemSelected'>
+
+    <block wx:if="{{index % 10 == 0 && index != 0}}">
+      <ad unit-id="adunit-ef63cac06fc2580c"></ad>
+    </block>
+    
+    <view class='poem_cell'>
+      <view class='poem_top'>
+        <text class='poem_title'>{{item.nameStr}}</text>
+        <text class='poem_dynasy_author'>{{item.author}} / {{item.chaodai}}</text>
+      </view>
+      <view class='poem_bottom'>
+        <text class='poem_abstract'>{{item.cont}}</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+
+<view class="bottom_line" hidden="{{hide_bottom_line}}">---------我是底线---------</view>

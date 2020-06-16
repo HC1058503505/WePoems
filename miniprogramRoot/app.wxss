@@ -1,0 +1,6 @@
+@import "wxParse/wxParse.wxss";
+
+text {
+   font-family:'Times New Roman', Times, serif; 
+   letter-spacing: 3rpx;
+}

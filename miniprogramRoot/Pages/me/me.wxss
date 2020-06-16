@@ -1,0 +1,64 @@
+/* Pages/me/me.wxss */
+.basicprofile {
+  height: 130px;
+  width: 130px;
+  border-radius: 65px;
+  margin-bottom: 50rpx;
+  margin-top: 50rpx;
+}
+.info_list {
+  margin-top: 40rpx;
+}
+.userInfo {
+  margin-bottom: 100rpx;
+}
+.guanyu_img, .collection_img {
+  height: 25px;
+  width: 25px;
+  margin-right: 10rpx;
+}
+.collection {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  padding-bottom: 30rpx;
+  margin-left: 40rpx;
+  margin-right: 40rpx;
+
+}
+
+text {
+  font-size: large;
+}
+
+.guanyu {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  border-bottom: solid 2rpx rgb(242, 242, 242);
+  padding-bottom: 10rpx;
+  margin-left: 40rpx;
+  margin-right: 40rpx;
+  margin-bottom: 40rpx;
+}
+.nickname {
+  font: larger bold;
+}
+
+.loginView {
+  background-color: green;
+  border: none;
+  border-bottom-color: rebeccapurple;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+button::after{ border: none; }
+
+.divider {
+  height: 15rpx;
+  background-color: #f7f7f7;
+  margin-bottom: 40rpx;
+}

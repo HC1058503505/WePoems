@@ -1,0 +1,30 @@
+/* Pages/tag/tag.wxss */
+
+.poem_cell {
+  border-bottom: 1rpx solid rgb(228, 227, 227);
+  padding: 20rpx;
+  margin: 20rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.poem_top {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20rpx;
+}
+
+.poem_title {
+  font-size: medium;
+  font-weight: 600;
+  margin-right: 50rpx;
+}
+
+.poem_dynasy_author {
+  font-size: small;
+  color: gray;
+}
+
+.poem_abstract {
+  font-size: small;
+}

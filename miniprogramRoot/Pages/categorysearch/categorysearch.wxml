@@ -1,0 +1,76 @@
+<!--Pages/categorysearch/categorysearch.wxml-->
+<block wx:if="{{isShow}}">
+  <view class='header_tab'>
+    <text id="tag_poet" class="{{isAuthor ? 'author_didSelected' : 'normal'}}" bindtap='tagTap'>诗人</text>
+    <text id="tag_dynasty" class="{{isDynasty ? 'dynasty_didSelected' : 'normal'}}" bindtap='tagTap'>朝代</text>
+    <text id="tag" class="{{isTag ? 'tag_didSelected' : 'normal'}}" bindtap='tagTap'>标签</text>
+    <text id="tag_poems" class="{{isPoetry ? 'poetry_didSelected' : 'normal'}}" bindtap='tagTap'>诗集</text>
+    <icon class="searchcion" size='20' type='search' bindtap='seachAction'></icon>
+  </view>
+</block>
+
+
+<block wx:if="{{isAuthor}}">
+  <view class='flex_box'>
+    <scroll-view scroll-y scroll-with-animation scroll-into-view='{{sectionId}}'>
+      <view class='{{isiPhoneX ? "x_style" : "normal_style"}}'>
+        <view wx:for="{{search_conditions.author}}" wx:key="item.title" id="{{item.title}}">
+          <view class="section_title_container">
+            <text class="section_title">{{item.title}}</text>
+          </view>
+          <view wx:for="{{item.list}}" wx:for-item="info" wx:key="info.poet_id" class="item_info" data-id="{{info.poet_name}}" data-name="{{info.poet_name}}" bindtap='onItemSelected'>
+            <view class="author_name">{{info.poet_name}}</view>
+            <view class="poetry_count">{{info.poetry_count}}首</view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+
+    <view class="flex-right">
+      <view class="zimulist">
+        <view class="zimu" wx:for="{{search_conditions.author}}" wx:key="ABC" data-id="{{item.title}}" bindtap='zimuTap'>{{item.title}}</view>
+      </view>
+    </view>
+  </view>
+</block>
+
+<block wx:if="{{isDynasty}}">
+  <scroll-view class='{{isiPhoneX ? "x_style" : "normal_style"}}' scroll-y scroll-with-animation>
+    <view class='{{isiPhoneX ? "x_style" : "normal_style"}}'>
+      <view wx:for="{{search_conditions.dynasty}}" wx:key="item.name" id="{{item.name}}">
+        <view class="item_info" data-id="{{item.name}}" bindtap='onItemSelected'>
+          <view class="author_name">{{item.name}}</view>
+          <view class="dynasty_poetry_count">{{item.count}}首</view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</block>
+
+<block wx:if="{{isTag}}">
+  <scroll-view class='{{isiPhoneX ? "x_style" : "normal_style"}}' scroll-y scroll-with-animation>
+    <view class='{{isiPhoneX ? "x_style" : "normal_style"}}'>
+      <view wx:for="{{search_conditions.tag}}" wx:key="item.section_title" class='section_tag_container'>
+        <view class='section_tag'>{{item.section_title}}</view>
+        <view class='tag_container'>
+          <view class='tag_items_container' wx:for="{{item.items}}" wx:for-item="info" wx:key="info">
+            <text class='tag_item' wx:for="{{info}}" wx:for-item="tag_info" wx:key="tag_info" bindtap='onItemSelected' data-id="{{tag_info}}">{{tag_info}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</block>
+
+<block wx:if="{{isPoetry}}">
+  <scroll-view class='{{isiPhoneX ? "x_style" : "normal_style"}}' scroll-y scroll-with-animation>
+    <view class='{{isiPhoneX ? "x_style" : "normal_style"}}'>
+      <view wx:for="{{search_conditions.collections}}" wx:key="item.name" id="{{item.name}}">
+        <view class="item_info" data-id="{{item.name}}" bindtap='onItemSelected'>
+          <view class="author_name">{{item.name}}</view>
+          <view class="dynasty_poetry_count">{{item.count}}首</view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</block>

@@ -1,0 +1,73 @@
+{
+	"miniprogramRoot": "miniprogramRoot/",
+	"cloudfunctionRoot": "cloud-functions/",
+	"description": "项目配置文件。",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": true,
+		"es6": true,
+		"postcss": true,
+		"preloadBackgroundData": false,
+		"minified": true,
+		"newFeature": true,
+		"autoAudits": false,
+		"coverView": true,
+		"showShadowRootInWxmlPanel": true,
+		"scopeDataCheck": false,
+		"useCompilerModule": false
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.3.0",
+	"appid": "wxe57c9eee18f3a179",
+	"projectname": "WePoems",
+	"isGameTourist": false,
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"cloudfunctionTemplateRoot": "cloudfunctionTemplate",
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 1,
+			"list": [
+				{
+					"id": -1,
+					"name": "Categorydetail",
+					"pathName": "Pages/categorydetail/categorydetail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 1,
+					"name": "Search",
+					"pathName": "Pages/poem/poem",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "Pages/me/me",
+					"pathName": "Pages/me/me",
+					"query": "",
+					"scene": null
+				}
+			]
+		}
+	}
+}
